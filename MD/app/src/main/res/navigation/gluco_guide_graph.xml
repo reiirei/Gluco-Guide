@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gluco_guide_graph"
+    app:startDestination="@id/homeFragment2">
+
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.health.glucoguide.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment2_to_inputDataFragment"
+            app:destination="@id/inputDataFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_newsFragment"
+            app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_preferenceFragment"
+            app:destination="@id/preferenceFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inputDataFragment"
+        android:name="com.health.glucoguide.ui.InputDataFragment"
+        android:label="InputDataFragment"
+        tools:layout="@layout/fragment_input_data">
+        <action
+            android:id="@+id/action_inputDataFragment_to_inputDataAdvancedFragment"
+            app:destination="@id/inputDataAdvancedFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/inputDataAdvancedFragment"
+        android:name="com.health.glucoguide.ui.InputDataAdvancedFragment"
+        android:label="InputDataAdvancedFragment"
+        tools:layout="@layout/fragment_input_data_advanced">
+        <argument
+            android:name="userData"
+            app:argType="com.health.glucoguide.models.UserData" />
+
+        <action
+            android:id="@+id/action_inputDataAdvancedFragment_to_resultFragment"
+            app:destination="@id/resultFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.health.glucoguide.ui.ResultFragment"
+        android:label="ResultFragment"
+        tools:layout="@layout/fragment_result">
+
+        <argument
+            android:name="userData"
+            app:argType="com.health.glucoguide.models.UserData" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.health.glucoguide.ui.NewsFragment"
+        android:label="NewsFragment"
+        tools:layout="@layout/fragment_news">
+
+        <argument
+            android:name="news"
+            app:argType="com.health.glucoguide.models.WebLink" />
+    </fragment>
+    <fragment
+        android:id="@+id/preferenceFragment"
+        android:name="com.health.glucoguide.ui.PreferenceFragment"
+        android:label="PreferenceFragment"
+        tools:layout="@layout/fragment_preference"/>
+</navigation>
