@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">Gluco Guide</string>
+    <string name="detail_news">Detail News</string>
+    <string name="give_feedback">Give feedba</string>
+    <string name="change_language">Change language</string>
+    <string name="share_to_your_friend">Share to your friend</string>
+    <string name="input_data">Input Data</string>
+    <string name="result">Result</string>
+    <string name="app_logo">App logo</string>
+    <string name="hi_gluco_friend">Hi! Gluco friend</string>
+    <string name="we_have_something_for_you">We have solution for you!</string>
+    <string name="setting">Setting</string>
+    <string name="home">home page</string>
+    <string name="set_your_preferences_here">Set your preferences here!</string>
+    <string name="ai_powered_glucose_guide">AI Powered Glucose Guide</string>
+    <string name="monitor_your_glucose">Monitor your glucose levels and risk\n
+    easily with our AI Powered tool!</string>
+    <string name="check_now">Check Now!</string>
+    <string name="online_glucose_checking">Online Checking\nGlucose</string>
+    <string name="let_our_ai_powered">
+        Let our AI Powered\nTool to analyze\nyour data for\ninstant glucose\ninsights.
+    </string>
+    <string name="manual_entry_results">Manual Entry\nand Results</string>
+    <string name="enter_your_data">
+        Enter your data\nto get personalized\nfeedback.
+    </string>
+    <string name="article">Article</string>
+    <string name="suggestion">Suggestion to read</string>
+    <string name="image_article_suggestion">image article suggestion</string>
+    <string name="comparing_camel">Comparing camel, cow and goat\nmilk : Which is best for diabetes\nand heart health?</string>
+    <string name="in_a_recent">In a recent review published in the Nutrients lorem ipsum color sit dot amet</string>
+    <string name="gender">Gender</string>
+    <string name="select_your_gender">Select your gender</string>
+    <string name="age">Age</string>
+    <string name="enter_your_age">Enter your age</string>
+    <string name="smoking_history">Smoking History</string>
+    <string name="do_you_smoke">Do you smoke?</string>
+    <string name="heart_disease">Heart Disease</string>
+    <string name="any_history_of_heart_disease">Any history of heart disease?</string>
+    <string name="hypertension">Hypertension</string>
+    <string name="do_you_have_high_blood_pressure">Do you have high blood pressure?</string>
+    <string name="body_mass_index">Body Mass Index</string>
+    <string name="enter_your_bmi">enter your BMI(e.g.,22.5)</string>
+    <string name="hemoglobin_a1c_level">Hemoglobin A1C Level</string>
+    <string name="enter_your_hba1c">Enter your HbA1c % (e.g.,5.7)</string>
+    <string name="blood_glucose_evel">Blood Glucose Level</string>
+    <string name="enter_your_glucose_level">Enter your current glucose level</string>
+    <string name="double_check_your_information">Double-check your information!</string>
+    <string name="just_one_more_step">Just one more\nstep!</string>
+    <string name="next">Next</string>
+    <string name="submit">Submit</string>
+    <string name="success_submit">Success Submit</string>
+    <string name="error_empty_field">All field must be filled</string>
+    <string name="make_sure_everything_is_correct_before_proceeding.">Make sure everything is\ncorrect before\nproceeding.</string>
+    <string name="all_set_up">All set up!</string>
+    <string name="you_are_ready_to_go">You’re ready to go!</string>
+    <string name="heres_your_result">Here\'s Your Result</string>
+    <string name="diabete_result">Diabetic</string>
+    <string name="result_data">Result data user</string>
+    <string name="play_store">"Check out this app: https://play.google.com/store/apps/details?id="</string>
+    <string name="share">Share this app to your friend</string>
+    <string name="text_plain">text/plain</string>
+    <string name="test">test</string>
+</resources>

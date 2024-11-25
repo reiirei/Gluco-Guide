@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/green_light"
+                app:title="@string/input_data"
+                app:titleTextAppearance="@style/ToolbarTitleText" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="match_parent"
+            android:layout_height="234.09dp"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/doubleCheckCardView"
+            android:layout_width="380dp"
+            android:layout_height="200dp"
+            app:cardElevation="1dp"
+            app:layout_constraintEnd_toEndOf="@+id/cardViewInputData"
+            app:layout_constraintStart_toStartOf="@+id/cardViewInputData"
+            app:layout_constraintTop_toTopOf="@+id/guideline3">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/double_check_your_information"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/just_one_more_step"
+                    android:textSize="40sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView3"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewInputData"
+            android:layout_width="380dp"
+            android:layout_height="500dp"
+            android:layout_marginTop="88dp"
+            android:background="@color/white"
+            app:cardCornerRadius="26dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/gender"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputGender"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintStart_toStartOf="@+id/tv_gender"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_gender">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ti_gender"
+                        android:layout_width="336dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/rounded_text_input_layout"
+                        android:fontFamily="@font/nunito_bold"
+                        android:hint="@string/select_your_gender"
+                        android:inputType="none"
+                        android:padding="15dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/age"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputGender" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputAge"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintStart_toStartOf="@+id/tv_age"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_age">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ti_age"
+                        android:layout_width="336dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/rounded_text_input_layout"
+                        android:fontFamily="@font/nunito_bold"
+                        android:hint="@string/enter_your_age"
+                        android:inputType="none"
+                        android:padding="15dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_smoking_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/smoking_history"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputAge" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputSmokingHistory"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintStart_toStartOf="@+id/tv_smoking_history"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_smoking_history">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ti_smoking_history"
+                        android:layout_width="336dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/rounded_text_input_layout"
+                        android:fontFamily="@font/nunito_bold"
+                        android:hint="@string/do_you_smoke"
+                        android:inputType="none"
+                        android:padding="15dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_heart_disease"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/heart_disease"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputSmokingHistory" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputHeartDisease"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintStart_toStartOf="@+id/tv_heart_disease"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_heart_disease">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ti_heart_disease"
+                        android:layout_width="336dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/rounded_text_input_layout"
+                        android:fontFamily="@font/nunito_bold"
+                        android:hint="@string/any_history_of_heart_disease"
+                        android:inputType="none"
+                        android:padding="15dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_hypertension"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/hypertension"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputHeartDisease" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputHypertension"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintStart_toStartOf="@+id/tv_hypertension"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_hypertension">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ti_hypertension"
+                        android:layout_width="336dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/rounded_text_input_layout"
+                        android:fontFamily="@font/nunito_bold"
+                        android:hint="@string/do_you_have_high_blood_pressure"
+                        android:inputType="none"
+                        android:padding="15dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="380dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cardViewInputData"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/cardViewInputData" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="558dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
