@@ -102,7 +102,7 @@ class HomeFragment : Fragment() {
             .build()
 
         val shapeDrawableBackground = MaterialShapeDrawable(shapeAppearanceModelBackground)
-        shapeDrawableBackground.fillColor = ContextCompat.getColorStateList(requireContext(), R.color.green_light)
+        shapeDrawableBackground.fillColor = ContextCompat.getColorStateList(requireContext(), R.color.dark_blue)
         binding.materialCardView.background = shapeDrawableBackground
     }
 

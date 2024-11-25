@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Gluco Guide</string>
     <string name="detail_news">Detail News</string>
-    <string name="give_feedback">Give feedba</string>
+    <string name="give_feedback">Give feedback</string>
     <string name="change_language">Change language</string>
     <string name="share_to_your_friend">Share to your friend</string>
     <string name="input_data">Input Data</string>
@@ -28,6 +28,7 @@
     <string name="suggestion">Suggestion to read</string>
     <string name="image_article_suggestion">image article suggestion</string>
     <string name="comparing_camel">Comparing camel, cow and goat\nmilk : Which is best for diabetes\nand heart health?</string>
+    <string name="comparing_cow">Comparing camel, cow and goat milk : Which is best for diabetes and heart health?</string>
     <string name="in_a_recent">In a recent review published in the Nutrients lorem ipsum color sit dot amet</string>
     <string name="gender">Gender</string>
     <string name="select_your_gender">Select your gender</string>
@@ -61,4 +62,5 @@
     <string name="share">Share this app to your friend</string>
     <string name="text_plain">text/plain</string>
     <string name="test">test</string>
+    <string name="invalid_view_type">Invalid view type</string>
 </resources>

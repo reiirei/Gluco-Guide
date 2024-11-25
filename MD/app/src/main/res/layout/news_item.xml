@@ -7,12 +7,12 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     app:cardCornerRadius="26dp"
-    android:background="@color/slightly_grey"
     android:layout_marginVertical="8dp">
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/grey">
 
         <ImageView
             android:id="@+id/imageView"

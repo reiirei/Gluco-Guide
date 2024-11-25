@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.glucoGuide.MySplash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/slightly_grey</item>
+        <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.GlucoGuide</item>
     </style>

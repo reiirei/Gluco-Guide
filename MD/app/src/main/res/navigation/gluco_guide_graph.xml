@@ -58,7 +58,11 @@
             android:id="@+id/action_resultFragment_to_homeFragment2"
             app:destination="@id/homeFragment2"
             app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment2"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_resultFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"

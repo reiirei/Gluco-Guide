@@ -6,7 +6,7 @@
     </style>
 
     <style name="Theme.GlucoGuide" parent="Base.Theme.GlucoGuide">
-        <item name="android:statusBarColor">@color/green_light</item>
+        <item name="android:statusBarColor">@color/dark_blue</item>
     </style>
 
     <style name="ToolbarTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">

@@ -1,265 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/dark_blue"
+            app:title="@string/input_data"
+            app:titleTextAppearance="@style/ToolbarTitleText" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/green_light"
-                app:title="@string/input_data"
-                app:titleTextAppearance="@style/ToolbarTitleText" />
-        </com.google.android.material.appbar.AppBarLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="234.09dp"
+        android:background="@color/dark_blue"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewInputData"
+        android:layout_width="380dp"
+        android:layout_height="312dp"
+        android:layout_marginTop="88dp"
+        app:cardElevation="3dp"
+        app:cardCornerRadius="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="234.09dp"
-            android:background="@color/green_light"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewInputData"
-            android:layout_width="380dp"
-            android:layout_height="312dp"
-            android:layout_marginTop="88dp"
-            android:background="@color/white"
-            app:cardElevation="3dp"
-            app:cardCornerRadius="26dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/tv_body_mass_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/body_mass_index"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputBodyMassIndex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:hintEnabled="false"
+                app:layout_constraintStart_toStartOf="@+id/tv_body_mass_index"
+                app:layout_constraintTop_toBottomOf="@+id/tv_body_mass_index">
 
-                <TextView
-                    android:id="@+id/tv_body_mass_index"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="@string/body_mass_index"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputBodyMassIndex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ti_body_mass_index"
+                    android:layout_width="336dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="8dp"
-                    app:hintEnabled="false"
-                    app:layout_constraintStart_toStartOf="@+id/tv_body_mass_index"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_body_mass_index">
+                    android:background="@drawable/rounded_text_input_layout"
+                    android:fontFamily="@font/nunito_bold"
+                    android:hint="@string/enter_your_bmi"
+                    android:inputType="numberDecimal"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ti_body_mass_index"
-                        android:layout_width="336dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/rounded_text_input_layout"
-                        android:fontFamily="@font/nunito_bold"
-                        android:hint="@string/enter_your_bmi"
-                        android:inputType="numberDecimal"
-                        android:padding="15dp" />
-                </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/tv_hemoglobin_a1c_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/hemoglobin_a1c_level"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputBodyMassIndex" />
 
-                <TextView
-                    android:id="@+id/tv_hemoglobin_a1c_level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="@string/hemoglobin_a1c_level"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputBodyMassIndex" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputHemoglobinA1cLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:hintEnabled="false"
+                app:layout_constraintStart_toStartOf="@+id/tv_hemoglobin_a1c_level"
+                app:layout_constraintTop_toBottomOf="@+id/tv_hemoglobin_a1c_level">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputHemoglobinA1cLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ti_hemoglobin_a1c_level"
+                    android:layout_width="336dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="8dp"
-                    app:hintEnabled="false"
-                    app:layout_constraintStart_toStartOf="@+id/tv_hemoglobin_a1c_level"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_hemoglobin_a1c_level">
+                    android:background="@drawable/rounded_text_input_layout"
+                    android:fontFamily="@font/nunito_bold"
+                    android:hint="@string/enter_your_hba1c"
+                    android:inputType="numberDecimal"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ti_hemoglobin_a1c_level"
-                        android:layout_width="336dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/rounded_text_input_layout"
-                        android:fontFamily="@font/nunito_bold"
-                        android:hint="@string/enter_your_hba1c"
-                        android:inputType="numberDecimal"
-                        android:padding="15dp" />
-                </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/tv_glucose_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/blood_glucose_evel"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputHemoglobinA1cLevel" />
 
-                <TextView
-                    android:id="@+id/tv_glucose_level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="@string/blood_glucose_evel"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputHemoglobinA1cLevel" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputGlucoseLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:hintEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_glucose_level"
+                app:layout_constraintTop_toBottomOf="@+id/tv_glucose_level"
+                app:layout_constraintVertical_bias="0.0">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputGlucoseLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ti_glucose_level"
+                    android:layout_width="336dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="8dp"
-                    app:hintEnabled="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/tv_glucose_level"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_glucose_level"
-                    app:layout_constraintVertical_bias="0.0">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ti_glucose_level"
-                        android:layout_width="336dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/rounded_text_input_layout"
-                        android:contentDescription="@string/enter_your_glucose_level"
-                        android:fontFamily="@font/nunito_bold"
-                        android:hint="@string/enter_your_glucose_level"
-                        android:inputType="number"
-                        android:padding="15dp" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/doubleCheckCard"
-            android:layout_width="380dp"
-            android:layout_height="220dp"
-            app:cardElevation="2dp"
-            app:layout_constraintEnd_toEndOf="@+id/cardViewInputData"
-            app:layout_constraintStart_toStartOf="@+id/cardViewInputData"
-            app:layout_constraintTop_toTopOf="@+id/guideline">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tv_double_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="40dp"
+                    android:background="@drawable/rounded_text_input_layout"
+                    android:contentDescription="@string/enter_your_glucose_level"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="@string/double_check_your_information"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:hint="@string/enter_your_glucose_level"
+                    android:inputType="number"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/nunito_bold"
-                    android:text="@string/make_sure_everything_is_correct_before_proceeding."
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/tv_double_check"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_double_check" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/doubleCheckCard"
+        android:layout_width="380dp"
+        android:layout_height="220dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/cardViewInputData"
+        app:layout_constraintStart_toStartOf="@+id/cardViewInputData"
+        app:layout_constraintTop_toTopOf="@+id/guideline">
 
-        </com.google.android.material.card.MaterialCardView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/readyCard"
-            android:layout_width="380dp"
-            android:layout_height="150dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="@+id/cardViewInputData"
-            app:layout_constraintStart_toStartOf="@+id/cardViewInputData"
-            app:layout_constraintTop_toTopOf="@+id/guideline2">
+            <TextView
+                android:id="@+id/tv_double_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/double_check_your_information"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/make_sure_everything_is_correct_before_proceeding."
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_double_check"
+                app:layout_constraintTop_toBottomOf="@+id/tv_double_check" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/tv_all_set_up"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="50dp"
-                    android:fontFamily="@font/nunito_bold"
-                    android:text="@string/all_set_up"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/nunito_bold"
-                    android:text="@string/you_are_ready_to_go"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/tv_all_set_up"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_all_set_up"
-                    app:layout_constraintVertical_bias="0.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/readyCard"
+        android:layout_width="380dp"
+        android:layout_height="150dp"
+        app:cardElevation="1dp"
+        app:layout_constraintEnd_toEndOf="@+id/cardViewInputData"
+        app:layout_constraintStart_toStartOf="@+id/cardViewInputData"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_submit"
-            android:layout_width="380dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/button_background"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/submit"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/readyCard"
-            app:layout_constraintStart_toStartOf="@+id/readyCard" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="371dp" />
+            <TextView
+                android:id="@+id/tv_all_set_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/all_set_up"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="562dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/you_are_ready_to_go"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_all_set_up"
+                app:layout_constraintTop_toBottomOf="@+id/tv_all_set_up"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_submit"
+        android:layout_width="380dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/submit"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/readyCard"
+        app:layout_constraintStart_toStartOf="@+id/readyCard" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="371dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="562dp" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

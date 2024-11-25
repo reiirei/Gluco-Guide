@@ -1,7 +1,11 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background">
@@ -18,21 +22,21 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/green_light"
+                android:background="@color/dark_blue"
                 app:title="@string/result"
                 app:titleTextAppearance="@style/ToolbarTitleText" />
         </com.google.android.material.appbar.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/iv_home"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="24dp"
-        android:contentDescription="@string/home"
-        android:src="@drawable/baseline_home_24"
-        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appBarLayout" />
+        <ImageView
+            android:id="@+id/iv_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="@string/home"
+            android:src="@drawable/baseline_home_24"
+            app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/appBarLayout" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
@@ -43,7 +47,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewInputData"
             android:layout_width="380dp"
-            android:layout_height="500dp"
+            android:layout_height="530dp"
             android:layout_marginTop="88dp"
             android:background="@color/white"
             android:contentDescription="@string/result_data"
@@ -55,7 +59,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/tv_gender"
@@ -65,7 +70,7 @@
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/gender"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,7 +81,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/gender"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_gender"
                     app:layout_constraintTop_toBottomOf="@+id/tv_gender" />
 
@@ -87,7 +92,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/age"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_gender"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_gender" />
 
@@ -98,7 +103,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/age"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_age"
                     app:layout_constraintTop_toBottomOf="@+id/tv_age" />
 
@@ -109,7 +114,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/smoking_history"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_age"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_age" />
 
@@ -120,7 +125,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/smoking_history"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_smoking_history"
                     app:layout_constraintTop_toBottomOf="@+id/tv_smoking_history" />
 
@@ -131,7 +136,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/heart_disease"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_smoking_history"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_smoking_history" />
 
@@ -142,7 +147,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/heart_disease"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_heart_disease"
                     app:layout_constraintTop_toBottomOf="@+id/tv_heart_disease" />
 
@@ -153,7 +158,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/hypertension"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_heart_disease"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_heart_disease" />
 
@@ -164,7 +169,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/hypertension"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_hypertension"
                     app:layout_constraintTop_toBottomOf="@+id/tv_hypertension" />
 
@@ -175,7 +180,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/body_mass_index"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_hypertension"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_hypertension" />
 
@@ -186,7 +191,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/body_mass_index"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_body_mass_index"
                     app:layout_constraintTop_toBottomOf="@+id/tv_body_mass_index" />
 
@@ -197,7 +202,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/hemoglobin_a1c_level"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_body_mass_index"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_body_mass_index" />
 
@@ -206,9 +211,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/hemoglobin_a1c_level"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_hemoglobin_a1c_level"
                     app:layout_constraintTop_toBottomOf="@+id/tv_hemoglobin_a1c_level" />
 
@@ -219,7 +226,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/blood_glucose_evel"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_hemoglobin_a1c_level"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_hemoglobin_a1c_level" />
 
@@ -231,7 +238,7 @@
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/blood_glucose_evel"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_blood_glucose_level"
                     app:layout_constraintTop_toBottomOf="@+id/tv_blood_glucose_level" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -255,7 +262,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/heres_your_result"
                     android:textSize="16sp"
@@ -282,72 +289,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/nunito_semibold"
+            android:fontFamily="@font/nunito_bold"
             android:text="@string/suggestion"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/resultCard"
             app:layout_constraintTop_toBottomOf="@+id/resultCard" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="577dp" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="380dp"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@color/grey"
-            android:contentDescription="@string/suggestion"
-            app:cardCornerRadius="26dp"
-            app:layout_constraintEnd_toEndOf="@+id/resultCard"
-            app:layout_constraintStart_toStartOf="@+id/resultCard"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="595dp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="81dp"
-                    android:layout_height="89dp"
-                    android:layout_marginVertical="16dp"
-                    android:layout_marginStart="16dp"
-                    android:contentDescription="@string/image_article_suggestion"
-                    app:cornerRadius="13dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/gluco52" />
-
-                <TextView
-                    android:id="@+id/news_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/nunito_bold"
-                    android:text="@string/comparing_camel"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-                <TextView
-                    android:id="@+id/news_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/nunito"
-                    android:maxLines="1"
-                    android:text="@string/in_a_recent"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintStart_toStartOf="@+id/news_title"
-                    app:layout_constraintTop_toBottomOf="@+id/news_title" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_suggestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            app:layout_constraintStart_toStartOf="@id/cardViewInputData"
+            app:layout_constraintEnd_toEndOf="@id/cardViewInputData"
+            tools:listitem="@layout/news_item"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

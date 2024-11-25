@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/green_light"
+            android:background="@color/dark_blue"
             app:title="@string/detail_news"
             app:titleTextAppearance="@style/ToolbarTitleText" />
     </com.google.android.material.appbar.AppBarLayout>
