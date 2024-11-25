@@ -48,11 +48,6 @@ class ResultFragment : Fragment() {
         toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-
-        binding.ivHome.setOnClickListener {
-            val action = ResultFragmentDirections.actionResultFragmentToHomeFragment2()
-            findNavController().navigate(action)
-        }
     }
 
     private fun setupShape(cardView: MaterialCardView, cornerSizeResId: Int, colorResId: Int) {
