@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="corner_radius_message">21dp</dimen>
-    <dimen name="corner_radius_green_background">60dp</dimen>
-    <dimen name="corner_radius_grey_background">26dp</dimen>
-</resources>
