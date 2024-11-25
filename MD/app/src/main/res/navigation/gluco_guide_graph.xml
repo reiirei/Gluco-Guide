@@ -54,6 +54,11 @@
         <argument
             android:name="userData"
             app:argType="com.health.glucoguide.models.UserData" />
+        <action
+            android:id="@+id/action_resultFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
