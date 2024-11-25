@@ -23,6 +23,7 @@
     <string name="suggestion">Saran bacaan</string>
     <string name="image_article_suggestion">Gambar sugesti artikel</string>
     <string name="comparing_camel">Membandingkan susu unta,  sapi, dan kambing: Mana yang  terbaik untuk diabetes dan  kesehatan jantung?</string>
+    <string name="comparing_cow">Membandingkan susu unta,  sapi, dan kambing: Mana yang  terbaik untuk diabetes dan  kesehatan jantung?</string>
     <string name="in_a_recent">Dalam sebuah tinjauan terbaru yang  diterbitkan di jurnal Nutrients.</string>
     <string name="gender">Gender</string>
     <string name="select_your_gender">Jenis kelamin</string>
@@ -57,4 +58,5 @@
     <string name="text_plain">text/plain</string>
     <string name="detail_news">Detail Artikel</string>
     <string name="test">test</string>
+    <string name="invalid_view_type">Tipe view tidak sesuai</string>
 </resources>

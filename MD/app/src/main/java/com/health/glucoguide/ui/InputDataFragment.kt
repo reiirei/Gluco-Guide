@@ -154,11 +154,11 @@ class InputDataFragment : Fragment() {
     }
 
     private fun setupShapeGreenBackground() {
-        setupShape(binding.materialCardView, R.dimen.corner_radius_green_background, R.color.green_light)
+        setupShape(binding.materialCardView, R.dimen.corner_radius_green_background, R.color.dark_blue)
     }
 
     private fun setupShapeDoubleCheckCard() {
-        setupShape(binding.doubleCheckCardView, R.dimen.corner_radius_grey_background, R.color.slightly_grey)
+        setupShape(binding.doubleCheckCardView, R.dimen.corner_radius_grey_background, R.color.grey)
     }
 
     private fun showToast(toast: String) {
