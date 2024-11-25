@@ -23,8 +23,7 @@
             app:cornerRadius="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/gluco52" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/news_title"
