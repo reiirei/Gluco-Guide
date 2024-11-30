@@ -12,5 +12,6 @@ data class UserData(
     var hypertension: String? = null,
     var bodyMassIndex: Double? = null,
     var hemoglobinLevel: Double? = null,
-    var glucoseLevel: Int? = null
+    var glucoseLevel: Int? = null,
+    var date: String? = null
 ) : Parcelable

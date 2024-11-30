@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id ("androidx.navigation.safeargs")
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp") version "1.9.20-1.0.14"
+    id ("kotlin-kapt")
+    id("com.google.dagger.hilt.android") version "2.51.1"
 }
 
 android {
@@ -20,6 +23,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField ("String", "BASE_URL", "\"https://localhost:8080/\"")
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -37,6 +44,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -48,6 +56,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
+    testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
@@ -56,8 +65,6 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     implementation (libs.coil)
-
-    implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -68,4 +75,13 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+
+    implementation(libs.symbol.processing.api)
+    ksp(libs.symbol.processing)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 }
