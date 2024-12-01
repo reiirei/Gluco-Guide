@@ -20,8 +20,7 @@
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/Theme.GlucoGuide.OnBoarding"
-            android:screenOrientation="portrait">
+            android:theme="@style/Theme.GlucoGuide.OnBoarding">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,23 +31,19 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.GlucoGuide.OnBoarding"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/Theme.GlucoGuide.OnBoarding"/>
         <activity
             android:name=".SignUpActivity"
             android:exported="false"
-            android:theme="@style/Theme.GlucoGuide.OnBoarding"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/Theme.GlucoGuide.OnBoarding"/>
         <activity
             android:name=".OnBoardingActivity"
             android:exported="false"
-            android:theme="@style/Theme.GlucoGuide.OnBoarding"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/Theme.GlucoGuide.OnBoarding"/>
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.GlucoGuide"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/Theme.GlucoGuide" />
 
         <meta-data
             android:name="preloaded_fonts"
