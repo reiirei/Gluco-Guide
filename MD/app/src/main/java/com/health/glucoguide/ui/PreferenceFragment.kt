@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -38,10 +37,6 @@ class PreferenceFragment : Fragment() {
     private fun setupToolbar() {
         val toolbar = binding.toolbar
         toolbar.isTitleCentered = true
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_30)
-        toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
-        }
     }
 
     private fun setupAction() {

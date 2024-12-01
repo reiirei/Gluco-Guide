@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment2_to_preferenceFragment"
             app:destination="@id/preferenceFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
 
     <fragment
@@ -29,6 +32,10 @@
         <action
             android:id="@+id/action_inputDataFragment_to_inputDataAdvancedFragment"
             app:destination="@id/inputDataAdvancedFragment"/>
+        <argument
+            android:name="showBottomNav"
+            android:defaultValue="false"
+            app:argType="boolean"/>
     </fragment>
 
     <fragment
@@ -39,7 +46,10 @@
         <argument
             android:name="userData"
             app:argType="com.health.glucoguide.models.UserData" />
-
+        <argument
+            android:name="showBottomNav"
+            android:defaultValue="false"
+            app:argType="boolean"/>
         <action
             android:id="@+id/action_inputDataAdvancedFragment_to_resultFragment"
             app:destination="@id/resultFragment"/>
@@ -79,4 +89,9 @@
         android:name="com.health.glucoguide.ui.PreferenceFragment"
         android:label="PreferenceFragment"
         tools:layout="@layout/fragment_preference"/>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.health.glucoguide.ui.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history"/>
 </navigation>

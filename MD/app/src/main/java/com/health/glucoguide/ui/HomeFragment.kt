@@ -43,11 +43,6 @@ class HomeFragment : Fragment() {
     private fun setupToolbar() {
         val toolbar = binding.toolbar
         toolbar.isTitleCentered = true
-
-        binding.ivSettings.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragment2ToPreferenceFragment()
-            Navigation.findNavController(requireView()).navigate(action)
-        }
     }
 
     private fun setupAction() {
