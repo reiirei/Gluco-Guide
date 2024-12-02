@@ -1,8 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const { db } = require('./db');
-const authRoutes = require('./routes/authRoutes'); // Import authRoutes
+const authRoutes = require('./routes/authRoutes');
+const profileRoutes = require('./routes/profileRoutes'); // Import profileRoutes
 
 dotenv.config();
 
@@ -13,7 +13,8 @@ app.use(express.json()); // Parse JSON bodies
 app.use(cors()); // Enable CORS for all origins
 
 // Routes
-app.use('/api', authRoutes); // Gunakan /api sebagai prefix
+app.use('/api', authRoutes); // Rute untuk login dan register
+app.use('/api/profile', profileRoutes); // Rute untuk profile
 
 // Start the server
 const port = process.env.PORT || 3000;
