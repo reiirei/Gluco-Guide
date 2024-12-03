@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.health.glucoguide.R
+import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -20,7 +21,5 @@ class SplashScreenActivity : AppCompatActivity() {
             finish()
         }, 2000)
     }
-
-
 }
 
