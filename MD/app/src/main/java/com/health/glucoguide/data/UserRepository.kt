@@ -3,18 +3,31 @@ package com.health.glucoguide.data
 import androidx.lifecycle.liveData
 import com.google.gson.Gson
 import com.health.glucoguide.R
+import com.health.glucoguide.data.local.UserPreference
 import com.health.glucoguide.data.remote.ApiService
 import com.health.glucoguide.models.UserLoginRequest
 import com.health.glucoguide.models.UserLoginResponse
 import com.health.glucoguide.models.UserRegisterRequest
 import com.health.glucoguide.models.UserRegisterResponse
+import com.health.glucoguide.models.UserSession
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val userPreference: UserPreference
 ) {
+
+    suspend fun saveSession(user: UserSession) {
+        userPreference.saveSession(user)
+    }
+
+    fun getSession() = userPreference.getSession()
+
+    suspend fun clearSession() {
+        userPreference.clearSession()
+    }
 
     fun registerUser(request: UserRegisterRequest) = liveData {
         emit(ResultState.Loading)
