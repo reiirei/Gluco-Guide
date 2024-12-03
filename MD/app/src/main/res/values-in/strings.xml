@@ -7,7 +7,7 @@
     <string name="input_data">Masukan Data</string>
     <string name="result">Hasil</string>
     <string name="app_logo">App Logo</string>
-    <string name="hi_gluco_friend">Hi! Sobat Gluco</string>
+    <string name="hi_gluco_friend">Hi! %s</string>
     <string name="we_have_something_for_you">Kita punya solusi buat kamu</string>
     <string name="setting">Pengaturan</string>
     <string name="home">home page</string>
@@ -94,8 +94,11 @@
     <string name="you_seem_to_be_offline">Nampaknya anda sedang offline</string>
     <string name="check_your_internet_connection_and_try_again">Check your internet connection and try again</string>
     <string name="image_no_internet">image no internet</string>
-    <string name="yakin_mau_keluar_nanti_harus_login_ulang_loh">Yakin mau keluar? Nanti harus login ulang loh</string>
-    <string name="keluar">Keluar</string>
+    <string name="sure_want_to_logout">Yakin mau keluar? Nanti harus login ulang loh</string>
+    <string name="logout">Keluar</string>
     <string name="network_connection_error">Tidak ada internet</string>
     <string name="an_unexpected_error_occurred">Error belum diketahui</string>
+    <string name="what_language_do_you_prefer">Mau pakai bahasa apa?</string>
+    <string name="feel_free_to_share_this_app_to_your_friend">Bagikan aplikasi ini ke teman anda</string>
+    <string name="your_feedback_is_important_to_us">Kami sangat menghargai umpan balik</string>
 </resources>
