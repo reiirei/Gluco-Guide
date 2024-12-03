@@ -49,7 +49,8 @@ class LoginActivity : AppCompatActivity() {
             val password = password.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                showToast("All fields must not be empty")
+                val emptyFields = getString(com.health.glucoguide.R.string.all_fields_must_not_be_empty)
+                showToast(emptyFields)
             } else {
                 viewModel.loginAccount(email, password).observe(this) { response ->
                     when (response) {
@@ -64,13 +65,14 @@ class LoginActivity : AppCompatActivity() {
                                 response.data.loginResult?.token.toString(),
                                 true
                             )
-                            showToast("Login success")
+                            val loginSuccess = getString(com.health.glucoguide.R.string.login_success)
+                            showToast(loginSuccess)
                             viewModel.saveSession(user)
                             goToMainActivity()
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
-                            showToast("Login failed: ${response.error}")
+                            showToast(response.error)
                         }
                     }
                 }

@@ -44,9 +44,11 @@ class SignUpActivity : AppCompatActivity() {
             val emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
 
             if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
-                showToast("All fields must not be empty")
+                val emptyFields = getString(com.health.glucoguide.R.string.all_fields_must_not_be_empty)
+                showToast(emptyFields)
             } else if (!email.matches(emailPattern.toRegex())) {
-                showToast("Invalid email address")
+                val emailInvalid = getString(com.health.glucoguide.R.string.invalid_email_address)
+                showToast(emailInvalid)
             } else {
                 viewModel.registerAccount(username, email, password).observe(this) { response ->
                     when (response) {
@@ -55,14 +57,15 @@ class SignUpActivity : AppCompatActivity() {
                         }
                         is ResultState.Success -> {
                             progressDialog.hideLoading()
-                            showToast("Sign up success")
+                            val successSignup = getString(com.health.glucoguide.R.string.sign_up_success)
+                            showToast(successSignup)
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
-                            showToast("Sign up failed: ${response.error}")
+                            showToast(response.error)
                         }
                     }
                 }
