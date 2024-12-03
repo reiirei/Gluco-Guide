@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -121,15 +122,25 @@
                 android:id="@+id/tv_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginStart="16dp"
                 android:fontFamily="@font/nunito_semibold"
                 android:text="@string/share_to_your_friend"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_share"
                 app:layout_constraintStart_toEndOf="@+id/card_share"
                 app:layout_constraintTop_toTopOf="@+id/card_share"
-                app:layout_constraintVertical_bias="0.277" />
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tv_share_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:text="@string/feel_free_to_share_this_app_to_your_friend"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_share"
+                app:layout_constraintStart_toStartOf="@+id/tv_share"
+                app:layout_constraintTop_toBottomOf="@+id/tv_share" />
 
             <ImageView
                 android:id="@+id/arrow_share"
@@ -193,14 +204,25 @@
                 android:id="@+id/tv_feedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:fontFamily="@font/nunito_semibold"
                 android:text="@string/give_feedback"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_feedback"
                 app:layout_constraintStart_toEndOf="@+id/card_feedback"
                 app:layout_constraintTop_toTopOf="@+id/card_feedback"
-                app:layout_constraintVertical_bias="0.518" />
+                app:layout_constraintVertical_bias="0.17" />
+
+            <TextView
+                android:id="@+id/tv_feedback_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:text="@string/your_feedback_is_important_to_us"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_feedback"
+                app:layout_constraintStart_toStartOf="@+id/tv_feedback"
+                app:layout_constraintTop_toBottomOf="@+id/tv_feedback" />
 
             <ImageView
                 android:id="@+id/arrow_feedback"
@@ -265,14 +287,25 @@
                 android:id="@+id/tv_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:fontFamily="@font/nunito_semibold"
                 android:text="@string/change_language"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_language"
                 app:layout_constraintStart_toEndOf="@+id/card_language"
                 app:layout_constraintTop_toTopOf="@+id/card_language"
-                app:layout_constraintVertical_bias="0.518" />
+                app:layout_constraintVertical_bias="0.17" />
+
+            <TextView
+                android:id="@+id/tv_language_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:text="@string/what_language_do_you_prefer"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_language"
+                app:layout_constraintStart_toStartOf="@+id/tv_language"
+                app:layout_constraintTop_toBottomOf="@+id/tv_language" />
 
             <ImageView
                 android:id="@+id/arrow_language"
@@ -300,7 +333,7 @@
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
         android:clickable="true"
-        android:contentDescription="@string/change_language"
+        android:contentDescription="@string/sure_want_to_logout"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="0dp"
@@ -336,9 +369,9 @@
                 android:id="@+id/tv_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:fontFamily="@font/nunito_semibold"
-                android:text="@string/keluar"
+                android:text="@string/logout"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_logout"
                 app:layout_constraintStart_toEndOf="@+id/card_logout"
@@ -349,12 +382,11 @@
                 android:id="@+id/tv_logout_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:fontFamily="@font/nunito"
-                android:text="@string/yakin_mau_keluar_nanti_harus_login_ulang_loh"
-                android:textSize="12sp"
+                android:text="@string/sure_want_to_logout"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_logout"
-                app:layout_constraintStart_toEndOf="@+id/card_logout"
+                app:layout_constraintStart_toStartOf="@+id/tv_logout"
                 app:layout_constraintTop_toBottomOf="@+id/tv_logout"
                 app:layout_constraintVertical_bias="0.518" />
 

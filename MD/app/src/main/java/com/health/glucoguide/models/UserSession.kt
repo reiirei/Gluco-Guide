@@ -1,7 +1,8 @@
 package com.health.glucoguide.models
 
-data class UserLoginRequest(
+data class UserSession(
     val email: String,
-    val password: String,
+    val name: String,
+    val token: String,
     val isLogin: Boolean = false
 )

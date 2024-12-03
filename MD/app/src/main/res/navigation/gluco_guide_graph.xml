@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment2"
-        android:name="com.health.glucoguide.ui.fragment.HomeFragment"
+        android:name="com.health.glucoguide.ui.fragment.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -86,9 +86,9 @@
     </fragment>
     <fragment
         android:id="@+id/preferenceFragment"
-        android:name="com.health.glucoguide.ui.fragment.PreferenceFragment"
+        android:name="com.health.glucoguide.ui.fragment.profile.ProfileFragment"
         android:label="PreferenceFragment"
-        tools:layout="@layout/fragment_preference"/>
+        tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.health.glucoguide.ui.fragment.HistoryFragment"
