@@ -6,6 +6,27 @@ const { db } = require('../db');
 async function registerUser(req, res) {
   const { name, email, password } = req.body;
 
+  // Validasi panjang email
+  if (email.length < 8) {
+    return res.status(400).json({ error: true, message: 'Email harus memiliki minimal 8 karakter' });
+  }
+
+  // Validasi format email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex untuk format email valid
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: true, message: 'Email tidak valid' });
+  }
+
+  // Validasi panjang username
+  if (name.length < 8) {
+    return res.status(400).json({ error: true, message: 'Username harus memiliki minimal 8 karakter' });
+  }
+
+  // Validasi panjang password
+  if (password.length < 8) {
+    return res.status(400).json({ error: true, message: 'Password harus memiliki minimal 8 karakter' });
+  }
+
   // Cek apakah email sudah ada
   const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
   if (rows.length > 0) {
@@ -20,6 +41,8 @@ async function registerUser(req, res) {
 
   res.json({ error: false, message: 'User Created' });
 }
+
+
 
 
 // Fungsi untuk login pengguna

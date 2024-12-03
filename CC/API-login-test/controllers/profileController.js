@@ -6,7 +6,7 @@ async function getProfile(req, res) {
   const userId = req.user.userId; // Ambil userId dari token JWT
 
   // Ambil data pengguna berdasarkan userId
-  const [rows] = await db.query('SELECT id, name, email, password FROM users WHERE id = ?', [userId]);
+  const [rows] = await db.query('SELECT id, name, email FROM users WHERE id = ?', [userId]);
 
   if (rows.length === 0) {
     return res.status(404).json({ error: true, message: 'User not found' });
@@ -18,8 +18,7 @@ async function getProfile(req, res) {
     user: {
       id: user.id,
       name: user.name,
-      email: user.email,
-      password: user.password
+      email: user.email
     }
   });
 }
