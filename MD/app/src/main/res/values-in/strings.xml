@@ -91,9 +91,11 @@
     <string name="diabetes_result">Hasil tes</string>
     <string name="results_diabetes_result">High Risk</string>
     <string name="try_again">Try again</string>
-    <string name="you_seem_to_be_offline">You seem to be offline</string>
+    <string name="you_seem_to_be_offline">Nampaknya anda sedang offline</string>
     <string name="check_your_internet_connection_and_try_again">Check your internet connection and try again</string>
     <string name="image_no_internet">image no internet</string>
     <string name="yakin_mau_keluar_nanti_harus_login_ulang_loh">Yakin mau keluar? Nanti harus login ulang loh</string>
     <string name="keluar">Keluar</string>
+    <string name="network_connection_error">Tidak ada internet</string>
+    <string name="an_unexpected_error_occurred">Error belum diketahui</string>
 </resources>
