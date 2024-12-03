@@ -1,4 +1,4 @@
-package com.health.glucoguide.ui.fragment
+package com.health.glucoguide.ui.fragment.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,27 +7,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
-import com.health.glucoguide.databinding.FragmentPreferenceBinding
+import com.health.glucoguide.databinding.FragmentProfileBinding
+import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class PreferenceFragment : Fragment() {
+@AndroidEntryPoint
+class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentPreferenceBinding? = null
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPreferenceBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getUserName().observe(viewLifecycleOwner) { user ->
+            val greeting = getString(R.string.hi_gluco_friend, user.name)
+            binding.tvGlucoGuide.text = greeting
+
+        }
 
         setupToolbar()
         setupShapeMessage()
@@ -45,6 +56,13 @@ class PreferenceFragment : Fragment() {
             intent.type = getString(R.string.text_plain)
             intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.play_store) + requireContext().packageName)
             startActivity(Intent.createChooser(intent, getString(R.string.share)))
+        }
+
+        binding.cvLogout.setOnClickListener {
+            viewModel.logout()
+            val intent = Intent(requireContext(), OnBoardingActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
     }
 
