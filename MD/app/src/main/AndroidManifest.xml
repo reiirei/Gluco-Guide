@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name=".GlucoGuideApp"
@@ -16,9 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GlucoGuide"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ui.activity.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/Theme.GlucoGuide.OnBoarding"
             android:screenOrientation="portrait">
@@ -30,25 +29,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activity.login.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.GlucoGuide.OnBoarding"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".ui.activity.signup.SignUpActivity"
             android:exported="false"
             android:theme="@style/Theme.GlucoGuide.OnBoarding"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".OnBoardingActivity"
+            android:name=".ui.activity.OnBoardingActivity"
             android:exported="false"
             android:theme="@style/Theme.GlucoGuide.OnBoarding"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.GlucoGuide"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/Theme.GlucoGuide" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -24,7 +24,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField ("String", "BASE_URL", "\"https://localhost:8080/\"")
+            buildConfigField ("String", "BASE_URL", "\"http://192.168.1.3:3000/\"")
         }
 
         release {
@@ -84,4 +84,6 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    implementation(libs.lottie)
 }

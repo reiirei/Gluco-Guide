@@ -1,11 +1,15 @@
 package com.health.glucoguide.models
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.google.gson.annotations.SerializedName
 
-@Parcelize
 data class UserRegisterRequest(
-    val email: String,
-    val name: String,
-    val password: String
-) : Parcelable
+
+	@field:SerializedName("name")
+	var name: String,
+
+	@field:SerializedName("email")
+	var email: String,
+
+	@field:SerializedName("password")
+	var password: String,
+)
