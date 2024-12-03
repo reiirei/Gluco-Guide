@@ -101,4 +101,8 @@
     <string name="what_language_do_you_prefer">Mau pakai bahasa apa?</string>
     <string name="feel_free_to_share_this_app_to_your_friend">Bagikan aplikasi ini ke teman anda</string>
     <string name="your_feedback_is_important_to_us">Kami sangat menghargai umpan balik</string>
+    <string name="all_fields_must_not_be_empty">Semua form input harus diisi</string>
+    <string name="invalid_email_address">Alamat email tidak sesuai</string>
+    <string name="sign_up_success">Berhasil daftar akun</string>
+    <string name="login_success">Berhasil masuk</string>
 </resources>
