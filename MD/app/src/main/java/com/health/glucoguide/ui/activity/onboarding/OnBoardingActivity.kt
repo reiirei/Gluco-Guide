@@ -1,4 +1,4 @@
-package com.health.glucoguide.ui.activity
+package com.health.glucoguide.ui.activity.onboarding
 
 import android.content.Intent
 import android.os.Bundle
