@@ -1,8 +1,8 @@
 package com.health.glucoguide.data
 
-import android.util.Log
 import androidx.lifecycle.liveData
 import com.google.gson.Gson
+import com.health.glucoguide.R
 import com.health.glucoguide.data.remote.ApiService
 import com.health.glucoguide.models.UserLoginRequest
 import com.health.glucoguide.models.UserLoginResponse
@@ -27,9 +27,9 @@ class UserRepository @Inject constructor(
             val errorMessage = errorBody.message
             emit(ResultState.Error(errorMessage.toString()))
         } catch (e: IOException) {
-            emit(ResultState.Error("Network connection error"))
+            emit(ResultState.Error(R.string.network_connection_error.toString()))
         } catch (e: Exception) {
-            emit(ResultState.Error("An unexpected error occurred"))
+            emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
         }
     }
 
@@ -37,13 +37,16 @@ class UserRepository @Inject constructor(
         emit(ResultState.Loading)
         try {
             val successResponse = apiService.postUserLogin(request)
-            Log.d("Login", successResponse.toString())
             emit(ResultState.Success(successResponse))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, UserLoginResponse::class.java)
             val errorMessage = errorBody.message
             emit(ResultState.Error(errorMessage.toString()))
+        } catch (e: IOException) {
+            emit(ResultState.Error(R.string.network_connection_error.toString()))
+        } catch (e: Exception) {
+            emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
         }
     }
 }

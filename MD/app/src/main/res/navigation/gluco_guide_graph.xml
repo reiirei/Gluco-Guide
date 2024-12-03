@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment2"
-        android:name="com.health.glucoguide.ui.HomeFragment"
+        android:name="com.health.glucoguide.ui.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/inputDataFragment"
-        android:name="com.health.glucoguide.ui.InputDataFragment"
+        android:name="com.health.glucoguide.ui.fragment.InputDataFragment"
         android:label="InputDataFragment"
         tools:layout="@layout/fragment_input_data">
         <action
@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/inputDataAdvancedFragment"
-        android:name="com.health.glucoguide.ui.InputDataAdvancedFragment"
+        android:name="com.health.glucoguide.ui.fragment.InputDataAdvancedFragment"
         android:label="InputDataAdvancedFragment"
         tools:layout="@layout/fragment_input_data_advanced">
         <argument
@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.health.glucoguide.ui.ResultFragment"
+        android:name="com.health.glucoguide.ui.fragment.ResultFragment"
         android:label="ResultFragment"
         tools:layout="@layout/fragment_result">
 
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.health.glucoguide.ui.NewsFragment"
+        android:name="com.health.glucoguide.ui.fragment.NewsFragment"
         android:label="NewsFragment"
         tools:layout="@layout/fragment_news">
 
@@ -86,12 +86,12 @@
     </fragment>
     <fragment
         android:id="@+id/preferenceFragment"
-        android:name="com.health.glucoguide.ui.PreferenceFragment"
+        android:name="com.health.glucoguide.ui.fragment.PreferenceFragment"
         android:label="PreferenceFragment"
         tools:layout="@layout/fragment_preference"/>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.health.glucoguide.ui.HistoryFragment"
+        android:name="com.health.glucoguide.ui.fragment.HistoryFragment"
         android:label="HistoryFragment"
         tools:layout="@layout/fragment_history"/>
 </navigation>

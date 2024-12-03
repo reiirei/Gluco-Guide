@@ -36,13 +36,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/nunito_bold"
-        android:text="@string/username"
+        android:text="@string/email"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_username"
+        android:id="@+id/tl_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -56,14 +56,14 @@
         app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ti_username"
+            android:id="@+id/ti_email"
             android:layout_width="374dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/rounded_text_input_layout"
             android:fontFamily="@font/nunito_bold"
-            android:hint="@string/input_your_name"
-            android:inputType="text"
+            android:hint="@string/input_your_email"
+            android:inputType="textEmailAddress"
             android:padding="15dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,7 +77,7 @@
         android:text="@string/password"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tl_username" />
+        app:layout_constraintTop_toBottomOf="@+id/tl_email" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tl_password"

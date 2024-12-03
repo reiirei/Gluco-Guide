@@ -76,13 +76,11 @@
     <string name="password">Password</string>
     <string name="Input_password">Password must more than 8 character</string>
     <string name="login">Login</string>
-    <string name="input_your_name">Input your name</string>
+    <string name="input_your_email">Input your email</string>
     <string name="input_your_password">Input your password</string>
     <string name="title_home">Home</string>
     <string name="title_person">Profile</string>
     <string name="title_history">History</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="guide_your_glucose">Guide Your Glucose</string>
     <string name="app_version_1_0_0">App Version 1.0.0</string>
     <string name="application_logo">application logo</string>
@@ -100,4 +98,8 @@
     <string name="you_seem_to_be_offline">You seem to be offline</string>
     <string name="check_your_internet_connection_and_try_again">Check your internet connection and try again</string>
     <string name="image_no_internet">image no internet</string>
+    <string name="yakin_mau_keluar_nanti_harus_login_ulang_loh">Yakin mau keluar? Nanti harus login ulang loh</string>
+    <string name="keluar">Keluar</string>
+    <string name="network_connection_error">Network connection error</string>
+    <string name="an_unexpected_error_occurred">An unexpected error occurred</string>
 </resources>
