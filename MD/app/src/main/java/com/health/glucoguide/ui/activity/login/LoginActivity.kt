@@ -9,6 +9,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.health.glucoguide.util.ProgressDialogUtil
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.ActivityLoginBinding
+import com.health.glucoguide.models.UserSession
 import com.health.glucoguide.ui.activity.MainActivity
 import com.health.glucoguide.ui.activity.signup.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,10 +58,15 @@ class LoginActivity : AppCompatActivity() {
                         }
                         is ResultState.Success -> {
                             progressDialog.hideLoading()
+                            val user = UserSession(
+                                email,
+                                response.data.loginResult?.name.toString(),
+                                response.data.loginResult?.token.toString(),
+                                true
+                            )
                             showToast("Login success")
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                            viewModel.saveSession(user)
+                            goToMainActivity()
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
@@ -70,6 +76,13 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun goToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        finish()
     }
 
     private fun showToast(toast: String) {
