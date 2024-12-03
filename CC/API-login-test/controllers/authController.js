@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { db } = require('../db');
 
+
 // Fungsi untuk register pengguna
 async function registerUser(req, res) {
   const { name, email, password } = req.body;

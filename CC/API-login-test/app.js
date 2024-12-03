@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes'); // Import profileRoutes
+const historyRoutes = require('./routes/historyRoutes'); // Import historyRoutes
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(cors()); // Enable CORS for all origins
 // Routes
 app.use('/app', authRoutes); // Rute untuk login dan register
 app.use('/app/profile', profileRoutes); // Rute untuk profile
+app.use('/app/histories', historyRoutes); // Rute untuk histories
 
 // Start the server
 const port = process.env.PORT || 3000;

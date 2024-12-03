@@ -6,7 +6,7 @@ async function getProfile(req, res) {
   const userId = req.user.userId; // Ambil userId dari token JWT
 
   // Ambil data pengguna berdasarkan userId
-  const [rows] = await db.query('SELECT id, name, email FROM users WHERE id = ?', [userId]);
+  const [rows] = await db.query('SELECT name, email FROM users WHERE id = ?', [userId]);
 
   if (rows.length === 0) {
     return res.status(404).json({ error: true, message: 'User not found' });
@@ -16,7 +16,6 @@ async function getProfile(req, res) {
   res.json({
     error: false,
     user: {
-      id: user.id,
       name: user.name,
       email: user.email
     }
@@ -26,13 +25,21 @@ async function getProfile(req, res) {
 // Fungsi untuk mengubah profil pengguna
 async function updateProfile(req, res) {
   const userId = req.user.userId; // Ambil userId dari token JWT
-  const { name, email, password } = req.body;
+  const { name, password } = req.body;
 
-  // Cek apakah email sudah digunakan oleh pengguna lain
-  const [existingUser] = await db.query('SELECT * FROM users WHERE email = ? AND id != ?', [email, userId]);
+  // Validasi input: name atau password harus diisi
+  if (!name && !password) {
+    return res.status(400).json({ error: true, message: 'Name or password must be provided for update' });
+  }
 
-  if (existingUser.length > 0) {
-    return res.status(400).json({ error: true, message: 'Email sudah digunakan' });
+  // Validasi panjang name (jika diubah)
+  if (name && name.length < 12) {
+    return res.status(400).json({ error: true, message: 'Name must be at least 12 characters long' });
+  }
+
+  // Validasi panjang password (jika diubah)
+  if (password && password.length < 8) {
+    return res.status(400).json({ error: true, message: 'Password must be at least 8 characters long' });
   }
 
   // Jika password diubah, hash password terlebih dahulu
@@ -41,10 +48,9 @@ async function updateProfile(req, res) {
     hashedPassword = await bcrypt.hash(password, 10);
   }
 
-  // Update data pengguna
-  await db.query('UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?', [
+  // Update data pengguna (email tidak diubah)
+  await db.query('UPDATE users SET name = ?, password = ? WHERE id = ?', [
     name || null,
-    email || null,
     hashedPassword || null,
     userId
   ]);
