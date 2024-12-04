@@ -1,20 +1,19 @@
 package com.health.glucoguide.models
 
-import kotlinx.parcelize.Parcelize
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-@Parcelize
 data class UserProfileResponse(
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,
 
+	@field:SerializedName("message")
+	val message: String? = null,
+
 	@field:SerializedName("user")
 	val user: User? = null
-) : Parcelable
+)
 
-@Parcelize
 data class User(
 
 	@field:SerializedName("name")
@@ -25,4 +24,4 @@ data class User(
 
 	@field:SerializedName("email")
 	val email: String? = null
-) : Parcelable
+)
