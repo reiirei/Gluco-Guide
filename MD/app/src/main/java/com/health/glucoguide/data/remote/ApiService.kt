@@ -1,5 +1,7 @@
 package com.health.glucoguide.data.remote
 
+import com.health.glucoguide.models.UserHistoriesResponse
+import com.health.glucoguide.models.UserInputProfile
 import com.health.glucoguide.models.UserLoginRequest
 import com.health.glucoguide.models.UserLoginResponse
 import com.health.glucoguide.models.UserProfileResponse
@@ -14,24 +16,29 @@ import retrofit2.http.PUT
 
 interface ApiService {
 
-    @POST("app/register")
+    @POST("auth/register")
     suspend fun postUserRegister(
         @Body request: UserRegisterRequest
     ): UserRegisterResponse
 
-    @POST("app/login")
+    @POST("auth/login")
     suspend fun postUserLogin(
     @Body request: UserLoginRequest
     ): UserLoginResponse
 
-    @PUT("app/profile")
+    @PUT("profile")
     suspend fun putUserProfile(
         @Header("Authorization") token: String,
-        @Body userData: UserSession
+        @Body userData: UserInputProfile
     ): UserProfileResponse
 
-    @GET("app/profile")
+    @GET("profile")
     suspend fun getUserProfile(
         @Header("Authorization") token: String
     ): UserProfileResponse
+
+    @GET("histories")
+    suspend fun getUserHistories(
+        @Header("Authorization") token: String
+    ): UserHistoriesResponse
 }
