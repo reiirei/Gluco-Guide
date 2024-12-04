@@ -2,7 +2,6 @@ package com.health.glucoguide.ui.activity.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -12,6 +11,7 @@ import com.health.glucoguide.databinding.ActivityLoginBinding
 import com.health.glucoguide.models.UserSession
 import com.health.glucoguide.ui.activity.MainActivity
 import com.health.glucoguide.ui.activity.signup.SignUpActivity
+import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
 
             if (email.isEmpty() || password.isEmpty()) {
                 val emptyFields = getString(com.health.glucoguide.R.string.all_fields_must_not_be_empty)
-                showToast(emptyFields)
+                showToast(emptyFields, this@LoginActivity)
             } else {
                 viewModel.loginAccount(email, password).observe(this) { response ->
                     when (response) {
@@ -60,20 +60,18 @@ class LoginActivity : AppCompatActivity() {
                         is ResultState.Success -> {
                             progressDialog.hideLoading()
                             val user = UserSession(
-                                email,
                                 response.data.loginResult?.name.toString(),
-                                password,
                                 response.data.loginResult?.token.toString(),
                                 true
                             )
                             val loginSuccess = getString(com.health.glucoguide.R.string.login_success)
-                            showToast(loginSuccess)
+                            showToast(loginSuccess, this@LoginActivity)
                             viewModel.saveSession(user)
                             goToMainActivity()
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
-                            showToast(response.error)
+                            showToast(response.error, this@LoginActivity)
                         }
                     }
                 }
@@ -86,9 +84,5 @@ class LoginActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         finish()
-    }
-
-    private fun showToast(toast: String) {
-        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
     }
 }
