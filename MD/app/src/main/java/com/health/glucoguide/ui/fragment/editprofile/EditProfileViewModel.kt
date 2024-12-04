@@ -1,4 +1,4 @@
-package com.health.glucoguide.ui.fragment.home
+package com.health.glucoguide.ui.fragment.editprofile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -11,12 +11,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class EditProfileViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    fun getSession(): LiveData<UserSession> {
-        return userRepository.getSession().asLiveData()
+    fun getSession() = userRepository.getSession().asLiveData()
+
+    fun setUserData(token: String, userData: UserSession): LiveData<ResultState<UserProfileResponse>> {
+        return userRepository.setUserData(token, userData)
     }
 
     fun getUserData(token: String): LiveData<ResultState<UserProfileResponse>> {

@@ -6,14 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
+import androidx.navigation.fragment.findNavController
+import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentProfileBinding
-import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
+import com.health.glucoguide.models.UserProfileResponse
+import com.health.glucoguide.util.BottomLogoutDialog
+import com.health.glucoguide.util.ProgressDialogUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +26,10 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
     private val viewModel: ProfileViewModel by viewModels()
+    private val bottomLogoutDialog by lazy { BottomLogoutDialog(requireContext(), viewModel) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,15 +42,45 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getUserName().observe(viewLifecycleOwner) { user ->
-            val greeting = getString(R.string.hi_gluco_friend, user.name)
-            binding.tvGlucoGuide.text = greeting
-
+        viewModel.getSession().observe(viewLifecycleOwner) { user ->
+            val token: String = user.token.toString()
+            getUserData(token)
         }
 
         setupToolbar()
         setupShapeMessage()
         setupAction()
+    }
+
+    private fun getUserData(token: String) {
+        viewModel.getUserData(token)
+            .observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is ResultState.Loading -> {
+                        progressDialog.showLoading()
+                    }
+
+                    is ResultState.Success -> {
+                        progressDialog.hideLoading()
+                        greeting(result.data)
+                    }
+
+                    is ResultState.Error -> {
+                        progressDialog.hideLoading()
+                        val errorMessage = result.error
+                        showToast(errorMessage)
+                    }
+                }
+            }
+    }
+
+    private fun showToast(errorMessage: String) {
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun greeting(response: UserProfileResponse) {
+        val greeting = getString(R.string.hi_gluco_friend, response.user?.name)
+        binding.tvGlucoGuide.text = greeting
     }
 
     private fun setupToolbar() {
@@ -59,10 +97,13 @@ class ProfileFragment : Fragment() {
         }
 
         binding.cvLogout.setOnClickListener {
-            viewModel.logout()
-            val intent = Intent(requireContext(), OnBoardingActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+            bottomLogoutDialog.showLogoutDialog()
+        }
+
+        binding.ivEdit.setOnClickListener{
+            val navigateToEditProfile = ProfileFragmentDirections
+                .actionProfileFragmentToEditProfileFragment()
+            findNavController().navigate(navigateToEditProfile)
         }
     }
 

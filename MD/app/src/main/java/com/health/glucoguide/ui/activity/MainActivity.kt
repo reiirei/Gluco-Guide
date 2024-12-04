@@ -50,6 +50,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.newsFragment -> {
                     navView.visibility = View.GONE
                 }
+                R.id.editProfileFragment -> {
+                    navView.visibility = View.GONE
+                }
                 else -> {
                     navView.visibility = View.VISIBLE
                 }
