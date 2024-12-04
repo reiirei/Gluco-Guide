@@ -1,4 +1,6 @@
 package com.health.glucoguide.models
 
-class UserInputProfile {
-}
+class UserInputProfile(
+    val name: String,
+    val password: String
+)
