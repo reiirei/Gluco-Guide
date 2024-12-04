@@ -9,29 +9,29 @@ async function registerUser(req, res) {
 
   // Validasi panjang email
   if (email.length < 8) {
-    return res.status(400).json({ error: true, message: 'Email harus memiliki minimal 8 karakter' });
+    return res.status(400).json({ error: true, message: 'Email must have a minimum of 8 characters' });
   }
 
   // Validasi format email
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex untuk format email valid
   if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: true, message: 'Email tidak valid' });
+    return res.status(400).json({ error: true, message: 'Invalid email' });
   }
 
   // Validasi panjang username
   if (name.length < 8) {
-    return res.status(400).json({ error: true, message: 'Username harus memiliki minimal 8 karakter' });
+    return res.status(400).json({ error: true, message: 'Username must have a minimum of 8 characters' });
   }
 
   // Validasi panjang password
   if (password.length < 8) {
-    return res.status(400).json({ error: true, message: 'Password harus memiliki minimal 8 karakter' });
+    return res.status(400).json({ error: true, message: 'Password must have a minimum of 8 characters' });
   }
 
   // Cek apakah email sudah ada
   const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
   if (rows.length > 0) {
-    return res.status(400).json({ error: true, message: 'Email sudah terdaftar' });
+    return res.status(400).json({ error: true, message: 'Email is already registered.' });
   }
 
   // Hash password sebelum menyimpannya
@@ -53,7 +53,7 @@ async function loginUser(req, res) {
   // Cari user berdasarkan email
   const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
   if (rows.length === 0) {
-    return res.status(400).json({ error: true, message: 'Email atau password salah' });
+    return res.status(400).json({ error: true, message: 'Invalid email or password' });
   }
 
   const user = rows[0];
@@ -61,7 +61,7 @@ async function loginUser(req, res) {
   // Bandingkan password dengan yang ada di database
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    return res.status(400).json({ error: true, message: 'Email atau password salah' });
+    return res.status(400).json({ error: true, message: 'Invalid email or password' });
   }
 
   // Buat JWT token

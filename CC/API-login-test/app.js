@@ -14,9 +14,10 @@ app.use(express.json()); // Parse JSON bodies
 app.use(cors()); // Enable CORS for all origins
 
 // Routes
-app.use('/app', authRoutes); // Rute untuk login dan register
-app.use('/app/profile', profileRoutes); // Rute untuk profile
-app.use('/app/histories', historyRoutes); // Rute untuk histories
+app.use('/auth', authRoutes); // Rute untuk login dan register
+app.use('/profile', profileRoutes); // Rute untuk profile
+app.use('/histories', historyRoutes); // Rute untuk histories
+
 
 // Start the server
 const port = process.env.PORT || 3000;
