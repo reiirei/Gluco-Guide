@@ -18,7 +18,7 @@
             app:destination="@id/newsFragment" />
         <action
             android:id="@+id/action_homeFragment2_to_preferenceFragment"
-            app:destination="@id/preferenceFragment" />
+            app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_homeFragment2_to_historyFragment"
             app:destination="@id/historyFragment" />
@@ -85,13 +85,22 @@
             app:argType="com.health.glucoguide.models.WebLink" />
     </fragment>
     <fragment
-        android:id="@+id/preferenceFragment"
+        android:id="@+id/profileFragment"
         android:name="com.health.glucoguide.ui.fragment.profile.ProfileFragment"
         android:label="PreferenceFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.health.glucoguide.ui.fragment.HistoryFragment"
         android:label="HistoryFragment"
         tools:layout="@layout/fragment_history"/>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.health.glucoguide.ui.fragment.editprofile.EditProfileFragment"
+        android:label="EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"/>
 </navigation>
