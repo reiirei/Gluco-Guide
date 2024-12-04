@@ -105,4 +105,7 @@
     <string name="invalid_email_address">Alamat email tidak sesuai</string>
     <string name="sign_up_success">Berhasil daftar akun</string>
     <string name="login_success">Berhasil masuk</string>
+    <string name="profile">Ubah Profile</string>
+    <string name="save">simpan</string>
+    <string name="profile_updated">Profile diperbarui</string>
 </resources>

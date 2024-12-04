@@ -109,4 +109,7 @@
     <string name="invalid_email_address">Invalid email address</string>
     <string name="sign_up_success">Sign up success</string>
     <string name="login_success">Login success</string>
+    <string name="profile">Change Profile</string>
+    <string name="save">save</string>
+    <string name="profile_updated">Profile updated</string>
 </resources>
