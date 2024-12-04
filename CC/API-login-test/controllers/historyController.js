@@ -6,7 +6,7 @@ async function getHistories(req, res) {
   const userId = req.user.userId; // Ambil userId dari token JWT
 
   // Ambil data histori dari database berdasarkan userId
-  const [rows] = await db.query('SELECT * FROM histories WHERE user_id = ?', [userId]);
+  const [rows] = await db.query('SELECT keluhan, diagnosa, tanggal_cek FROM histories WHERE user_id = ?', [userId]);
 
   if (rows.length === 0) {
     return res.status(404).json({ error: true, message: 'No history found' });
