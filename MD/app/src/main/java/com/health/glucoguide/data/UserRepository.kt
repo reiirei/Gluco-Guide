@@ -7,6 +7,7 @@ import com.health.glucoguide.data.local.UserPreference
 import com.health.glucoguide.data.remote.ApiService
 import com.health.glucoguide.models.UserLoginRequest
 import com.health.glucoguide.models.UserLoginResponse
+import com.health.glucoguide.models.UserProfileResponse
 import com.health.glucoguide.models.UserRegisterRequest
 import com.health.glucoguide.models.UserRegisterResponse
 import com.health.glucoguide.models.UserSession
@@ -27,6 +28,41 @@ class UserRepository @Inject constructor(
 
     suspend fun clearSession() {
         userPreference.clearSession()
+    }
+
+    fun getUserData(token: String) = liveData {
+        emit(ResultState.Loading)
+        try {
+            val successResponse = apiService.getUserProfile("Bearer $token")
+            emit(ResultState.Success(successResponse))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, UserProfileResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(ResultState.Error(errorMessage.toString()))
+        } catch (e: IOException) {
+            emit(ResultState.Error(R.string.network_connection_error.toString()))
+        } catch (e: Exception) {
+            emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
+        }
+    }
+
+    fun setUserData(token: String, userData: UserSession) = liveData {
+        emit(ResultState.Loading)
+        try {
+            val successResponse = apiService.putUserProfile("Bearer $token", userData)
+            emit(ResultState.Success(successResponse))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, UserRegisterResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(ResultState.Error(errorMessage.toString()))
+        } catch (e: IOException) {
+            emit(ResultState.Error(R.string.network_connection_error.toString()))
+        } catch (e: Exception) {
+            emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
+        }
+
     }
 
     fun registerUser(request: UserRegisterRequest) = liveData {
