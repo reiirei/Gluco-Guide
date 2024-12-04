@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -19,6 +18,7 @@ import com.health.glucoguide.databinding.FragmentProfileBinding
 import com.health.glucoguide.models.UserProfileResponse
 import com.health.glucoguide.util.BottomLogoutDialog
 import com.health.glucoguide.util.ProgressDialogUtil
+import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -68,14 +68,10 @@ class ProfileFragment : Fragment() {
                     is ResultState.Error -> {
                         progressDialog.hideLoading()
                         val errorMessage = result.error
-                        showToast(errorMessage)
+                        showToast(errorMessage, requireContext())
                     }
                 }
             }
-    }
-
-    private fun showToast(errorMessage: String) {
-        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }
 
     private fun greeting(response: UserProfileResponse) {
