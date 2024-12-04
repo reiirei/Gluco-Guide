@@ -2,11 +2,11 @@ package com.health.glucoguide.ui.fragment.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -16,10 +16,12 @@ import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import com.health.glucoguide.adapter.WebLinkAdapter
+import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentHomeBinding
-import com.health.glucoguide.models.UserSession
+import com.health.glucoguide.models.UserProfileResponse
 import com.health.glucoguide.models.WebLink
 import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
+import com.health.glucoguide.util.ProgressDialogUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +29,9 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
     private val viewModel: HomeViewModel by viewModels()
+    private lateinit var token: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,13 +46,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getSession().observe(viewLifecycleOwner) { userSession ->
-            Log.d("HomeFragment", "UserSession: $userSession")
             if(!userSession.isLogin) {
                 val intent = Intent(requireContext(), OnBoardingActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
             } else {
-                greeting(userSession)
+                token = userSession.token.toString()
+                getUserData(token)
             }
         }
 
@@ -57,6 +61,28 @@ class HomeFragment : Fragment() {
         setupShapeBackground()
         setupAction()
         setupRecyclerView()
+    }
+
+    private fun getUserData(token: String) {
+        viewModel.getUserData(token)
+            .observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is ResultState.Loading -> {
+                        progressDialog.showLoading()
+                    }
+
+                    is ResultState.Success -> {
+                        progressDialog.hideLoading()
+                        greeting(result.data)
+                    }
+
+                    is ResultState.Error -> {
+                        progressDialog.hideLoading()
+                        val errorMessage = result.error
+                        showToast(errorMessage)
+                    }
+                }
+            }
     }
 
     private fun setupToolbar() {
@@ -120,9 +146,13 @@ class HomeFragment : Fragment() {
         binding.materialCardView.background = shapeDrawableBackground
     }
 
-    private fun greeting(userSession: UserSession) {
-        val greeting = getString(R.string.hi_gluco_friend, userSession.name)
+    private fun greeting(response: UserProfileResponse) {
+        val greeting = getString(R.string.hi_gluco_friend, response.user?.name)
         binding.tvGlucoGuide.text = greeting
+    }
+
+    private fun showToast(toast: String) {
+        Toast.makeText(requireContext(), toast, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
