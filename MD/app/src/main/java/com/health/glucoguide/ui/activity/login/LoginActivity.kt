@@ -62,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
                             val user = UserSession(
                                 email,
                                 response.data.loginResult?.name.toString(),
+                                password,
                                 response.data.loginResult?.token.toString(),
                                 true
                             )
