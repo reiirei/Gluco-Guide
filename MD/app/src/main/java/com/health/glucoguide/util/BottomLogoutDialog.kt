@@ -28,9 +28,11 @@ class BottomLogoutDialog(
         btnLogout.setOnClickListener {
             viewModel.logout()
             dismissLogoutDialog()
-            val intent = Intent(context, OnBoardingActivity::class.java)
+            val intent = Intent(context, OnBoardingActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
             context.startActivity(intent)
-            if(context is MainActivity) {
+            if (context is MainActivity) {
                 context.finish()
             }
         }

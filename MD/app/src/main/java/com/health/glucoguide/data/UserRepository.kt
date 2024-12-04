@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.health.glucoguide.R
 import com.health.glucoguide.data.local.UserPreference
 import com.health.glucoguide.data.remote.ApiService
+import com.health.glucoguide.models.UserInputProfile
 import com.health.glucoguide.models.UserLoginRequest
 import com.health.glucoguide.models.UserLoginResponse
 import com.health.glucoguide.models.UserProfileResponse
@@ -30,6 +31,23 @@ class UserRepository @Inject constructor(
         userPreference.clearSession()
     }
 
+    fun getHistories(token: String) = liveData {
+        emit(ResultState.Loading)
+        try {
+            val successResponse = apiService.getUserHistories("Bearer $token")
+            emit(ResultState.Success(successResponse))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, UserProfileResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(ResultState.Error(errorMessage.toString()))
+        } catch (e: IOException) {
+            emit(ResultState.Error(R.string.network_connection_error.toString()))
+        } catch (e: Exception) {
+            emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
+        }
+    }
+
     fun getUserData(token: String) = liveData {
         emit(ResultState.Loading)
         try {
@@ -47,7 +65,7 @@ class UserRepository @Inject constructor(
         }
     }
 
-    fun setUserData(token: String, userData: UserSession) = liveData {
+    fun setUserData(token: String, userData: UserInputProfile) = liveData {
         emit(ResultState.Loading)
         try {
             val successResponse = apiService.putUserProfile("Bearer $token", userData)

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -17,6 +16,7 @@ import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentInputDataAdvancedBinding
 import com.health.glucoguide.models.UserData
+import com.health.glucoguide.util.showToast
 
 class InputDataAdvancedFragment : Fragment() {
 
@@ -69,9 +69,9 @@ class InputDataAdvancedFragment : Fragment() {
             val gl = glucoseLevel.text.toString().trim()
 
             if (bmi.isEmpty() || hml.isEmpty() || gl.isEmpty()) {
-                showToast(getString(R.string.error_empty_field))
+                showToast(getString(R.string.error_empty_field), requireContext())
             } else {
-                showToast(getString(R.string.success_submit))
+                showToast(getString(R.string.success_submit), requireContext())
 
                 userData.bodyMassIndex = bmi.toDouble()
                 userData.hemoglobinLevel = hml.toDouble()
@@ -95,10 +95,6 @@ class InputDataAdvancedFragment : Fragment() {
         val toResultFragment =
             InputDataAdvancedFragmentDirections.actionInputDataAdvancedFragmentToResultFragment(data)
         findNavController().navigate(toResultFragment)
-    }
-
-    private fun showToast(toast: String) {
-        Toast.makeText(requireContext(), toast, Toast.LENGTH_SHORT).show()
     }
 
     private fun setupShape(cardView: MaterialCardView, cornerSizeResId: Int, colorResId: Int) {

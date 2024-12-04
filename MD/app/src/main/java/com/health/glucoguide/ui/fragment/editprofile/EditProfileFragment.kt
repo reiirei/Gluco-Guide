@@ -5,14 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.health.glucoguide.R
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentEditProfileBinding
+import com.health.glucoguide.models.UserInputProfile
 import com.health.glucoguide.models.UserSession
 import com.health.glucoguide.util.ProgressDialogUtil
+import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,19 +36,16 @@ class EditProfileFragment : Fragment() {
 
         viewModel.getSession().observe(viewLifecycleOwner) { session ->
             userData = UserSession(
-                session.email,
                 session.name,
-                session.password,
                 session.token,
                 session.isLogin
             )
 
             getUserData(session.token ?: "")
+            setupAction()
         }
 
-
         setupToolbar()
-        setupAction()
     }
 
     private fun setupToolbar() {
@@ -61,13 +59,12 @@ class EditProfileFragment : Fragment() {
 
     private fun setupAction() {
         binding.btnSave.setOnClickListener {
-            val email = binding.tiEmail.text.toString()
             val username = binding.tiUsername.text.toString()
             val password = binding.tiPassword.text.toString()
             val token = userData.token ?: ""
 
-            if (validateUserData(email, username, password)) {
-                val userData = UserSession(email, username, password, token)
+            if (validateUserData(username, password)) {
+                val userData = UserInputProfile(username, password)
                 viewModel.setUserData(token, userData).observe(viewLifecycleOwner) { result ->
                     when (result) {
                         is ResultState.Loading -> {
@@ -75,12 +72,12 @@ class EditProfileFragment : Fragment() {
                         }
                         is ResultState.Success -> {
                             progressDialog.hideLoading()
-                            showToast(getString(R.string.profile_updated))
+                            showToast(getString(R.string.profile_updated), requireContext())
                             navigateBack()
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
-                            showToast(result.error)
+                            showToast(result.error, requireContext())
                         }
                     }
                 }
@@ -88,9 +85,9 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-    private fun validateUserData(email: String, username: String, password: String): Boolean {
-        return if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
-            showToast(getString(R.string.all_fields_must_not_be_empty))
+    private fun validateUserData(username: String, password: String): Boolean {
+        return if (username.isEmpty() || password.isEmpty()) {
+            showToast(getString(R.string.all_fields_must_not_be_empty), requireContext())
             false
         } else {
             true
@@ -107,21 +104,16 @@ class EditProfileFragment : Fragment() {
 
                     is ResultState.Success -> {
                         progressDialog.hideLoading()
-                        binding.tiEmail.setText(result.data.user?.email)
                         binding.tiUsername.setText(result.data.user?.name)
                     }
 
                     is ResultState.Error -> {
                         progressDialog.hideLoading()
                         val errorMessage = result.error
-                        showToast(errorMessage)
+                        showToast(errorMessage, requireContext())
                     }
                 }
             }
-    }
-
-    private fun showToast(toast: String) {
-        Toast.makeText(requireContext(), toast, Toast.LENGTH_SHORT).show()
     }
 
     private fun navigateBack() {

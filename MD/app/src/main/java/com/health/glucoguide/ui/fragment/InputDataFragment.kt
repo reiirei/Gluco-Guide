@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.card.MaterialCardView
@@ -18,6 +17,7 @@ import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentInputDataBinding
 import com.health.glucoguide.models.UserData
+import com.health.glucoguide.util.showToast
 
 class InputDataFragment : Fragment() {
 
@@ -105,10 +105,10 @@ class InputDataFragment : Fragment() {
             hypertension.isNullOrEmpty()
             )  {
 
-            showToast(getString(R.string.error_empty_field))
+            showToast(getString(R.string.error_empty_field), requireContext())
             false
         } else {
-            showToast(getString(R.string.success_submit))
+            showToast(getString(R.string.success_submit), requireContext())
             true
         }
     }
@@ -137,7 +137,6 @@ class InputDataFragment : Fragment() {
 
         autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
             val selectedItem = parent.getItemAtPosition(position).toString()
-            Toast.makeText(requireContext(), "Selected: $selectedItem", Toast.LENGTH_SHORT).show()
             onItemSelected(selectedItem)
         }
     }
@@ -162,10 +161,6 @@ class InputDataFragment : Fragment() {
 
     private fun setupShapeDoubleCheckCard() {
         setupShape(binding.doubleCheckCardView, R.dimen.corner_radius_grey_background, R.color.grey)
-    }
-
-    private fun showToast(toast: String) {
-        Toast.makeText(requireContext(), toast, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {

@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.data.UserRepository
+import com.health.glucoguide.models.UserInputProfile
 import com.health.glucoguide.models.UserProfileResponse
-import com.health.glucoguide.models.UserSession
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ class EditProfileViewModel @Inject constructor(
 
     fun getSession() = userRepository.getSession().asLiveData()
 
-    fun setUserData(token: String, userData: UserSession): LiveData<ResultState<UserProfileResponse>> {
+    fun setUserData(token: String, userData: UserInputProfile): LiveData<ResultState<UserProfileResponse>> {
         return userRepository.setUserData(token, userData)
     }
 

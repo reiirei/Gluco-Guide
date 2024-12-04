@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.health.glucoguide.ui.fragment.HistoryFragment"
+        android:name="com.health.glucoguide.ui.fragment.history.HistoryFragment"
         android:label="HistoryFragment"
         tools:layout="@layout/fragment_history"/>
     <fragment

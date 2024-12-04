@@ -2,7 +2,6 @@ package com.health.glucoguide.ui.activity.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -10,6 +9,7 @@ import com.health.glucoguide.util.ProgressDialogUtil
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.ActivitySignUpBinding
 import com.health.glucoguide.ui.activity.login.LoginActivity
+import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,10 +45,10 @@ class SignUpActivity : AppCompatActivity() {
 
             if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
                 val emptyFields = getString(com.health.glucoguide.R.string.all_fields_must_not_be_empty)
-                showToast(emptyFields)
+                showToast(emptyFields, this@SignUpActivity)
             } else if (!email.matches(emailPattern.toRegex())) {
                 val emailInvalid = getString(com.health.glucoguide.R.string.invalid_email_address)
-                showToast(emailInvalid)
+                showToast(emailInvalid, this@SignUpActivity)
             } else {
                 viewModel.registerAccount(username, email, password).observe(this) { response ->
                     when (response) {
@@ -58,24 +58,20 @@ class SignUpActivity : AppCompatActivity() {
                         is ResultState.Success -> {
                             progressDialog.hideLoading()
                             val successSignup = getString(com.health.glucoguide.R.string.sign_up_success)
-                            showToast(successSignup)
+                            showToast(successSignup, this@SignUpActivity)
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
-                            showToast(response.error)
+                            showToast(response.error, this@SignUpActivity)
                         }
                     }
                 }
             }
 
         }
-    }
-
-    private fun showToast(toast: String) {
-        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
     }
 
     private fun setupAction() {

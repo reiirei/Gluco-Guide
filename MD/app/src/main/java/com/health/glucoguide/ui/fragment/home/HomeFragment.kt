@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -22,6 +21,7 @@ import com.health.glucoguide.models.UserProfileResponse
 import com.health.glucoguide.models.WebLink
 import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
 import com.health.glucoguide.util.ProgressDialogUtil
+import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -79,7 +79,7 @@ class HomeFragment : Fragment() {
                     is ResultState.Error -> {
                         progressDialog.hideLoading()
                         val errorMessage = result.error
-                        showToast(errorMessage)
+                        showToast(errorMessage, requireContext())
                     }
                 }
             }
@@ -149,10 +149,6 @@ class HomeFragment : Fragment() {
     private fun greeting(response: UserProfileResponse) {
         val greeting = getString(R.string.hi_gluco_friend, response.user?.name)
         binding.tvGlucoGuide.text = greeting
-    }
-
-    private fun showToast(toast: String) {
-        Toast.makeText(requireContext(), toast, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
