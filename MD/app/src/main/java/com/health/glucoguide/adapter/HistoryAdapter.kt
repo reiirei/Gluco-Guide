@@ -2,15 +2,15 @@ package com.health.glucoguide.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.health.glucoguide.R
 import com.health.glucoguide.databinding.HistoryItemBinding
-import com.health.glucoguide.models.UserData
+import com.health.glucoguide.models.HistoriesItem
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-class HistoryAdapter : ListAdapter<UserData, HistoryAdapter.ViewHolder>(DIFF_CALLBACK) {
+class HistoryAdapter : ListAdapter<HistoriesItem, HistoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = HistoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,22 +22,29 @@ class HistoryAdapter : ListAdapter<UserData, HistoryAdapter.ViewHolder>(DIFF_CAL
     }
 
     inner class ViewHolder(private val binding: HistoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: UserData) {
+        fun bind(user: HistoriesItem) {
             binding.apply {
-                tvDate.text = user.date
-                tvResultHemoglobin.text = user.hemoglobinLevel.toString()
-                tvResultGlucoseLevel.text = user.glucoseLevel.toString()
-                tvResultCheck.text = ContextCompat.getString(binding.root.context, R.string.diabete_result)
+                val inputDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                val outputDateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy, HH:mm", Locale.getDefault())
+                val date = user.tanggalCek?.let {
+                    inputDateFormat.parse(it)
+                }
+                val formattedDate = date?.let {
+                    outputDateFormat.format(it)
+                }
+                tvDate.text = formattedDate
+                tvResultKeluhan.text = user.keluhan.toString()
+                tvResultCheck.text = user.diagnosa
             }
         }
     }
 
-    companion object DIFF_CALLBACK : DiffUtil.ItemCallback<UserData>() {
-        override fun areItemsTheSame(oldItem: UserData, newItem: UserData): Boolean {
+    companion object DIFF_CALLBACK : DiffUtil.ItemCallback<HistoriesItem>() {
+        override fun areItemsTheSame(oldItem: HistoriesItem, newItem: HistoriesItem): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: UserData, newItem: UserData): Boolean {
+        override fun areContentsTheSame(oldItem: HistoriesItem, newItem: HistoriesItem): Boolean {
             return oldItem == newItem
         }
     }
