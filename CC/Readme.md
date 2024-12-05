@@ -2,11 +2,42 @@
 -
 
 ## URL
-Landing page : -
+Backend URL : http://34.101.216.232:3000
 
 ## Deploy
 - Clone this repository
-- You need to prepare two services: cloud storage & cloud SQL / firestore
+- You need to prepare two services: cloud storage & cloud SQL
+  - mysql configuration :
+    - create database
+    - ```
+      CREATE DATABASE glucoguide;
+      ```
+    - use database
+    - ```
+      USE DATABASE glucoguide;
+      ```
+    - create table users
+    - ```
+      CREATE TABLE users (
+        id INT(11) AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+      ```
+    - create table histories
+    - ```
+      CREATE TABLE histories (
+      id INT(11) AUTO_INCREMENT PRIMARY KEY,
+      user_id INT(11),
+      complaint_disease TEXT NULL, 
+      check_result TEXT NULL, 
+      check_date DATETIME NULL, 
+      FOREIGN KEY (user_id) REFERENCES users(id)
+          ON DELETE CASCADE
+          ON UPDATE CASCADE
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+      ```
 - Don't forget to configure auth in GCP
 
 ## Endpoint
