@@ -1,22 +1,15 @@
 const mysql = require('mysql2/promise');
+const dotenv = require('dotenv');
 
-// Create a MySQL connection pool
+// Memuat variabel environment dari file .env
+dotenv.config();
+
+// Membuat koneksi pool ke Cloud SQL
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'auth_system',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
-
-// async function fetchUsers() {
-//     try {
-//       const [rows, fields] = await pool.query('SELECT * FROM users');
-//       console.log(rows);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   }
-  
-// fetchUsers();
 
 module.exports = { db: pool };
