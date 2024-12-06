@@ -1,5 +1,6 @@
 package com.health.glucoguide.data
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
@@ -19,6 +20,7 @@ import com.health.glucoguide.data.remote.response.UserHistoriesResponse
 import com.health.glucoguide.data.remote.response.UserRegisterResponse
 import com.health.glucoguide.data.remote.response.UserSession
 import com.health.glucoguide.models.HistoryEntity
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import java.io.IOException
@@ -28,7 +30,8 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(
     private val apiService: ApiService,
     private val historyDao: HistoryDao,
-    private val userPreference: UserPreference
+    private val userPreference: UserPreference,
+    @ApplicationContext private val context: Context
 ) {
     suspend fun saveSession(user: UserSession) {
         userPreference.saveSession(user)
@@ -48,11 +51,12 @@ class UserRepository @Inject constructor(
 
             val listHistory = histories.map{
                 HistoryEntity(
-                    diagnosa = it.diagnosa,
-                    tanggalCek = it.tanggalCek,
-                    keluhan = it.keluhan
+                    diagnosa = it.checkResult,
+                    tanggalCek = it.checkDate,
+                    keluhan = it.complaintDisease
                 )
             }
+            historyDao.deleteHistories()
             historyDao.insertHistories(listHistory)
             emit(ResultState.Success(listHistory))
         } catch (e: HttpException) {
@@ -61,7 +65,7 @@ class UserRepository @Inject constructor(
             val errorMessage = errorBody.error
             emit(ResultState.Error(errorMessage.toString()))
         } catch (e: ConnectException) {
-            emit(ResultState.Error(R.string.network_connection_error.toString()))
+            emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         }
         catch (e: IOException) {
             emit(ResultState.Error(R.string.network_connection_error.toString()))
@@ -96,7 +100,7 @@ class UserRepository @Inject constructor(
             val errorMessage = errorBody.message
             emit(ResultState.Error(errorMessage.toString()))
         } catch (e: ConnectException) {
-            emit(ResultState.Error(R.string.network_connection_error.toString()))
+            emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         }
         catch (e: IOException) {
             emit(ResultState.Error(R.string.network_connection_error.toString()))
@@ -121,7 +125,7 @@ class UserRepository @Inject constructor(
             val errorMessage = errorBody.message
             emit(ResultState.Error(errorMessage.toString()))
         } catch (e: ConnectException) {
-            emit(ResultState.Error("Failed to connect. Please check your internet connection."))
+            emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         }
         catch (e: IOException) {
             emit(ResultState.Error(R.string.network_connection_error.toString()))
@@ -141,7 +145,7 @@ class UserRepository @Inject constructor(
             val errorMessage = errorBody.message
             emit(ResultState.Error(errorMessage.toString()))
         } catch (e: ConnectException) {
-            emit(ResultState.Error("Failed to connect. Please check your internet connection."))
+            emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         }
         catch (e: IOException) {
             emit(ResultState.Error(R.string.network_connection_error.toString()))
@@ -156,7 +160,7 @@ class UserRepository @Inject constructor(
             val successResponse = apiService.postUserLogin(request)
             emit(ResultState.Success(successResponse))
         } catch (e: ConnectException) {
-            emit(ResultState.Error("Failed to connect. Please check your internet connection."))
+            emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         }
         catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
