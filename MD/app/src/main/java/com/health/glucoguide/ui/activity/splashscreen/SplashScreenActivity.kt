@@ -1,4 +1,4 @@
-package com.health.glucoguide.ui.activity
+package com.health.glucoguide.ui.activity.splashscreen
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.health.glucoguide.databinding.ActivitySplashScreenBinding
+import com.health.glucoguide.ui.activity.MainActivity
 import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
-import com.health.glucoguide.ui.activity.splashscreen.SplashScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
