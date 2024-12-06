@@ -8,7 +8,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.health.glucoguide.util.ProgressDialogUtil
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.ActivityLoginBinding
-import com.health.glucoguide.models.UserSession
+import com.health.glucoguide.data.remote.response.UserSession
 import com.health.glucoguide.ui.activity.MainActivity
 import com.health.glucoguide.ui.activity.signup.SignUpActivity
 import com.health.glucoguide.util.showToast
