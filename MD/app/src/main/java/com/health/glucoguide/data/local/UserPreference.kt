@@ -7,7 +7,8 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.health.glucoguide.models.UserSession
+import com.health.glucoguide.data.remote.response.User
+import com.health.glucoguide.data.remote.response.UserSession
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -31,6 +32,20 @@ class UserPreference @Inject constructor(@ApplicationContext context: Context) {
                 preferences[USER_NAME] ?: "",
                 preferences[USER_TOKEN] ?: "",
                 preferences[USER_IS_LOGIN] ?: false
+            )
+        }
+    }
+
+    suspend fun saveUser(user: User) {
+        dataStore.edit { preferences ->
+            preferences[USER_NAME] = user.name.toString()
+        }
+    }
+
+    fun getUser(): Flow<User> {
+        return dataStore.data.map { preferences ->
+            User(
+                preferences[USER_NAME] ?: ""
             )
         }
     }
