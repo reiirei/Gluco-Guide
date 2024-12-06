@@ -18,8 +18,8 @@ class SplashScreenActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, OnBoardingActivity::class.java)
             startActivity(intent)
-            finish()
-        }, 2000)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        }, 3000)
     }
 }
 
