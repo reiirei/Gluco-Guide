@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentNewsBinding
-import com.health.glucoguide.models.WebLink
+import com.health.glucoguide.data.remote.response.WebLink
 
 class NewsFragment : Fragment() {
 
