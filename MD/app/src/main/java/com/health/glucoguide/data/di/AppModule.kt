@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import com.health.glucoguide.BuildConfig
 import com.health.glucoguide.data.local.GlucoDatabase
-import com.health.glucoguide.data.local.SessionDao
+import com.health.glucoguide.data.local.HistoryDao
 import com.health.glucoguide.data.remote.ApiService
+import com.health.glucoguide.util.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,11 +21,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ApiConfig {
+object AppModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
         val loggingInterceptor = if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         } else {
@@ -32,6 +33,7 @@ object ApiConfig {
         }
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(AuthInterceptor(context))
             .build()
     }
 
@@ -63,7 +65,7 @@ object ApiConfig {
     }
 
     @Provides
-    fun provideSessionDao(database: GlucoDatabase): SessionDao {
-        return database.getSessionDao()
+    fun provideHistoryDao(database: GlucoDatabase): HistoryDao {
+        return database.historyDao()
     }
 }
