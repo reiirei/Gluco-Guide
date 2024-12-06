@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.health.glucoguide.databinding.HistoryItemBinding
-import com.health.glucoguide.models.HistoriesItem
+import com.health.glucoguide.models.HistoryEntity
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class HistoryAdapter : ListAdapter<HistoriesItem, HistoryAdapter.ViewHolder>(DIFF_CALLBACK) {
+class HistoryAdapter : ListAdapter<HistoryEntity, HistoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = HistoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,15 +23,20 @@ class HistoryAdapter : ListAdapter<HistoriesItem, HistoryAdapter.ViewHolder>(DIF
     }
 
     inner class ViewHolder(private val binding: HistoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: HistoriesItem) {
+        fun bind(user: HistoryEntity) {
             binding.apply {
                 val inputDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 val outputDateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy, HH:mm", Locale.getDefault())
-                val date = user.tanggalCek?.let {
-                    inputDateFormat.parse(it)
-                }
-                val formattedDate = date?.let {
-                    outputDateFormat.format(it)
+                val formattedDate = try {
+                    val date = user.tanggalCek?.trim()?.let {
+                        inputDateFormat.parse(it)
+                    }
+                    date?.let {
+                        outputDateFormat.format(it)
+                    }
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                    "Invalid date"
                 }
                 tvDate.text = formattedDate
                 tvResultKeluhan.text = user.keluhan.toString()
@@ -39,14 +45,13 @@ class HistoryAdapter : ListAdapter<HistoriesItem, HistoryAdapter.ViewHolder>(DIF
         }
     }
 
-    companion object DIFF_CALLBACK : DiffUtil.ItemCallback<HistoriesItem>() {
-        override fun areItemsTheSame(oldItem: HistoriesItem, newItem: HistoriesItem): Boolean {
+    companion object DIFF_CALLBACK : DiffUtil.ItemCallback<HistoryEntity>() {
+        override fun areItemsTheSame(oldItem: HistoryEntity, newItem: HistoryEntity): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: HistoriesItem, newItem: HistoriesItem): Boolean {
+        override fun areContentsTheSame(oldItem: HistoryEntity, newItem: HistoryEntity): Boolean {
             return oldItem == newItem
         }
     }
-
 }
