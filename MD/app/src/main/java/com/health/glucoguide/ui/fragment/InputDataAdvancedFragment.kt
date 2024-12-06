@@ -15,7 +15,7 @@ import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentInputDataAdvancedBinding
-import com.health.glucoguide.models.UserData
+import com.health.glucoguide.data.remote.request.UserData
 import com.health.glucoguide.util.showToast
 
 class InputDataAdvancedFragment : Fragment() {
@@ -91,7 +91,6 @@ class InputDataAdvancedFragment : Fragment() {
     }
 
     private fun sendUserData(data: UserData) {
-        Log.d("UserData", data.toString())
         val toResultFragment =
             InputDataAdvancedFragmentDirections.actionInputDataAdvancedFragmentToResultFragment(data)
         findNavController().navigate(toResultFragment)
