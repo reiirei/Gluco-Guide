@@ -6,7 +6,7 @@ Backend URL : http://34.101.216.232:3000
 
 ## Deploy
 - Clone this repository
-- You need to prepare two services: cloud storage & cloud SQL
+- You need to make database
   - mysql configuration :
     - create database
     - ```
@@ -28,12 +28,12 @@ Backend URL : http://34.101.216.232:3000
     - create table histories
     - ```
       CREATE TABLE histories (
-      id INT(11) AUTO_INCREMENT PRIMARY KEY,
-      user_id INT(11),
-      complaint_disease TEXT NULL, 
-      check_result TEXT NULL, 
-      check_date DATETIME NULL, 
-      FOREIGN KEY (user_id) REFERENCES users(id)
+        id INT(11) AUTO_INCREMENT PRIMARY KEY,
+        user_id INT(11),
+        complaint_disease TEXT NULL, 
+        check_result TEXT NULL, 
+        check_date DATETIME NULL, 
+        FOREIGN KEY (user_id) REFERENCES users(id)
           ON DELETE CASCADE
           ON UPDATE CASCADE
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
