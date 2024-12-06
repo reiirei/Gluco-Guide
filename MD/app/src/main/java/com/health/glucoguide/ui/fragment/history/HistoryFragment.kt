@@ -31,13 +31,18 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter = HistoryAdapter()
+
+        binding.rvHistory.layoutManager = LinearLayoutManager(context)
+        binding.rvHistory.adapter = adapter
+
         viewModel.getSession().observe(viewLifecycleOwner) { session ->
             val token = session.token.toString()
             viewModel.getHistories(token)
         }
 
         setupToolbar()
-        setupObserver()
+        setupObserver(adapter)
     }
 
     private fun setupToolbar() {
@@ -45,16 +50,13 @@ class HistoryFragment : Fragment() {
         toolbar.isTitleCentered = true
     }
 
-    private fun setupObserver() {
+    private fun setupObserver(adapter: HistoryAdapter) {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) progressDialog.showLoading() else progressDialog.hideLoading()
         }
 
         viewModel.listHistories.observe(viewLifecycleOwner) { histories ->
-            val adapter = HistoryAdapter()
 
-            binding.rvHistory.layoutManager = LinearLayoutManager(context)
-            binding.rvHistory.adapter = adapter
             adapter.submitList(histories)
         }
 
