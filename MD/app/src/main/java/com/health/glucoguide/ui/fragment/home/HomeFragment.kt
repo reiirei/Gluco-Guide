@@ -15,13 +15,10 @@ import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import com.health.glucoguide.adapter.WebLinkAdapter
-import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentHomeBinding
-import com.health.glucoguide.models.UserProfileResponse
-import com.health.glucoguide.models.WebLink
+import com.health.glucoguide.data.remote.response.WebLink
 import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
 import com.health.glucoguide.util.ProgressDialogUtil
-import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,9 +26,8 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
+//    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var token: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,8 +47,8 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
                 requireActivity().finish()
             } else {
-                token = userSession.token.toString()
-                getUserData(token)
+                val name = userSession.name
+                greeting(name)
             }
         }
 
@@ -61,28 +57,6 @@ class HomeFragment : Fragment() {
         setupShapeBackground()
         setupAction()
         setupRecyclerView()
-    }
-
-    private fun getUserData(token: String) {
-        viewModel.getUserData(token)
-            .observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is ResultState.Loading -> {
-                        progressDialog.showLoading()
-                    }
-
-                    is ResultState.Success -> {
-                        progressDialog.hideLoading()
-                        greeting(result.data)
-                    }
-
-                    is ResultState.Error -> {
-                        progressDialog.hideLoading()
-                        val errorMessage = result.error
-                        showToast(errorMessage, requireContext())
-                    }
-                }
-            }
     }
 
     private fun setupToolbar() {
@@ -146,8 +120,8 @@ class HomeFragment : Fragment() {
         binding.materialCardView.background = shapeDrawableBackground
     }
 
-    private fun greeting(response: UserProfileResponse) {
-        val greeting = getString(R.string.hi_gluco_friend, response.user?.name)
+    private fun greeting(name: String) {
+        val greeting = getString(R.string.hi_gluco_friend, name)
         binding.tvGlucoGuide.text = greeting
     }
 
