@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             if (!errorMessage.isNullOrEmpty()) {
-                showError(errorMessage)
+                showToast(errorMessage, requireContext())
             }
         }
     }
@@ -85,10 +85,6 @@ class ProfileFragment : Fragment() {
     private fun updateUsernameUI(username: String) {
         val greeting = getString(R.string.hi_gluco_friend, username)
         binding.tvGlucoGuide.text = greeting
-    }
-
-    private fun showError(message: String) {
-        showToast(message, requireContext())
     }
 
     private fun setupToolbar() {
@@ -109,7 +105,7 @@ class ProfileFragment : Fragment() {
                 bottomLogoutDialog.showLogoutDialog()
             } else {
                 bottomLogoutDialog.dismissLogoutDialog()
-                showToast(viewModel.errorMessage.value ?: "", requireContext())
+                showToast(requireContext().getString(R.string.network_connection_error), requireContext())
             }
         }
 
