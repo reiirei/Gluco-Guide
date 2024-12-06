@@ -1,4 +1,4 @@
-package com.health.glucoguide.models
+package com.health.glucoguide.data.remote.response
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
