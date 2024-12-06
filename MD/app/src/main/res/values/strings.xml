@@ -113,4 +113,7 @@
     <string name="save">save</string>
     <string name="profile_updated">Profile updated</string>
     <string name="keluhan">Keluhan</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="after_you_logout_you_will_need_to_login_again">After you logout, you will need to login again</string>
+    <string name="cancel">cancel</string>
 </resources>
