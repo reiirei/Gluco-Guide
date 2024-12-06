@@ -1,13 +1,12 @@
 package com.health.glucoguide.data.remote
 
-import com.health.glucoguide.models.UserHistoriesResponse
-import com.health.glucoguide.models.UserInputProfile
-import com.health.glucoguide.models.UserLoginRequest
-import com.health.glucoguide.models.UserLoginResponse
-import com.health.glucoguide.models.UserProfileResponse
-import com.health.glucoguide.models.UserRegisterRequest
-import com.health.glucoguide.models.UserRegisterResponse
-import com.health.glucoguide.models.UserSession
+import com.health.glucoguide.data.remote.response.UserHistoriesResponse
+import com.health.glucoguide.data.remote.request.UserInputProfile
+import com.health.glucoguide.data.remote.request.UserLoginRequest
+import com.health.glucoguide.data.remote.response.UserLoginResponse
+import com.health.glucoguide.data.remote.response.UserProfileResponse
+import com.health.glucoguide.data.remote.request.UserRegisterRequest
+import com.health.glucoguide.data.remote.response.UserRegisterResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header

@@ -100,7 +100,7 @@
     <string name="image_no_internet">image no internet</string>
     <string name="sure_want_to_logout">want to logout? after that you should login again</string>
     <string name="logout">Logout</string>
-    <string name="network_connection_error">Network connection error</string>
+    <string name="network_connection_error">Failed to connect. Please check your internet connection.</string>
     <string name="an_unexpected_error_occurred">An unexpected error occurred</string>
     <string name="what_language_do_you_prefer">what language do you prefer?</string>
     <string name="feel_free_to_share_this_app_to_your_friend">Feel free to share this app to your friend</string>
@@ -113,4 +113,7 @@
     <string name="save">save</string>
     <string name="profile_updated">Profile updated</string>
     <string name="keluhan">Keluhan</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="after_you_logout_you_will_need_to_login_again">After you logout, you will need to login again</string>
+    <string name="cancel">cancel</string>
 </resources>

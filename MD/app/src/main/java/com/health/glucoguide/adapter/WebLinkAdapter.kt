@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.health.glucoguide.databinding.NewsItemBinding
-import com.health.glucoguide.models.WebLink
+import com.health.glucoguide.data.remote.response.WebLink
 import coil.load
 
 class WebLinkAdapter(private val onItemClick: (WebLink) -> Unit

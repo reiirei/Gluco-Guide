@@ -10,8 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.health.glucoguide.R
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentEditProfileBinding
-import com.health.glucoguide.models.UserInputProfile
-import com.health.glucoguide.models.UserSession
+import com.health.glucoguide.data.remote.request.UserInputProfile
+import com.health.glucoguide.data.remote.response.UserSession
 import com.health.glucoguide.util.ProgressDialogUtil
 import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,8 +41,10 @@ class EditProfileFragment : Fragment() {
                 session.isLogin
             )
 
-            getUserData(session.token ?: "")
+            viewModel.getUserData(userData.token ?: "")
+
             setupAction()
+            setupObservers()
         }
 
         setupToolbar()
@@ -77,7 +79,10 @@ class EditProfileFragment : Fragment() {
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
-                            showToast(result.error, requireContext())
+                            val errorMessage = result.error
+                            if (!errorMessage.contains("Invalid token")) {
+                                showToast(errorMessage, requireContext())
+                            }
                         }
                     }
                 }
@@ -94,26 +99,40 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-    private fun getUserData(token: String) {
-        viewModel.getUserData(token)
-            .observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is ResultState.Loading -> {
-                        progressDialog.showLoading()
-                    }
-
-                    is ResultState.Success -> {
-                        progressDialog.hideLoading()
-                        binding.tiUsername.setText(result.data.user?.name)
-                    }
-
-                    is ResultState.Error -> {
-                        progressDialog.hideLoading()
-                        val errorMessage = result.error
-                        showToast(errorMessage, requireContext())
-                    }
-                }
+    private fun setupObservers() {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                showLoading()
+            } else {
+                hideLoading()
             }
+        }
+
+        viewModel.username.observe(viewLifecycleOwner) { username ->
+            updateUsernameUI(username)
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            if (!errorMessage.isNullOrEmpty()) {
+                showError(errorMessage)
+            }
+        }
+    }
+
+    private fun showLoading() {
+        progressDialog.showLoading()
+    }
+
+    private fun hideLoading() {
+        progressDialog.hideLoading()
+    }
+
+    private fun updateUsernameUI(username: String) {
+        binding.tiUsername.setText(username)
+    }
+
+    private fun showError(message: String) {
+        showToast(message, requireContext())
     }
 
     private fun navigateBack() {

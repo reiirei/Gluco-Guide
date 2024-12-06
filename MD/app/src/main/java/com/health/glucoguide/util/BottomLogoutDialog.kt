@@ -51,7 +51,7 @@ class BottomLogoutDialog(
         bottomLogoutDialog.show()
     }
 
-    private fun dismissLogoutDialog() {
+    fun dismissLogoutDialog() {
         bottomLogoutDialog.dismiss()
     }
 }

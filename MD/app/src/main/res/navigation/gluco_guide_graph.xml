@@ -45,7 +45,7 @@
         tools:layout="@layout/fragment_input_data_advanced">
         <argument
             android:name="userData"
-            app:argType="com.health.glucoguide.models.UserData" />
+            app:argType="com.health.glucoguide.data.remote.request.UserData" />
         <argument
             android:name="showBottomNav"
             android:defaultValue="false"
@@ -63,7 +63,7 @@
 
         <argument
             android:name="userData"
-            app:argType="com.health.glucoguide.models.UserData" />
+            app:argType="com.health.glucoguide.data.remote.request.UserData" />
         <action
             android:id="@+id/action_resultFragment_to_homeFragment2"
             app:destination="@id/homeFragment2"
@@ -76,13 +76,13 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.health.glucoguide.ui.fragment.NewsFragment"
+        android:name="com.health.glucoguide.ui.fragment.news.NewsFragment"
         android:label="NewsFragment"
         tools:layout="@layout/fragment_news">
 
         <argument
             android:name="news"
-            app:argType="com.health.glucoguide.models.WebLink" />
+            app:argType="com.health.glucoguide.data.remote.response.WebLink" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

@@ -15,7 +15,6 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFirstOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupAction()
     }
 

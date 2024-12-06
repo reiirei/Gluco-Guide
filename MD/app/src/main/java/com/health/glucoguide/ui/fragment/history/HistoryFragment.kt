@@ -8,16 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.health.glucoguide.adapter.HistoryAdapter
-import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentHistoryBinding
-import com.health.glucoguide.models.HistoriesItem
-import com.health.glucoguide.models.UserData
 import com.health.glucoguide.util.ProgressDialogUtil
 import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
@@ -39,10 +33,11 @@ class HistoryFragment : Fragment() {
 
         viewModel.getSession().observe(viewLifecycleOwner) { session ->
             val token = session.token.toString()
-            getHistories(token)
+            viewModel.getHistories(token)
         }
 
         setupToolbar()
+        setupObserver()
     }
 
     private fun setupToolbar() {
@@ -50,31 +45,21 @@ class HistoryFragment : Fragment() {
         toolbar.isTitleCentered = true
     }
 
-    private fun setupRecyclerView(users: List<HistoriesItem?>?) {
-        val adapter = HistoryAdapter()
+    private fun setupObserver() {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) progressDialog.showLoading() else progressDialog.hideLoading()
+        }
 
-        binding.rvHistory.layoutManager = LinearLayoutManager(context)
-        binding.rvHistory.adapter = adapter
-        adapter.submitList(users)
-    }
+        viewModel.listHistories.observe(viewLifecycleOwner) { histories ->
+            val adapter = HistoryAdapter()
 
-    private fun getHistories(token: String) {
-        viewModel.getHistories(token).observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is ResultState.Loading -> {
-                    progressDialog.showLoading()
-                }
-                is ResultState.Success -> {
-                    progressDialog.hideLoading()
-                    val listHistory = result.data.histories
-                    setupRecyclerView(listHistory)
-                }
-                is ResultState.Error -> {
-                    progressDialog.hideLoading()
-                    val errorMessage = result.error
-                    showToast(errorMessage, requireContext())
-                }
-            }
+            binding.rvHistory.layoutManager = LinearLayoutManager(context)
+            binding.rvHistory.adapter = adapter
+            adapter.submitList(histories)
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            showToast(errorMessage, requireContext())
         }
     }
 }

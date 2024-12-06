@@ -16,8 +16,8 @@ import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import com.health.glucoguide.adapter.WebLinkAdapter
 import com.health.glucoguide.databinding.FragmentResultBinding
-import com.health.glucoguide.models.UserData
-import com.health.glucoguide.models.WebLink
+import com.health.glucoguide.data.remote.request.UserData
+import com.health.glucoguide.data.remote.response.WebLink
 
 class ResultFragment : Fragment() {
 

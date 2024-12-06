@@ -13,9 +13,7 @@ import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import androidx.navigation.fragment.findNavController
-import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentProfileBinding
-import com.health.glucoguide.models.UserProfileResponse
 import com.health.glucoguide.util.BottomLogoutDialog
 import com.health.glucoguide.util.ProgressDialogUtil
 import com.health.glucoguide.util.showToast
@@ -44,39 +42,53 @@ class ProfileFragment : Fragment() {
 
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
             val token: String = user.token.toString()
-            getUserData(token)
+            val name: String = user.name
+
+            updateUsernameUI(name)
+            viewModel.getUserData(token)
         }
 
         setupToolbar()
         setupShapeMessage()
+        setupObservers()
         setupAction()
     }
 
-    private fun getUserData(token: String) {
-        viewModel.getUserData(token)
-            .observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is ResultState.Loading -> {
-                        progressDialog.showLoading()
-                    }
-
-                    is ResultState.Success -> {
-                        progressDialog.hideLoading()
-                        greeting(result.data)
-                    }
-
-                    is ResultState.Error -> {
-                        progressDialog.hideLoading()
-                        val errorMessage = result.error
-                        showToast(errorMessage, requireContext())
-                    }
-                }
+    private fun setupObservers() {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                showLoading()
+            } else {
+                hideLoading()
             }
+        }
+
+        viewModel.username.observe(viewLifecycleOwner) { username ->
+            updateUsernameUI(username)
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            if (!errorMessage.isNullOrEmpty()) {
+                showError(errorMessage)
+            }
+        }
     }
 
-    private fun greeting(response: UserProfileResponse) {
-        val greeting = getString(R.string.hi_gluco_friend, response.user?.name)
+    private fun showLoading() {
+        progressDialog.showLoading()
+    }
+
+    private fun hideLoading() {
+        progressDialog.hideLoading()
+    }
+
+    private fun updateUsernameUI(username: String) {
+        val greeting = getString(R.string.hi_gluco_friend, username)
         binding.tvGlucoGuide.text = greeting
+    }
+
+    private fun showError(message: String) {
+        showToast(message, requireContext())
     }
 
     private fun setupToolbar() {
@@ -93,7 +105,12 @@ class ProfileFragment : Fragment() {
         }
 
         binding.cvLogout.setOnClickListener {
-            bottomLogoutDialog.showLogoutDialog()
+            if (viewModel.errorMessage.value.isNullOrEmpty()) {
+                bottomLogoutDialog.showLogoutDialog()
+            } else {
+                bottomLogoutDialog.dismissLogoutDialog()
+                showToast(viewModel.errorMessage.value ?: "", requireContext())
+            }
         }
 
         binding.ivEdit.setOnClickListener{
