@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.data.UserRepository
-import com.health.glucoguide.models.UserRegisterRequest
-import com.health.glucoguide.models.UserRegisterResponse
+import com.health.glucoguide.data.remote.request.UserRegisterRequest
+import com.health.glucoguide.data.remote.response.UserRegisterResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
