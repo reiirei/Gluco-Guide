@@ -1,4 +1,4 @@
-package com.health.glucoguide.models
+package com.health.glucoguide.data.remote.request
 
 class UserInputProfile(
     val name: String,
