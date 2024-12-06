@@ -1,25 +1,43 @@
 package com.health.glucoguide.ui.activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.health.glucoguide.R
+import androidx.lifecycle.lifecycleScope
+import com.health.glucoguide.databinding.ActivitySplashScreenBinding
 import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
+import com.health.glucoguide.ui.activity.splashscreen.SplashScreenViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-@SuppressLint("CustomSplashScreen")
+@Suppress("customSplashScreen")
+@AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
+    private val binding: ActivitySplashScreenBinding by lazy {
+        ActivitySplashScreenBinding.inflate(layoutInflater)
+    }
+    private val viewModel: SplashScreenViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(binding.root)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, OnBoardingActivity::class.java)
-            startActivity(intent)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        }, 3000)
+        lifecycleScope.launch {
+            delay(2000)
+            viewModel.getSession().observe(this@SplashScreenActivity) { userSession ->
+                val intent = if (userSession.isLogin) {
+                    Intent(this@SplashScreenActivity, MainActivity::class.java)
+                } else {
+                    Intent(this@SplashScreenActivity, OnBoardingActivity::class.java)
+                }.apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 }
 
