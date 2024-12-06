@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.data.UserRepository
-import com.health.glucoguide.models.UserLoginRequest
-import com.health.glucoguide.models.UserLoginResponse
-import com.health.glucoguide.models.UserSession
+import com.health.glucoguide.data.remote.request.UserLoginRequest
+import com.health.glucoguide.data.remote.response.UserLoginResponse
+import com.health.glucoguide.data.remote.response.UserSession
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
