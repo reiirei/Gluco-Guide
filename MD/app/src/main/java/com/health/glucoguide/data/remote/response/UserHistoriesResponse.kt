@@ -13,12 +13,12 @@ data class UserHistoriesResponse(
 
 data class HistoriesItem(
 
-	@field:SerializedName("diagnosa")
-	val diagnosa: String? = null,
+	@field:SerializedName("check_result")
+	val checkResult: String? = null,
 
-	@field:SerializedName("tanggal_cek")
-	val tanggalCek: String? = null,
+	@field:SerializedName("check_date")
+	val checkDate: String? = null,
 
-	@field:SerializedName("keluhan")
-	val keluhan: String? = null
+	@field:SerializedName("complaint_disease")
+	val complaintDisease: String? = null
 )

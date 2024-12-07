@@ -4,14 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.health.glucoguide.R
 import com.health.glucoguide.util.ProgressDialogUtil
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.ActivityLoginBinding
 import com.health.glucoguide.data.remote.response.UserSession
 import com.health.glucoguide.ui.activity.MainActivity
 import com.health.glucoguide.ui.activity.signup.SignUpActivity
-import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,8 +51,8 @@ class LoginActivity : AppCompatActivity() {
             val password = password.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                val emptyFields = getString(com.health.glucoguide.R.string.all_fields_must_not_be_empty)
-                showToast(emptyFields, this@LoginActivity)
+                val emptyFields = getString(R.string.all_fields_must_not_be_empty)
+                showSnackbar(emptyFields)
             } else {
                 viewModel.loginAccount(email, password).observe(this) { response ->
                     when (response) {
@@ -64,19 +66,27 @@ class LoginActivity : AppCompatActivity() {
                                 response.data.loginResult?.token.toString(),
                                 true
                             )
-                            val loginSuccess = getString(com.health.glucoguide.R.string.login_success)
-                            showToast(loginSuccess, this@LoginActivity)
+                            val loginSuccess = getString(R.string.login_success)
+                            showSnackbar(loginSuccess)
                             viewModel.saveSession(user)
                             goToMainActivity()
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
-                            showToast(response.error, this@LoginActivity)
+                            showSnackbar(response.error)
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun showSnackbar(errorMessage: String) {
+        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
+            setBackgroundTint(ContextCompat.getColor(this@LoginActivity, R.color.black))
+            setTextColor(ContextCompat.getColor(this@LoginActivity, R.color.white))
+            setAction("OK") { dismiss() }
+        }.show()
     }
 
     private fun goToMainActivity() {

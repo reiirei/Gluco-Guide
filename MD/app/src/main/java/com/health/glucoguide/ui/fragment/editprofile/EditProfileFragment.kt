@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.R
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentEditProfileBinding
@@ -81,7 +83,7 @@ class EditProfileFragment : Fragment() {
                             progressDialog.hideLoading()
                             val errorMessage = result.error
                             if (!errorMessage.contains("Invalid token")) {
-                                showToast(errorMessage, requireContext())
+                                showSnackbar(errorMessage)
                             }
                         }
                     }
@@ -90,9 +92,20 @@ class EditProfileFragment : Fragment() {
         }
     }
 
+    private fun showSnackbar(errorMessage: String, anchorView: View? = null) {
+        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
+            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            anchorView?.let { this.anchorView = it }
+            setAction("Retry") {
+                viewModel.getUserData(viewModel.getSession().value?.token.toString())
+            }
+        }.show()
+    }
+
     private fun validateUserData(username: String, password: String): Boolean {
         return if (username.isEmpty() || password.isEmpty()) {
-            showToast(getString(R.string.all_fields_must_not_be_empty), requireContext())
+            showSnackbar(getString(R.string.all_fields_must_not_be_empty))
             false
         } else {
             true
@@ -114,7 +127,7 @@ class EditProfileFragment : Fragment() {
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             if (!errorMessage.isNullOrEmpty()) {
-                showError(errorMessage)
+                showSnackbar(errorMessage)
             }
         }
     }
@@ -129,10 +142,6 @@ class EditProfileFragment : Fragment() {
 
     private fun updateUsernameUI(username: String) {
         binding.tiUsername.setText(username)
-    }
-
-    private fun showError(message: String) {
-        showToast(message, requireContext())
     }
 
     private fun navigateBack() {

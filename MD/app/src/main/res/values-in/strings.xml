@@ -96,9 +96,10 @@
     <string name="image_no_internet">image no internet</string>
     <string name="sure_want_to_logout">Yakin mau keluar? Nanti harus login ulang loh</string>
     <string name="logout">Keluar</string>
-    <string name="network_connection_error">Tidak ada internet</string>
-    <string name="an_unexpected_error_occurred">Error belum diketahui</string>
-    <string name="what_language_do_you_prefer">Mau pakai bahasa apa?</string>
+    <string name="network_connection_error">Gak ada internet nih</string>
+    <string name="an_unexpected_error_occurred">Kami mengalami kendala yang tidak terduga.</string>
+    <string name="http_error_default_message">Permintaan Anda tidak dapat diproses saat ini.</string>
+    <string name="what_language_do_you_prefer">Kamu lebih suka pakai bahasa apa?</string>
     <string name="feel_free_to_share_this_app_to_your_friend">Bagikan aplikasi ini ke teman anda</string>
     <string name="your_feedback_is_important_to_us">Kami sangat menghargai umpan balik</string>
     <string name="all_fields_must_not_be_empty">Semua form input harus diisi</string>
