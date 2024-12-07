@@ -7,8 +7,6 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.data.UserRepository
-import com.health.glucoguide.data.remote.response.UserProfileResponse
-import com.health.glucoguide.data.remote.response.UserSession
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.net.ConnectException
@@ -28,16 +26,14 @@ class ProfileViewModel @Inject constructor(
     private var _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
 
-    fun getSession(): LiveData<UserSession> {
-        return userRepository.getSession().asLiveData()
-    }
+    fun getSession() = userRepository.getSession().asLiveData()
 
     fun getUserData(token: String) {
         viewModelScope.launch {
             userRepository.getUserData(token).observeForever {
                 when (it) {
                     is ResultState.Loading -> {
-                        _isLoading.value = true
+                        _isLoading.value = false
                     }
                     is ResultState.Success -> {
                         _isLoading.value = false

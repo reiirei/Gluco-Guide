@@ -14,6 +14,7 @@ import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.health.glucoguide.data.remote.response.UserSession
 import com.health.glucoguide.databinding.FragmentProfileBinding
 import com.health.glucoguide.util.BottomLogoutDialog
 import com.health.glucoguide.util.ProgressDialogUtil
@@ -25,9 +26,10 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
-    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
     private val viewModel: ProfileViewModel by viewModels()
+    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
     private val bottomLogoutDialog by lazy { BottomLogoutDialog(requireContext(), viewModel) }
+    private lateinit var userSession: UserSession
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,14 +46,14 @@ class ProfileFragment : Fragment() {
             val token: String = user.token.toString()
             val name: String = user.name
 
-            updateUsernameUI(name)
             viewModel.getUserData(token)
+            userSession = UserSession(name, token, user.isLogin)
+            setupAction(userSession)
         }
 
         setupToolbar()
         setupShapeMessage()
         setupObservers()
-        setupAction()
     }
 
     private fun setupObservers() {
@@ -103,7 +105,7 @@ class ProfileFragment : Fragment() {
         toolbar.isTitleCentered = true
     }
 
-    private fun setupAction() {
+    private fun setupAction(userSession: UserSession) {
         binding.cvShare.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = getString(R.string.text_plain)
@@ -122,7 +124,7 @@ class ProfileFragment : Fragment() {
 
         binding.ivEdit.setOnClickListener{
             val navigateToEditProfile = ProfileFragmentDirections
-                .actionProfileFragmentToEditProfileFragment()
+                .actionProfileFragmentToEditProfileFragment(userSession)
             findNavController().navigate(navigateToEditProfile)
         }
     }
