@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="corner_radius_message">21dp</dimen>
+    <dimen name="corner_radius_green_background">60dp</dimen>
+    <dimen name="corner_radius_grey_background">26dp</dimen>
+
+    <!--  SignUp  -->
+    <dimen name="image_height">390dp</dimen>
+    <dimen name="ts_tv_discover_45">45sp</dimen>
+    <dimen name="lay_martop_16">16dp</dimen>
+    <dimen name="lay_martop_40">40dp</dimen>
+    <dimen name="lay_marhor_16">16dp</dimen>
+    <dimen name="lay_marbot_16">16dp</dimen>
+    <dimen name="ts_button_30">30sp</dimen>
+    <dimen name="button_height_60">60dp</dimen>
+    <dimen name="button_width_380">380dp</dimen>
+</resources>
