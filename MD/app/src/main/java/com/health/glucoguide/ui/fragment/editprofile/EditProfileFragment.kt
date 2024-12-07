@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.R
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentEditProfileBinding
 import com.health.glucoguide.data.remote.request.UserInputProfile
-import com.health.glucoguide.data.remote.response.UserSession
 import com.health.glucoguide.util.ProgressDialogUtil
 import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class EditProfileFragment : Fragment() {
     private lateinit var binding: FragmentEditProfileBinding
     private val viewModel: EditProfileViewModel by viewModels()
-    private lateinit var userData: UserSession
+    private val args: EditProfileFragmentArgs by navArgs()
     private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
 
     override fun onCreateView(
@@ -36,20 +36,13 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getSession().observe(viewLifecycleOwner) { session ->
-            userData = UserSession(
-                session.name,
-                session.token,
-                session.isLogin
-            )
-
-            viewModel.getUserData(userData.token ?: "")
-
-            setupAction()
-            setupObservers()
-        }
-
         setupToolbar()
+        val name = args.usernameAndToken.name
+        val token = args.usernameAndToken.token
+        updateUsernameUI(name)
+        token?.let {
+            setupAction(it)
+        }
     }
 
     private fun setupToolbar() {
@@ -61,11 +54,10 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-    private fun setupAction() {
+    private fun setupAction(token: String) {
         binding.btnSave.setOnClickListener {
             val username = binding.tiUsername.text.toString()
             val password = binding.tiPassword.text.toString()
-            val token = userData.token ?: ""
 
             if (validateUserData(username, password)) {
                 val userData = UserInputProfile(username, password)
@@ -97,9 +89,6 @@ class EditProfileFragment : Fragment() {
             setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             anchorView?.let { this.anchorView = it }
-            setAction("Retry") {
-                viewModel.getUserData(viewModel.getSession().value?.token.toString())
-            }
         }.show()
     }
 
@@ -110,34 +99,6 @@ class EditProfileFragment : Fragment() {
         } else {
             true
         }
-    }
-
-    private fun setupObservers() {
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) {
-                showLoading()
-            } else {
-                hideLoading()
-            }
-        }
-
-        viewModel.username.observe(viewLifecycleOwner) { username ->
-            updateUsernameUI(username)
-        }
-
-        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            if (!errorMessage.isNullOrEmpty()) {
-                showSnackbar(errorMessage)
-            }
-        }
-    }
-
-    private fun showLoading() {
-        progressDialog.showLoading()
-    }
-
-    private fun hideLoading() {
-        progressDialog.hideLoading()
     }
 
     private fun updateUsernameUI(username: String) {
