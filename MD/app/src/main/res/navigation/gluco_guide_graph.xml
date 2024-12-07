@@ -102,5 +102,10 @@
         android:id="@+id/editProfileFragment"
         android:name="com.health.glucoguide.ui.fragment.editprofile.EditProfileFragment"
         android:label="EditProfileFragment"
-        tools:layout="@layout/fragment_edit_profile"/>
+        tools:layout="@layout/fragment_edit_profile">
+
+        <argument
+            android:name="usernameAndToken"
+            app:argType="com.health.glucoguide.data.remote.response.UserSession" />
+    </fragment>
 </navigation>
