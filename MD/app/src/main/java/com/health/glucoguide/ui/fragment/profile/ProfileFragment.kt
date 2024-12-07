@@ -13,10 +13,10 @@ import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.databinding.FragmentProfileBinding
 import com.health.glucoguide.util.BottomLogoutDialog
 import com.health.glucoguide.util.ProgressDialogUtil
-import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -69,9 +69,20 @@ class ProfileFragment : Fragment() {
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             if (!errorMessage.isNullOrEmpty()) {
-                showToast(errorMessage, requireContext())
+                showSnackbar(errorMessage)
             }
         }
+    }
+
+    private fun showSnackbar(errorMessage: String) {
+        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
+            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            anchorView = requireActivity().findViewById(R.id.bottom_navigation)
+            setAction("Retry") {
+                viewModel.getUserData(viewModel.getSession().value?.token.toString())
+            }
+        }.show()
     }
 
     private fun showLoading() {
@@ -105,7 +116,7 @@ class ProfileFragment : Fragment() {
                 bottomLogoutDialog.showLogoutDialog()
             } else {
                 bottomLogoutDialog.dismissLogoutDialog()
-                showToast(requireContext().getString(R.string.network_connection_error), requireContext())
+                showSnackbar(requireContext().getString(R.string.network_connection_error))
             }
         }
 

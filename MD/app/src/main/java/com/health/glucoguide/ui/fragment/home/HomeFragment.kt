@@ -18,7 +18,6 @@ import com.health.glucoguide.adapter.WebLinkAdapter
 import com.health.glucoguide.databinding.FragmentHomeBinding
 import com.health.glucoguide.data.remote.response.WebLink
 import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
-import com.health.glucoguide.util.ProgressDialogUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +25,6 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-//    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(

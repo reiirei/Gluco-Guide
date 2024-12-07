@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import com.health.glucoguide.R
 import com.health.glucoguide.adapter.HistoryAdapter
 import com.health.glucoguide.databinding.FragmentHistoryBinding
 import com.health.glucoguide.util.ProgressDialogUtil
-import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,7 +63,18 @@ class HistoryFragment : Fragment() {
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            showToast(errorMessage, requireContext())
+            showSnackbar(errorMessage)
         }
+    }
+
+    private fun showSnackbar(errorMessage: String) {
+        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
+            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            anchorView = requireActivity().findViewById(R.id.bottom_navigation)
+            setAction("Retry") {
+                viewModel.getHistories(viewModel.getSession().value?.token.toString())
+            }
+        }.show()
     }
 }
