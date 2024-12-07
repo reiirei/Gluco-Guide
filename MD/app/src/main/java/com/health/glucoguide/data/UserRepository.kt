@@ -68,7 +68,7 @@ class UserRepository @Inject constructor(
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         }
         catch (e: IOException) {
-            emit(ResultState.Error(R.string.network_connection_error.toString()))
+            emit(ResultState.Error(R.string.http_error_default_message.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
         }
@@ -92,7 +92,7 @@ class UserRepository @Inject constructor(
 
                 emit(ResultState.Success(userData))
             } else {
-                emit(ResultState.Error(R.string.network_connection_error.toString()))
+                emit(ResultState.Error(context.getString(R.string.an_unexpected_error_occurred)))
             }
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
@@ -103,7 +103,7 @@ class UserRepository @Inject constructor(
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         }
         catch (e: IOException) {
-            emit(ResultState.Error(R.string.network_connection_error.toString()))
+            emit(ResultState.Error(R.string.http_error_default_message.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
         }
@@ -128,7 +128,7 @@ class UserRepository @Inject constructor(
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         }
         catch (e: IOException) {
-            emit(ResultState.Error(R.string.network_connection_error.toString()))
+            emit(ResultState.Error(R.string.http_error_default_message.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
         }
@@ -148,7 +148,7 @@ class UserRepository @Inject constructor(
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         }
         catch (e: IOException) {
-            emit(ResultState.Error(R.string.network_connection_error.toString()))
+            emit(ResultState.Error(R.string.http_error_default_message.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
         }
@@ -167,8 +167,11 @@ class UserRepository @Inject constructor(
             val errorBody = Gson().fromJson(jsonInString, UserLoginResponse::class.java)
             val errorMessage = errorBody.message
             emit(ResultState.Error(errorMessage.toString()))
-        } catch (e: IOException) {
-            emit(ResultState.Error(R.string.network_connection_error.toString()))
+        } catch (e: ConnectException) {
+            emit(ResultState.Error(context.getString(R.string.network_connection_error)))
+        }
+        catch (e: IOException) {
+            emit(ResultState.Error(R.string.http_error_default_message.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
         }
