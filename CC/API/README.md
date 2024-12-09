@@ -31,7 +31,9 @@ Running on http://127.0.0.1:3000/ (Press CTRL+C to quit)
 ```
 ## Endpoint API
 **URL**: http://127.0.0.1:3000/api/predict
+
 **Metode**: **POST**
+
 **Body Request (JSON)**: Kirimkan data JSON berisi informasi medis pengguna untuk prediksi. Berikut adalah contoh data yang bisa dikirimkan:
 ```
 {
