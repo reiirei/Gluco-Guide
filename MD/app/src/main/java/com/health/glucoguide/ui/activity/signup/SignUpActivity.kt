@@ -5,20 +5,22 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.health.glucoguide.R
-import com.health.glucoguide.util.ProgressDialogUtil
+import com.health.glucoguide.util.ProgressDialog
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.ActivitySignupBinding
 import com.health.glucoguide.ui.activity.login.LoginActivity
-import com.health.glucoguide.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
-    private val progressDialog by lazy { ProgressDialogUtil(this) }
+    private val progressDialog by lazy { ProgressDialog(this) }
     private val viewModel: SignUpViewModel by viewModels()
 
     private lateinit var email: TextInputEditText
@@ -60,11 +62,11 @@ class SignUpActivity : AppCompatActivity() {
                         }
                         is ResultState.Success -> {
                             progressDialog.hideLoading()
-                            val successSignup = getString(R.string.sign_up_success)
-                            showToast(successSignup, this@SignUpActivity)
-                            val intent = Intent(this, LoginActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                            showSnackbar(
+                                ContextCompat.getString(this, R.string.you_have_successfully_registered)
+                                , false
+                            )
+                            gotoLoginActivity()
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
@@ -77,18 +79,32 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun showSnackbar(errorMessage: String) {
-        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
-            setBackgroundTint(ContextCompat.getColor(this@SignUpActivity, R.color.black))
-            setTextColor(ContextCompat.getColor(this@SignUpActivity, R.color.white))
-            setAction("OK") { dismiss() }
+    private fun showSnackbar(errorMessage: String, isError: Boolean = true) {
+        val snackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT)
+        val backgroundColor = if (isError) R.color.red else R.color.army
+        val textColor = R.color.white
+
+        snackbar.apply {
+            setBackgroundTint(ContextCompat.getColor(this@SignUpActivity, backgroundColor))
+            setTextColor(ContextCompat.getColor(this@SignUpActivity, textColor))
+            anchorView = binding.btnNextSignup
+            setActionTextColor(ContextCompat.getColor(this@SignUpActivity, textColor))
+            gotoLoginActivity()
         }.show()
     }
 
+    private fun gotoLoginActivity() {
+        lifecycleScope.launch {
+            delay(2000)
+            startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+            finish()
+        }
+    }
+
     private fun setupAction() {
-        binding.login.setOnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        binding.login.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 }
