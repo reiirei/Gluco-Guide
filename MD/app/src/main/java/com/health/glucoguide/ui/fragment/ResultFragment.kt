@@ -75,7 +75,7 @@ class ResultFragment : Fragment() {
     }
 
     private fun setupShapeGreenBackground() {
-        setupShape(binding.materialCardView, R.dimen.corner_radius_green_background, R.color.dark_blue)
+        setupShape(binding.materialCardView, R.dimen.corner_radius_green_background, R.color.light_army)
     }
 
     private fun setupShapeDoubleCheckCard() {

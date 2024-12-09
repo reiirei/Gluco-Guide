@@ -1,7 +1,6 @@
 package com.health.glucoguide.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +12,10 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
+import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentInputDataAdvancedBinding
 import com.health.glucoguide.data.remote.request.UserData
-import com.health.glucoguide.util.showToast
 
 class InputDataAdvancedFragment : Fragment() {
 
@@ -69,9 +68,9 @@ class InputDataAdvancedFragment : Fragment() {
             val gl = glucoseLevel.text.toString().trim()
 
             if (bmi.isEmpty() || hml.isEmpty() || gl.isEmpty()) {
-                showToast(getString(R.string.error_empty_field), requireContext())
+                showSnackbar(getString(R.string.error_empty_field))
             } else {
-                showToast(getString(R.string.success_submit), requireContext())
+                showSnackbar(getString(R.string.success_submit))
 
                 userData.bodyMassIndex = bmi.toDouble()
                 userData.hemoglobinLevel = hml.toDouble()
@@ -82,6 +81,14 @@ class InputDataAdvancedFragment : Fragment() {
                 clearInputData()
             }
         }
+    }
+
+    private fun showSnackbar(errorMessage: String) {
+        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
+            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setAction("OK") { dismiss() }
+        }.show()
     }
 
     private fun clearInputData() {
@@ -111,7 +118,7 @@ class InputDataAdvancedFragment : Fragment() {
     }
 
     private fun setupShapeGreenBackground() {
-        setupShape(binding.materialCardView, R.dimen.corner_radius_green_background, R.color.dark_blue)
+        setupShape(binding.materialCardView, R.dimen.corner_radius_green_background, R.color.light_army)
     }
 
     private fun setupShapeDoubleCheckCard() {
