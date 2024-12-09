@@ -14,7 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentNewsBinding
 import com.health.glucoguide.data.remote.response.WebLink
-import com.health.glucoguide.util.ProgressDialogUtil
+import com.health.glucoguide.util.ProgressDialog
 
 class NewsFragment : Fragment() {
 
@@ -22,7 +22,7 @@ class NewsFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: NewsFragmentArgs by navArgs()
     private val viewModel by viewModels<NewsViewModel>()
-    private val progressDialogUtil by lazy { ProgressDialogUtil(requireContext()) }
+    private val progressDialog by lazy { ProgressDialog(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +39,8 @@ class NewsFragment : Fragment() {
         setupToolbar()
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            if (it) progressDialogUtil.showLoading()
-            else progressDialogUtil.hideLoading()
+            if (it) progressDialog.showLoading()
+            else progressDialog.hideLoading()
         }
 
         setupWebView(arg)
