@@ -14,8 +14,7 @@ import com.health.glucoguide.R
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentEditProfileBinding
 import com.health.glucoguide.data.remote.request.UserInputProfile
-import com.health.glucoguide.util.ProgressDialogUtil
-import com.health.glucoguide.util.showToast
+import com.health.glucoguide.util.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +22,7 @@ class EditProfileFragment : Fragment() {
     private lateinit var binding: FragmentEditProfileBinding
     private val viewModel: EditProfileViewModel by viewModels()
     private val args: EditProfileFragmentArgs by navArgs()
-    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
+    private val progressDialog by lazy { ProgressDialog(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,14 +67,14 @@ class EditProfileFragment : Fragment() {
                         }
                         is ResultState.Success -> {
                             progressDialog.hideLoading()
-                            showToast(getString(R.string.profile_updated), requireContext())
+                            showSnackbar(getString(R.string.profile_updated), R.id.bottom_navigation)
                             navigateBack()
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
                             val errorMessage = result.error
                             if (!errorMessage.contains("Invalid token")) {
-                                showSnackbar(errorMessage)
+                                showSnackbar(errorMessage, R.id.bottom_navigation)
                             }
                         }
                     }
@@ -84,11 +83,19 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-    private fun showSnackbar(errorMessage: String, anchorView: View? = null) {
+    private fun showSnackbar(errorMessage: String, anchorViewId: Int? = null) {
         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
-            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.army))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            anchorView?.let { this.anchorView = it }
+            setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setAction("OK") {
+                dismiss()
+            }
+            anchorViewId?.let { id ->
+                (requireActivity().findViewById<View>(id))?.let { view ->
+                    anchorView = view
+                }
+            }
         }.show()
     }
 

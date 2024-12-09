@@ -5,14 +5,19 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.shape.RoundedCornerTreatment
+import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
 import com.health.glucoguide.ui.activity.MainActivity
 import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
 import com.health.glucoguide.ui.fragment.profile.ProfileViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 class BottomLogoutDialog(
-    context: Context,
+    @ApplicationContext private val context: Context,
     private val viewModel: ProfileViewModel
 ) {
     private val bottomLogoutDialog: BottomSheetDialog = BottomSheetDialog(context)
@@ -21,6 +26,9 @@ class BottomLogoutDialog(
         val dialogLayout = LayoutInflater.from(context).inflate(R.layout.bottom_logout_dialog,
             null as ViewGroup?, false
         )
+
+        val card = dialogLayout.findViewById<MaterialCardView>(R.id.card_bottom_logout)
+        setupShape(card, R.dimen.corner_radius_grey_background, R.color.grey)
 
         val btnLogout: AppCompatButton = dialogLayout.findViewById(R.id.btn_logout)
         val btnCancel: AppCompatButton = dialogLayout.findViewById(R.id.btn_cancel)
@@ -45,6 +53,20 @@ class BottomLogoutDialog(
             setContentView(dialogLayout)
             setCancelable(true)
         }
+    }
+
+    fun setupShape(cardView: MaterialCardView, cornerSizeResId: Int, colorResId: Int) {
+        val cornerSize = context.resources.getDimension(cornerSizeResId)
+        val shapeAppearanceModel = ShapeAppearanceModel.builder()
+            .setTopLeftCorner(RoundedCornerTreatment())
+            .setTopLeftCornerSize(cornerSize)
+            .setTopRightCorner(RoundedCornerTreatment())
+            .setTopRightCornerSize(cornerSize)
+            .build()
+
+        cardView.setCardBackgroundColor(ContextCompat.getColor(context, colorResId))
+        cardView.shapeAppearanceModel = shapeAppearanceModel
+        cardView.strokeWidth = 0
     }
 
     fun showLogoutDialog() {

@@ -14,10 +14,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
+import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentInputDataBinding
 import com.health.glucoguide.data.remote.request.UserData
-import com.health.glucoguide.util.showToast
 
 class InputDataFragment : Fragment() {
 
@@ -104,12 +104,19 @@ class InputDataFragment : Fragment() {
             hypertension.isNullOrEmpty()
             )  {
 
-            showToast(getString(R.string.error_empty_field), requireContext())
+            showSnackbar(getString(R.string.error_empty_field))
             false
         } else {
-            showToast(getString(R.string.success_submit), requireContext())
             true
         }
+    }
+
+    private fun showSnackbar(errorMessage: String) {
+        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
+            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.red))
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setAction("OK") { dismiss() }
+        }.show()
     }
 
     private fun clearInputData() {
@@ -155,7 +162,7 @@ class InputDataFragment : Fragment() {
     }
 
     private fun setupShapeGreenBackground() {
-        setupShape(binding.materialCardView, R.dimen.corner_radius_green_background, R.color.dark_blue)
+        setupShape(binding.materialCardView, R.dimen.corner_radius_green_background, R.color.light_army)
     }
 
     private fun setupShapeDoubleCheckCard() {

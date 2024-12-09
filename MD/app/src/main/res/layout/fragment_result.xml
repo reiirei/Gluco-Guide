@@ -22,16 +22,16 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/dark_blue"
+                android:background="@color/light_army"
                 app:title="@string/result"
                 app:titleTextAppearance="@style/ToolbarTitleText" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <ImageView
             android:id="@+id/iv_home"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="24dp"
+            android:layout_width="@dimen/lay_img_width_30"
+            android:layout_height="@dimen/lay_img_height_30"
+            android:layout_marginEnd="@dimen/lay_marend_24"
             android:contentDescription="@string/home"
             android:src="@drawable/baseline_home_24"
             app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
@@ -41,17 +41,17 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
-            android:layout_height="234.09dp"
+            android:layout_height="@dimen/lay_card_height_234"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewInputData"
-            android:layout_width="380dp"
-            android:layout_height="570dp"
-            android:layout_marginTop="88dp"
+            android:layout_width="@dimen/lay_card_width_380"
+            android:layout_height="@dimen/lay_card_height_570"
+            android:layout_marginTop="@dimen/lay_martop_88"
             android:background="@color/white"
             android:contentDescription="@string/result_data"
-            app:cardCornerRadius="26dp"
+            app:cardCornerRadius="@dimen/corner_radius_26"
             app:cardElevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,11 +66,11 @@
                     android:id="@+id/tv_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="@dimen/lay_marstar_24"
+                    android:layout_marginTop="@dimen/lay_martop_16"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/gender"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,10 +78,10 @@
                     android:id="@+id/tv_result_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/lay_martop_8"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/gender"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_gender"
                     app:layout_constraintTop_toBottomOf="@+id/tv_gender" />
 
@@ -92,7 +92,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/age"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_gender"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_gender" />
 
@@ -100,10 +100,10 @@
                     android:id="@+id/tv_result_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/lay_martop_8"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/age"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_age"
                     app:layout_constraintTop_toBottomOf="@+id/tv_age" />
 
@@ -111,10 +111,10 @@
                     android:id="@+id/tv_smoking_history"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/lay_martop_10"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/smoking_history"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_age"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_age" />
 
@@ -122,10 +122,10 @@
                     android:id="@+id/tv_result_smoking_history"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/lay_martop_8"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/smoking_history"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_smoking_history"
                     app:layout_constraintTop_toBottomOf="@+id/tv_smoking_history" />
 
@@ -133,10 +133,10 @@
                     android:id="@+id/tv_heart_disease"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/lay_martop_10"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/heart_disease"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_smoking_history"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_smoking_history" />
 
@@ -144,10 +144,10 @@
                     android:id="@+id/tv_result_heart_disease"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/lay_martop_8"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/heart_disease"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_heart_disease"
                     app:layout_constraintTop_toBottomOf="@+id/tv_heart_disease" />
 
@@ -155,10 +155,10 @@
                     android:id="@+id/tv_hypertension"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/lay_martop_10"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/hypertension"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_heart_disease"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_heart_disease" />
 
@@ -166,10 +166,10 @@
                     android:id="@+id/tv_result_hypertension"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/lay_martop_8"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/hypertension"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_hypertension"
                     app:layout_constraintTop_toBottomOf="@+id/tv_hypertension" />
 
@@ -177,10 +177,10 @@
                     android:id="@+id/tv_body_mass_index"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/lay_martop_10"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/body_mass_index"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_hypertension"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_hypertension" />
 
@@ -188,10 +188,10 @@
                     android:id="@+id/tv_result_body_mass_index"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/lay_martop_8"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/body_mass_index"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_body_mass_index"
                     app:layout_constraintTop_toBottomOf="@+id/tv_body_mass_index" />
 
@@ -199,10 +199,10 @@
                     android:id="@+id/tv_hemoglobin_a1c_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/lay_martop_10"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/hemoglobin_a1c_level"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_body_mass_index"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_body_mass_index" />
 
@@ -210,10 +210,10 @@
                     android:id="@+id/tv_result_hemoglobin_a1c_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/lay_martop_8"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/hemoglobin_a1c_level"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_hemoglobin_a1c_level"
                     app:layout_constraintTop_toBottomOf="@+id/tv_hemoglobin_a1c_level" />
 
@@ -221,10 +221,10 @@
                     android:id="@+id/tv_blood_glucose_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/lay_martop_10"
                     android:fontFamily="@font/nunito_semibold"
                     android:text="@string/blood_glucose_evel"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_hemoglobin_a1c_level"
                     app:layout_constraintTop_toBottomOf="@+id/tv_result_hemoglobin_a1c_level" />
 
@@ -232,11 +232,11 @@
                     android:id="@+id/tv_result_blood_glucose_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="@dimen/lay_martop_8"
+                    android:layout_marginBottom="@dimen/lay_marbot_16"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/blood_glucose_evel"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/ts_18"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_blood_glucose_level"
                     app:layout_constraintTop_toBottomOf="@+id/tv_blood_glucose_level" />
@@ -245,8 +245,8 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/resultCard"
-            android:layout_width="380dp"
-            android:layout_height="110dp"
+            android:layout_width="@dimen/lay_card_width_380"
+            android:layout_height="@dimen/lay_card_height_110"
             app:cardElevation="1dp"
             app:layout_constraintEnd_toEndOf="@+id/cardViewInputData"
             app:layout_constraintStart_toStartOf="@+id/cardViewInputData"
@@ -260,22 +260,22 @@
                     android:id="@+id/tv_all_set_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginStart="@dimen/lay_marstar_16"
+                    android:layout_marginTop="@dimen/lay_martop_32"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/heres_your_result"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/ts_16"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="@dimen/lay_martop_8"
+                    android:layout_marginBottom="@dimen/lay_marbot_16"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/diabete_result"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/ts_30"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_all_set_up"
                     app:layout_constraintTop_toBottomOf="@+id/tv_all_set_up"
@@ -287,10 +287,10 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/lay_marbot_16"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/suggestion"
-            android:textSize="16sp"
+            android:textSize="@dimen/ts_16"
             app:layout_constraintStart_toStartOf="@+id/resultCard"
             app:layout_constraintTop_toBottomOf="@+id/resultCard" />
 

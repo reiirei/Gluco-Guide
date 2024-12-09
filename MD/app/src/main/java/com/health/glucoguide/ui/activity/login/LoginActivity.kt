@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.health.glucoguide.R
-import com.health.glucoguide.util.ProgressDialogUtil
+import com.health.glucoguide.util.ProgressDialog
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.ActivityLoginBinding
 import com.health.glucoguide.data.remote.response.UserSession
@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
 
-    private val progressDialog by lazy { ProgressDialogUtil(this) }
+    private val progressDialog by lazy { ProgressDialog(this) }
     private lateinit var email: TextInputEditText
     private lateinit var password: TextInputEditText
 
@@ -66,8 +66,6 @@ class LoginActivity : AppCompatActivity() {
                                 response.data.loginResult?.token.toString(),
                                 true
                             )
-                            val loginSuccess = getString(R.string.login_success)
-                            showSnackbar(loginSuccess)
                             viewModel.saveSession(user)
                             goToMainActivity()
                         }
@@ -83,9 +81,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showSnackbar(errorMessage: String) {
         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
-            setBackgroundTint(ContextCompat.getColor(this@LoginActivity, R.color.black))
+            setBackgroundTint(ContextCompat.getColor(this@LoginActivity, R.color.red))
             setTextColor(ContextCompat.getColor(this@LoginActivity, R.color.white))
-            setAction("OK") { dismiss() }
+            anchorView = binding.btnLogin
+            setActionTextColor(ContextCompat.getColor(this@LoginActivity, R.color.white))
+            setAction("OK") {
+                dismiss()
+            }
         }.show()
     }
 

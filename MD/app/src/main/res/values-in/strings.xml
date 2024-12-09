@@ -113,4 +113,11 @@
     <string name="are_you_sure">Apakah anda yakin?</string>
     <string name="after_you_logout_you_will_need_to_login_again">Setelah logout, kamu harus login lagi\nuntuk bisa masuk</string>
     <string name="cancel">Gak jadi deh</string>
+    <string name="we_are_here_to_help_you_nmonitor_your_health_with_ease_nand_precision">Kami di sini untuk membantu Anda\nmemantau kesehatan dengan mudah\ndan akurat</string>
+    <string name="welocome_to_ai_powered">Selamat datang di Aplikasi</string>
+    <string name="diabetes_detection_app">Deteksi Diabetes Berbasis AI</string>
+    <string name="Retry">Coba lagi</string>
+    <string name="connection_timeout">Terjadi kesalahan. Silakan coba lagi.</string>
+    <string name="you_have_successfully_registered">Anda telah terdaftar</string>
+    <string name="congratulation">Selamat!</string>
 </resources>

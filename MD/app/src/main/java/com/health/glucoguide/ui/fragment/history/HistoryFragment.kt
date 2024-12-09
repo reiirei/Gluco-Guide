@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.R
 import com.health.glucoguide.adapter.HistoryAdapter
 import com.health.glucoguide.databinding.FragmentHistoryBinding
-import com.health.glucoguide.util.ProgressDialogUtil
+import com.health.glucoguide.util.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,7 @@ class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HistoryViewModel by viewModels()
-    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
+    private val progressDialog by lazy { ProgressDialog(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,10 +41,9 @@ class HistoryFragment : Fragment() {
         viewModel.getSession().observe(viewLifecycleOwner) { session ->
             val token = session.token.toString()
             viewModel.getHistories(token)
+            setupObserver(adapter, token)
         }
-
         setupToolbar()
-        setupObserver(adapter)
     }
 
     private fun setupToolbar() {
@@ -52,7 +51,7 @@ class HistoryFragment : Fragment() {
         toolbar.isTitleCentered = true
     }
 
-    private fun setupObserver(adapter: HistoryAdapter) {
+    private fun setupObserver(adapter: HistoryAdapter, token: String) {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) progressDialog.showLoading() else progressDialog.hideLoading()
         }
@@ -63,17 +62,18 @@ class HistoryFragment : Fragment() {
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            showSnackbar(errorMessage)
+            showSnackbar(errorMessage, token)
         }
     }
 
-    private fun showSnackbar(errorMessage: String) {
+    private fun showSnackbar(errorMessage: String, token: String) {
         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
-            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.red))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             anchorView = requireActivity().findViewById(R.id.bottom_navigation)
             setAction("Retry") {
-                viewModel.getHistories(viewModel.getSession().value?.token.toString())
+                viewModel.getHistories(token)
             }
         }.show()
     }

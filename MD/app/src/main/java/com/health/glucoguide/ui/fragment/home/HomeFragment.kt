@@ -39,14 +39,12 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getSession().observe(viewLifecycleOwner) { userSession ->
-            if(!userSession.isLogin) {
-                val intent = Intent(requireContext(), OnBoardingActivity::class.java)
-                startActivity(intent)
+        viewModel.getSession().observe(viewLifecycleOwner) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(requireContext(), OnBoardingActivity::class.java))
                 requireActivity().finish()
             } else {
-                val name = userSession.name
-                greeting(name)
+                greeting(user.name)
             }
         }
 
@@ -114,7 +112,7 @@ class HomeFragment : Fragment() {
             .build()
 
         val shapeDrawableBackground = MaterialShapeDrawable(shapeAppearanceModelBackground)
-        shapeDrawableBackground.fillColor = ContextCompat.getColorStateList(requireContext(), R.color.dark_blue)
+        shapeDrawableBackground.fillColor = ContextCompat.getColorStateList(requireContext(), R.color.light_army)
         binding.materialCardView.background = shapeDrawableBackground
     }
 

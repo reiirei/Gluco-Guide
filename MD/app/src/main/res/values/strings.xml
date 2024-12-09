@@ -117,4 +117,11 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="after_you_logout_you_will_need_to_login_again">After you logout, you will need to login again</string>
     <string name="cancel">cancel</string>
+    <string name="we_are_here_to_help_you_nmonitor_your_health_with_ease_nand_precision">We are here to help you\nmonitor your health with ease\nand precision</string>
+    <string name="welocome_to_ai_powered">Welocome to AI-Powered</string>
+    <string name="diabetes_detection_app">Diabetes Detection App</string>
+    <string name="Retry">Retry</string>
+    <string name="connection_timeout">Connection Timeout. Please try again.</string>
+    <string name="you_have_successfully_registered">You\'ve successfully registered!</string>
+    <string name="congratulation">Congratulation!</string>
 </resources>
