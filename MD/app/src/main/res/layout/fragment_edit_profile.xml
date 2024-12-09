@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/dark_blue"
+            android:background="@color/light_army"
             app:title="@string/profile"
             app:titleTextAppearance="@style/ToolbarTitleText" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -27,11 +27,11 @@
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/lay_marstar_16"
+        android:layout_marginTop="@dimen/lay_martop_16"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/username"
-        android:textSize="16sp"
+        android:textSize="@dimen/ts_16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
@@ -39,10 +39,9 @@
         android:id="@+id/tl_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/lay_martop_8"
+        android:layout_marginEnd="@dimen/lay_marend_16"
         app:hintEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_username"
@@ -51,22 +50,22 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ti_username"
-            android:layout_width="374dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/lay_ti_width_374"
+            android:layout_height="@dimen/lay_ti_height"
             android:layout_marginTop="8dp"
             android:background="@drawable/rounded_text_input_layout"
             android:fontFamily="@font/nunito_bold"
             android:hint="@string/Input_unique_name"
             android:inputType="text"
-            android:padding="15dp" />
+            android:padding="@dimen/padding_15" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/lay_marstar_16"
+        android:layout_marginTop="@dimen/lay_martop_16"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/password"
         android:textSize="16sp"
@@ -77,10 +76,9 @@
         android:id="@+id/tl_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/lay_martop_8"
+        android:layout_marginEnd="@dimen/lay_marend_16"
         app:hintEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_password"
@@ -89,28 +87,28 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ti_password"
-            android:layout_width="374dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="@dimen/lay_ti_width_374"
+            android:layout_height="@dimen/lay_ti_height_50"
+            android:layout_marginTop="@dimen/lay_martop_8"
             android:background="@drawable/rounded_text_input_layout"
             android:fontFamily="@font/nunito_bold"
             android:hint="@string/Input_password"
             android:inputType="textPassword"
-            android:padding="15dp" />
+            android:padding="@dimen/padding_15" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="@dimen/lay_marbot_32"
         android:background="@drawable/button_background"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/save"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/ts_22"
+        android:layout_marginTop="@dimen/lay_martop_16"
+        android:layout_marginHorizontal="@dimen/lay_marhor_16"
         app:layout_constraintTop_toBottomOf="@+id/tl_password"
         app:layout_constraintEnd_toEndOf="@+id/tl_password"
         app:layout_constraintHorizontal_bias="0.483"
