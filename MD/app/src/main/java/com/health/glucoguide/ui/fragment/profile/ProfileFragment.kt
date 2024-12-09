@@ -17,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.data.remote.response.UserSession
 import com.health.glucoguide.databinding.FragmentProfileBinding
 import com.health.glucoguide.util.BottomLogoutDialog
-import com.health.glucoguide.util.ProgressDialogUtil
+import com.health.glucoguide.util.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +27,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ProfileViewModel by viewModels()
-    private val progressDialog by lazy { ProgressDialogUtil(requireContext()) }
+    private val progressDialog by lazy { ProgressDialog(requireContext()) }
     private val bottomLogoutDialog by lazy { BottomLogoutDialog(requireContext(), viewModel) }
     private lateinit var userSession: UserSession
 
@@ -78,10 +78,11 @@ class ProfileFragment : Fragment() {
 
     private fun showSnackbar(errorMessage: String) {
         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
-            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.red))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             anchorView = requireActivity().findViewById(R.id.bottom_navigation)
-            setAction("Retry") {
+            setAction(R.string.Retry) {
                 viewModel.getUserData(viewModel.getSession().value?.token.toString())
             }
         }.show()
