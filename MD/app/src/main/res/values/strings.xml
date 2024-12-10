@@ -71,11 +71,11 @@
     <string name="make_sure_email_valid">Make sure your email is valid</string>
     <string name="username">Username</string>
     <string name="Input_unique_name">Input unique name</string>
-    <string name="have_an_account_login">Have an account? Login</string>
-    <string name="dont_have_account">Dont have an account? Signup</string>
+    <string name="have_an_account_login">Have an account? </string>
+    <string name="dont_have_account">Dont have an account? </string>
     <string name="password">Password</string>
     <string name="Input_password">Password must more than 8 character</string>
-    <string name="login">Login</string>
+    <string name="login">Log in</string>
     <string name="input_your_email">Input your email</string>
     <string name="input_your_password">Input your password</string>
     <string name="title_home">Home</string>
@@ -101,9 +101,10 @@
     <string name="sure_want_to_logout">want to logout? after that you should login again</string>
     <string name="logout">Logout</string>
     <string name="network_connection_error">There\'s no internet</string>
+    <string name="network_connection_restored">You are connected now</string>
     <string name="an_unexpected_error_occurred">An unexpected error occurred</string>
     <string name="http_error_default_message">An error occurred while processing your request.</string>
-    <string name="what_language_do_you_prefer">what language do you prefer?</string>
+    <string name="what_language_do_you_prefer">What language do you prefer?</string>
     <string name="feel_free_to_share_this_app_to_your_friend">Feel free to share this app to your friend</string>
     <string name="your_feedback_is_important_to_us">your feedback is important to us</string>
     <string name="all_fields_must_not_be_empty">All fields must not be empty</string>
@@ -121,7 +122,14 @@
     <string name="welocome_to_ai_powered">Welocome to AI-Powered</string>
     <string name="diabetes_detection_app">Diabetes Detection App</string>
     <string name="Retry">Retry</string>
+    <string name="ok">OK</string>
     <string name="connection_timeout">Connection Timeout. Please try again.</string>
     <string name="you_have_successfully_registered">You\'ve successfully registered!</string>
+    <string name="you_have_successfully_login">You\'ve successfully login!</string>
     <string name="congratulation">Congratulation!</string>
+    <string name="english">English</string>
+    <string name="indonesia">Indonesia</string>
+    <string name="chose_language">Chose language</string>
+    <string name="continu">Continue</string>
+    <string name="image_person_talking">image person talking</string>
 </resources>

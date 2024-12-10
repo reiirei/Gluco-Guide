@@ -2,6 +2,7 @@ package com.health.glucoguide.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -10,12 +11,15 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.ActivityMainBinding
+import com.health.glucoguide.ui.fragment.profile.ProfileViewModel
+import com.health.glucoguide.util.LocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,9 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val language = viewModel.getLanguageSync()
+        LocaleHelper.updateLocale(this, language)
 
         setupNavigationController(binding)
     }
