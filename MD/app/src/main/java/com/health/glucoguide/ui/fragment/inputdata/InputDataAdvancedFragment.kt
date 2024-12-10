@@ -1,4 +1,4 @@
-package com.health.glucoguide.ui.fragment
+package com.health.glucoguide.ui.fragment.inputdata
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
