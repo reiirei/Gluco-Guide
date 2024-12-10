@@ -11,7 +11,9 @@ import com.health.glucoguide.data.remote.response.User
 import com.health.glucoguide.data.remote.response.UserSession
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class UserPreference @Inject constructor(@ApplicationContext context: Context) {
@@ -33,6 +35,25 @@ class UserPreference @Inject constructor(@ApplicationContext context: Context) {
                 preferences[USER_TOKEN] ?: "",
                 preferences[USER_IS_LOGIN] ?: false
             )
+        }
+    }
+
+    suspend fun saveLanguage(language: String) {
+        dataStore.edit { preferences ->
+            preferences[LANGUAGE] = language
+        }
+    }
+
+    fun getLanguageSetting(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            val lang = preferences[LANGUAGE] ?: "en"
+            lang
+        }
+    }
+
+    fun getLanguageSync(): String {
+        return runBlocking {
+            dataStore.data.first()[LANGUAGE] ?: "en"
         }
     }
 
@@ -60,6 +81,7 @@ class UserPreference @Inject constructor(@ApplicationContext context: Context) {
         private val USER_NAME = stringPreferencesKey("name")
         private val USER_TOKEN = stringPreferencesKey("token")
         private val USER_IS_LOGIN = booleanPreferencesKey("isLogin")
+        private val LANGUAGE = stringPreferencesKey("language")
     }
 }
 
