@@ -1,20 +1,24 @@
 package com.health.glucoguide.ui.fragment.profile
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.health.glucoguide.R
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.data.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import java.net.ConnectException
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     private var _isLoading = MutableLiveData<Boolean>()
@@ -25,6 +29,16 @@ class ProfileViewModel @Inject constructor(
 
     private var _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
+
+    fun saveLanguage(language: String) {
+        viewModelScope.launch {
+            userRepository.saveLanguage(language)
+        }
+    }
+
+    fun getLanguage(): LiveData<String> {
+        return userRepository.getLanguage()
+    }
 
     fun getSession() = userRepository.getSession().asLiveData()
 
@@ -53,7 +67,7 @@ class ProfileViewModel @Inject constructor(
             try {
                 userRepository.clearSession()
             } catch (e: ConnectException) {
-                _errorMessage.value = "Failed to connect. Please check your internet connection."
+                _errorMessage.value = context.getString(R.string.check_your_internet_connection_and_try_again)
             }
         }
     }
