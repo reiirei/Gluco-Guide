@@ -2,7 +2,7 @@
 ## Main Features
 Checking user input data to get result of risk level of having diabetic or not
 
-## User Flow
+## Userflow Application
 
 ### Userflow MVP
 - User get into home page  
