@@ -25,6 +25,7 @@ import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.ConnectException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
@@ -41,6 +42,14 @@ class UserRepository @Inject constructor(
 
     suspend fun clearSession() {
         userPreference.clearSession()
+    }
+
+    suspend fun saveLanguage(language: String) {
+        userPreference.saveLanguage(language)
+    }
+
+    fun getLanguage(): LiveData<String> {
+        return userPreference.getLanguageSetting().asLiveData()
     }
 
     fun getHistories(token: String): LiveData<ResultState<List<HistoryEntity>>> = liveData {
@@ -62,16 +71,19 @@ class UserRepository @Inject constructor(
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, UserHistoriesResponse::class.java)
-            val errorMessage = errorBody.error
+            val errorMessage = errorBody.message
             emit(ResultState.Error(errorMessage.toString()))
         } catch (e: ConnectException) {
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
+        } catch (e: SocketTimeoutException) {
+            emit(ResultState.Error(context.getString(R.string.connection_timeout)))
         }
         catch (e: IOException) {
             emit(ResultState.Error(R.string.http_error_default_message.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
         }
+
         val localData: LiveData<ResultState<List<HistoryEntity>>> = historyDao.getHistories().map {
             ResultState.Success(it)
         }
@@ -101,6 +113,8 @@ class UserRepository @Inject constructor(
             emit(ResultState.Error(errorMessage.toString()))
         } catch (e: ConnectException) {
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
+        } catch (e: SocketTimeoutException) {
+            emit(ResultState.Error(context.getString(R.string.connection_timeout)))
         }
         catch (e: IOException) {
             emit(ResultState.Error(R.string.http_error_default_message.toString()))
@@ -144,10 +158,11 @@ class UserRepository @Inject constructor(
             val errorBody = Gson().fromJson(jsonInString, UserRegisterResponse::class.java)
             val errorMessage = errorBody.message
             emit(ResultState.Error(errorMessage.toString()))
+        } catch (e: SocketTimeoutException) {
+            emit(ResultState.Error(context.getString(R.string.connection_timeout)))
         } catch (e: ConnectException) {
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
-        }
-        catch (e: IOException) {
+        } catch (e: IOException) {
             emit(ResultState.Error(R.string.http_error_default_message.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
@@ -161,16 +176,16 @@ class UserRepository @Inject constructor(
             emit(ResultState.Success(successResponse))
         } catch (e: ConnectException) {
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
-        }
-        catch (e: HttpException) {
+        } catch (e: SocketTimeoutException) {
+            emit(ResultState.Error(context.getString(R.string.connection_timeout)))
+        } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, UserLoginResponse::class.java)
             val errorMessage = errorBody.message
             emit(ResultState.Error(errorMessage.toString()))
         } catch (e: ConnectException) {
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
-        }
-        catch (e: IOException) {
+        } catch (e: IOException) {
             emit(ResultState.Error(R.string.http_error_default_message.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(R.string.an_unexpected_error_occurred.toString()))
