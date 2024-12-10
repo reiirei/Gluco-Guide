@@ -16,7 +16,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.data.remote.response.UserSession
 import com.health.glucoguide.databinding.FragmentProfileBinding
+import com.health.glucoguide.util.BottomChoseLanguageDialog
 import com.health.glucoguide.util.BottomLogoutDialog
+import com.health.glucoguide.util.NetworkUtils
 import com.health.glucoguide.util.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +31,8 @@ class ProfileFragment : Fragment() {
     private val viewModel: ProfileViewModel by viewModels()
     private val progressDialog by lazy { ProgressDialog(requireContext()) }
     private val bottomLogoutDialog by lazy { BottomLogoutDialog(requireContext(), viewModel) }
+    private val bottomChoseLanguageDialog by lazy { BottomChoseLanguageDialog(requireContext(), viewModel) }
+    private val networkUtils: NetworkUtils by lazy { NetworkUtils(requireContext()) }
     private lateinit var userSession: UserSession
 
     override fun onCreateView(
@@ -42,18 +46,29 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeNetwork()
+
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
             val token: String = user.token.toString()
             val name: String = user.name
+            updateUsernameUI(name)
 
             viewModel.getUserData(token)
             userSession = UserSession(name, token, user.isLogin)
             setupAction(userSession)
+            setupObservers()
         }
 
         setupToolbar()
         setupShapeMessage()
-        setupObservers()
+    }
+
+    private fun observeNetwork() {
+        networkUtils.observe(viewLifecycleOwner) { isNetworkAvailable ->
+            if (!isNetworkAvailable) {
+                showSnackbar(getString(R.string.network_connection_error))
+            }
+        }
     }
 
     private fun setupObservers() {
@@ -70,20 +85,18 @@ class ProfileFragment : Fragment() {
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            if (!errorMessage.isNullOrEmpty()) {
-                showSnackbar(errorMessage)
-            }
+            showSnackbar(errorMessage)
         }
     }
 
-    private fun showSnackbar(errorMessage: String) {
+    private fun showSnackbar(errorMessage: String, color: Int = R.color.red) {
         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
-            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.red))
+            setBackgroundTint(ContextCompat.getColor(requireContext(), color))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             anchorView = requireActivity().findViewById(R.id.bottom_navigation)
-            setAction(R.string.Retry) {
-                viewModel.getUserData(viewModel.getSession().value?.token.toString())
+            setAction(getString(R.string.ok)) {
+                dismiss()
             }
         }.show()
     }
@@ -114,14 +127,22 @@ class ProfileFragment : Fragment() {
             startActivity(Intent.createChooser(intent, getString(R.string.share)))
         }
 
-        binding.cvLogout.setOnClickListener {
-            if (viewModel.errorMessage.value.isNullOrEmpty()) {
-                bottomLogoutDialog.showLogoutDialog()
+        binding.cvLanguage.setOnClickListener {
+            if (networkUtils.value == true) {
+                bottomChoseLanguageDialog.showDialog()
             } else {
-                bottomLogoutDialog.dismissLogoutDialog()
                 showSnackbar(requireContext().getString(R.string.network_connection_error))
             }
         }
+
+        binding.cvLogout.setOnClickListener {
+            if (networkUtils.value == true) {
+                bottomLogoutDialog.showLogoutDialog()
+            } else {
+                showSnackbar(requireContext().getString(R.string.network_connection_error))
+            }
+        }
+
 
         binding.ivEdit.setOnClickListener{
             val navigateToEditProfile = ProfileFragmentDirections
