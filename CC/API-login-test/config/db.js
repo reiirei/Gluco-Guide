@@ -12,12 +12,11 @@ dotenv.config();
 //   database: process.env.DB_NAME,
 // });
 
-// Membuat koneksi pool ke Cloud SQL
+// Membuat koneksi pool ke Lokal
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
   database: 'glucoguide',
 });
-
 module.exports = { db: pool };
