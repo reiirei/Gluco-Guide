@@ -1,4 +1,4 @@
-package com.health.glucoguide.ui.fragment
+package com.health.glucoguide.ui.fragment.inputdata
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -68,9 +68,9 @@ class InputDataAdvancedFragment : Fragment() {
             val gl = glucoseLevel.text.toString().trim()
 
             if (bmi.isEmpty() || hml.isEmpty() || gl.isEmpty()) {
-                showSnackbar(getString(R.string.error_empty_field))
+                showSnackbar(getString(R.string.error_empty_field), anchor = true)
             } else {
-                showSnackbar(getString(R.string.success_submit))
+                showSnackbar(getString(R.string.success_submit), R.color.army)
 
                 userData.bodyMassIndex = bmi.toDouble()
                 userData.hemoglobinLevel = hml.toDouble()
@@ -83,11 +83,15 @@ class InputDataAdvancedFragment : Fragment() {
         }
     }
 
-    private fun showSnackbar(errorMessage: String) {
+    private fun showSnackbar(errorMessage: String, color: Int = R.color.red, anchor: Boolean = false) {
         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
-            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+            setBackgroundTint(ContextCompat.getColor(requireContext(), color))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            setAction("OK") { dismiss() }
+            setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setAction(getString(R.string.ok)) {
+                dismiss()
+            }
+            anchorView = if (anchor) requireActivity().findViewById(R.id.btn_submit) else null
         }.show()
     }
 

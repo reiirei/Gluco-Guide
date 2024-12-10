@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.health.glucoguide.R
@@ -12,9 +13,12 @@ import com.health.glucoguide.util.ProgressDialog
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.ActivityLoginBinding
 import com.health.glucoguide.data.remote.response.UserSession
-import com.health.glucoguide.ui.activity.MainActivity
+import com.health.glucoguide.ui.activity.main.MainActivity
 import com.health.glucoguide.ui.activity.signup.SignUpActivity
+import com.health.glucoguide.util.LocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -31,6 +35,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val language = viewModel.getLanguageSync()
+        LocaleHelper.updateLocale(this, language)
+
         email = binding.tiEmail
         password = binding.tiPassword
 
@@ -40,7 +47,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.registerIfHavent.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            }
             startActivity(intent)
         }
     }
@@ -67,7 +76,11 @@ class LoginActivity : AppCompatActivity() {
                                 true
                             )
                             viewModel.saveSession(user)
-                            goToMainActivity()
+                            showSnackbar(getString(R.string.you_have_successfully_login), false)
+                            lifecycleScope.launch {
+                                delay(1000)
+                                goToMainActivity()
+                            }
                         }
                         is ResultState.Error -> {
                             progressDialog.hideLoading()
@@ -79,15 +92,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun showSnackbar(errorMessage: String) {
-        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
-            setBackgroundTint(ContextCompat.getColor(this@LoginActivity, R.color.red))
-            setTextColor(ContextCompat.getColor(this@LoginActivity, R.color.white))
-            anchorView = binding.btnLogin
-            setActionTextColor(ContextCompat.getColor(this@LoginActivity, R.color.white))
-            setAction("OK") {
-                dismiss()
-            }
+    private fun showSnackbar(errorMessage: String, isError: Boolean = true) {
+        val snackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT)
+        val backgroundColor = if (isError) R.color.red else R.color.army
+        val textColor = R.color.white
+        snackbar.apply {
+            setBackgroundTint(ContextCompat.getColor(this@LoginActivity, backgroundColor))
+            setTextColor(ContextCompat.getColor(this@LoginActivity, textColor))
+            setActionTextColor(ContextCompat.getColor(this@LoginActivity, textColor))
         }.show()
     }
 

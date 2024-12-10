@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.data.UserRepository
+import com.health.glucoguide.data.local.UserPreference
 import com.health.glucoguide.data.remote.request.UserLoginRequest
 import com.health.glucoguide.data.remote.response.UserLoginResponse
 import com.health.glucoguide.data.remote.response.UserSession
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val userPreference: UserPreference
 ) : ViewModel() {
 
     fun saveSession(user: UserSession) {
@@ -27,6 +29,10 @@ class LoginViewModel @Inject constructor(
         val request = UserLoginRequest(email, password)
 
         return userRepository.loginUser(request)
+    }
+
+    fun getLanguageSync(): String {
+        return userPreference.getLanguageSync()
     }
 
 }

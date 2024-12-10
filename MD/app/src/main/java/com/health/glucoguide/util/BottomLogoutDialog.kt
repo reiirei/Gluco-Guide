@@ -11,7 +11,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.health.glucoguide.R
-import com.health.glucoguide.ui.activity.MainActivity
+import com.health.glucoguide.ui.activity.main.MainActivity
 import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
 import com.health.glucoguide.ui.fragment.profile.ProfileViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -55,7 +55,7 @@ class BottomLogoutDialog(
         }
     }
 
-    fun setupShape(cardView: MaterialCardView, cornerSizeResId: Int, colorResId: Int) {
+    private fun setupShape(cardView: MaterialCardView, cornerSizeResId: Int, colorResId: Int) {
         val cornerSize = context.resources.getDimension(cornerSizeResId)
         val shapeAppearanceModel = ShapeAppearanceModel.builder()
             .setTopLeftCorner(RoundedCornerTreatment())
@@ -73,7 +73,7 @@ class BottomLogoutDialog(
         bottomLogoutDialog.show()
     }
 
-    fun dismissLogoutDialog() {
+    private fun dismissLogoutDialog() {
         bottomLogoutDialog.dismiss()
     }
 }

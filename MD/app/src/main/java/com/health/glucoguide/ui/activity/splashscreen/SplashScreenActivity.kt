@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.health.glucoguide.databinding.ActivitySplashScreenBinding
-import com.health.glucoguide.ui.activity.MainActivity
+import com.health.glucoguide.ui.activity.main.MainActivity
 
 @Suppress("customSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {

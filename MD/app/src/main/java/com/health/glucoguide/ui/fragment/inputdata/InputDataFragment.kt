@@ -1,7 +1,6 @@
-package com.health.glucoguide.ui.fragment
+package com.health.glucoguide.ui.fragment.inputdata
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -115,7 +114,11 @@ class InputDataFragment : Fragment() {
         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
             setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.red))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            setAction("OK") { dismiss() }
+            setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            anchorView = requireActivity().findViewById(R.id.bottom_navigation)
+            setAction(getString(R.string.ok)) {
+                dismiss()
+            }
         }.show()
     }
 

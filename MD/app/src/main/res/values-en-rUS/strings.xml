@@ -104,7 +104,7 @@
     <string name="network_connection_restored">You are connected now</string>
     <string name="an_unexpected_error_occurred">An unexpected error occurred</string>
     <string name="http_error_default_message">An error occurred while processing your request.</string>
-    <string name="what_language_do_you_prefer">What language do you prefer?</string>
+    <string name="what_language_do_you_prefer">what language do you prefer?</string>
     <string name="feel_free_to_share_this_app_to_your_friend">Feel free to share this app to your friend</string>
     <string name="your_feedback_is_important_to_us">your feedback is important to us</string>
     <string name="all_fields_must_not_be_empty">All fields must not be empty</string>

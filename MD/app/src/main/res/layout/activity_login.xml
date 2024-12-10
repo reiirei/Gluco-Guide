@@ -12,28 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="@dimen/lay_img_width_login"
-            android:layout_height="@dimen/lay_img_height_login"
-            android:layout_marginTop="@dimen/lay_martop_40"
-            android:src="@drawable/login"
-            android:contentDescription="@string/login_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lay_marstar_16"
-            android:layout_marginTop="@dimen/lay_martop_27"
+            android:layout_marginTop="@dimen/lay_martop_130"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/login"
             android:textSize="@dimen/ts_52"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_username"
@@ -113,29 +102,40 @@
             android:id="@+id/btn_login"
             android:layout_width="@dimen/button_width_380"
             android:layout_height="@dimen/button_height_50"
-            android:layout_marginTop="@dimen/lay_martop_16"
-            android:layout_marginBottom="@dimen/lay_marbot_12"
+            android:layout_marginTop="24dp"
             android:background="@drawable/button_background"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="@dimen/ts_24"
-            app:layout_constraintBottom_toTopOf="@+id/register_if_havent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tl_password"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintEnd_toEndOf="@+id/tl_password"
+            app:layout_constraintStart_toStartOf="@+id/tl_password"
+            app:layout_constraintTop_toBottomOf="@+id/tl_password" />
+
+        <TextView
+            android:id="@+id/ask_register_if_havent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="@string/dont_have_account"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_login"
+            app:layout_constraintHorizontal_bias="0.322"
+            app:layout_constraintStart_toStartOf="@+id/btn_login"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
         <TextView
             android:id="@+id/register_if_havent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/lay_marbot_16"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:padding="4dp"
             android:fontFamily="@font/nunito_bold"
-            android:text="@string/dont_have_account"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/btn_login"
-            app:layout_constraintStart_toStartOf="@+id/btn_login" />
+            android:text="@string/sign_up"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/ask_register_if_havent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

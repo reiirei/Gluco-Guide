@@ -1,6 +1,5 @@
 package com.health.glucoguide.ui.fragment.home
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,7 +16,6 @@ import com.health.glucoguide.R
 import com.health.glucoguide.adapter.WebLinkAdapter
 import com.health.glucoguide.databinding.FragmentHomeBinding
 import com.health.glucoguide.data.remote.response.WebLink
-import com.health.glucoguide.ui.activity.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,12 +38,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(requireContext(), OnBoardingActivity::class.java))
-                requireActivity().finish()
-            } else {
-                greeting(user.name)
-            }
+            greeting(user.name)
         }
 
         setupToolbar()

@@ -16,7 +16,7 @@
     <string name="monitor_your_glucose">Pantau kadar glukosa dan resiko Anda\ndengan mudah melalui aplikasi AI kami!</string>
     <string name="check_now">Cek Sekarang!</string>
     <string name="online_glucose_checking">Periksa\nGlukosa Online</string>
-    <string name="let_our_ai_powered">Biarkan Alat\nBertenaga AI kami\nmenganalisa data\nAnda dan dapatkan hasil instan.</string>
+    <string name="let_our_ai_powered">Biarkan Alat\nBertenaga AI kami\nmenganalisa data\nAnda dan dapatkan\nhasil instan.</string>
     <string name="manual_entry_results">Masukan data\ndan lihat hasil</string>
     <string name="enter_your_data">Masukan data Anda\nuntuk mendapatkan\numpan balik yang\ndipersonalisasi.</string>
     <string name="article">Artikel</string>
@@ -67,11 +67,11 @@
     <string name="make_sure_email_valid">Pastikan email yang tepat</string>
     <string name="username">Username</string>
     <string name="Input_unique_name">Masukan nama yang unik</string>
-    <string name="have_an_account_login">Sudah punya akun? masuk</string>
-    <string name="dont_have_account">Belum punya akun? daftar</string>
+    <string name="have_an_account_login">Sudah punya akun? </string>
+    <string name="dont_have_account">Belum punya akun? </string>
     <string name="password">Kata sandi</string>
     <string name="Input_password">Kata sandi harus lebih dari 8 karakter</string>
-    <string name="login">Login</string>
+    <string name="login">Log in</string>
     <string name="input_your_email">Masukan email anda</string>
     <string name="input_your_password">Masukan kata sandi anda</string>
     <string name="title_home">Home</string>
@@ -97,6 +97,7 @@
     <string name="sure_want_to_logout">Yakin mau keluar? Nanti harus login ulang loh</string>
     <string name="logout">Keluar</string>
     <string name="network_connection_error">Gak ada internet nih</string>
+    <string name="network_connection_restored">Kamu online lagi nih</string>
     <string name="an_unexpected_error_occurred">Kami mengalami kendala yang tidak terduga.</string>
     <string name="http_error_default_message">Permintaan Anda tidak dapat diproses saat ini.</string>
     <string name="what_language_do_you_prefer">Kamu lebih suka pakai bahasa apa?</string>
@@ -110,14 +111,21 @@
     <string name="save">simpan</string>
     <string name="profile_updated">Profile diperbarui</string>
     <string name="keluhan">Keluhan</string>
-    <string name="are_you_sure">Apakah anda yakin?</string>
+    <string name="are_you_sure">Kamu udah yakin?</string>
     <string name="after_you_logout_you_will_need_to_login_again">Setelah logout, kamu harus login lagi\nuntuk bisa masuk</string>
     <string name="cancel">Gak jadi deh</string>
     <string name="we_are_here_to_help_you_nmonitor_your_health_with_ease_nand_precision">Kami di sini untuk membantu Anda\nmemantau kesehatan dengan mudah\ndan akurat</string>
     <string name="welocome_to_ai_powered">Selamat datang di Aplikasi</string>
     <string name="diabetes_detection_app">Deteksi Diabetes Berbasis AI</string>
     <string name="Retry">Coba lagi</string>
+    <string name="ok">OK</string>
     <string name="connection_timeout">Terjadi kesalahan. Silakan coba lagi.</string>
     <string name="you_have_successfully_registered">Anda telah terdaftar</string>
+    <string name="you_have_successfully_login">Kamu telah berhasil login!</string>
     <string name="congratulation">Selamat!</string>
+    <string name="english">English</string>
+    <string name="indonesia">Indonesia</string>
+    <string name="chose_language">Pilih bahasa</string>
+    <string name="continu">Lanjutkan</string>
+    <string name="image_person_talking">image person talking</string>
 </resources>
