@@ -65,7 +65,7 @@ password as string
 - Body (JSON)
 ```
 {
-  "name": "karakter-lebih-dari-12",
+  "name": "karakter-lebih-dari-8",
   "email": "fromat-email@example.com",
   "password": "karakter-lebih-dari-8"
 }
@@ -99,7 +99,7 @@ password as string
     "message": "Password must have a minimum of 8 characters"
 }
 ```
-- Failure Response (Username And Email Already Registered):
+- Failure Response (Username Or Email Already Registered):
 ```
 {
     "status": "error",
