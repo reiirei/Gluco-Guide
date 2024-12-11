@@ -2,7 +2,7 @@
 ## Bangkit 2024 Batch 2 Product Capstone
 ### Introducing GlucoGuide
 
-![Logo Gluco Guide](https://github.com/reiirei/Gluco-Guide/blob/main/github_assets/gluco_guide_logo.png)
+![Gluco Guide Logo png](https://github.com/reiirei/Gluco-Guide/blob/main/github_assets/gluco_guide_logo.png)
 
 Your personalized companion for diabetes risk assessment and management. At Gluco Guide, we aim to empower users with actionable insights into their health by leveraging modern technologies like machine learning, mobile development, and cloud computing. Whether you're looking to monitor your risk, learn more about diabetes, or take proactive steps toward better health, Gluco Guide is here to guide you every step of the way. Join us in making health management smarter, easier, and more accessible!
 
@@ -28,10 +28,16 @@ Your personalized companion for diabetes risk assessment and management. At Gluc
 ### Cloud Computing (CC):
 
 ##### Cloud Computing Architecture Design
+![Gluco Guide Cloud Architecture png](https://github.com/reiirei/Gluco-Guide/blob/main/github_assets/cloud_computing_architecture.png)
 
 ### Machine Learning (ML):
 
 ##### Machine Learning Model and Training History
+###### Building model
+![Building model jpg](https://github.com/reiirei/Gluco-Guide/blob/main/github_assets/building_model.jpg)
+
+###### Visualitation loss & accurate
+![Visual loss jpg](https://github.com/reiirei/Gluco-Guide/blob/main/github_assets/visualisasi_loss_%26_accurate.jpg)
 
 ## Tech Stack
 
@@ -40,6 +46,7 @@ Your personalized companion for diabetes risk assessment and management. At Gluc
 ![VS Code](https://img.shields.io/badge/VS%20Code-0078D4.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00.svg?style=for-the-badge&logo=tensorflow&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=express&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-000000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![Kotlin](https://img.shields.io/badge/Kotlin-0095D5.svg?style=for-the-badge&logo=kotlin&logoColor=white)
