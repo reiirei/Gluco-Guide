@@ -2,7 +2,8 @@
 -
 
 ## URL
-Backend URL : http://34.101.216.232:3000
+Backend auth URL : http://34.101.216.232:3000
+Backend model url : :5000
 
 ## Deploy
 - Clone this repository
@@ -20,23 +21,30 @@ Backend URL : http://34.101.216.232:3000
     - ```
       CREATE TABLE users (
         id INT(11) AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
+        name VARCHAR(255) UNIQUE NOT NULL, 
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+      );
       ```
     - create table histories
     - ```
       CREATE TABLE histories (
         id INT(11) AUTO_INCREMENT PRIMARY KEY,
-        user_id INT(11),
-        complaint_disease TEXT NULL, 
-        check_result TEXT NULL, 
+        name VARCHAR(255),
+        age INT(11),
+        hypertension VARCHAR(255) NULL,
+        heart_disease VARCHAR(255) NULL,
+        body_mass_index FLOAT(11) NULL,
+        HbA1c_level FLOAT(11) NULL,
+        blood_glucose_level INT(11) NULL,
+        gender VARCHAR(255) NULL,
+        smoking_history VARCHAR(255) NULL, 
+        diabetes_category VARCHAR(255) NULL, 
         check_date DATETIME NULL, 
-        FOREIGN KEY (user_id) REFERENCES users(id)
-          ON DELETE CASCADE
-          ON UPDATE CASCADE
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+        FOREIGN KEY (name) REFERENCES users(name)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+      );
       ```
 - Don't forget to configure auth in GCP
 
@@ -44,7 +52,7 @@ Backend URL : http://34.101.216.232:3000
 ### Register
 #### Description : Register a new user.
 - Description: Register a new user.
-- Endpoint: /auth/register
+- Endpoint: /api/register
 - Method: POST
 - Request Body:
   - Content-Type: application/json
@@ -65,43 +73,43 @@ password as string
 - Success Response:
 ```
 {
-  "error": false,
-  "message": "User Created"
+    "status": "success",
+    "message": "User Created"
 }
 ```
 
 - Failure Response (Invalid Email):
 ```
 {
-    "error": true,
-    "message": "Invalid email"
+    "status": "error",
+    "message": "Invalid email format"
 }
 ```
-- Failure Response (Username Less Than 12 Characters And Password Less Than 8 Characters):
+- Failure Response (Username Less Than 8 Characters):
 ```
 {
-    "error": true,
+    "status": "error",
     "message": "Username must have a minimum of 8 characters"
 }
 ```
 - Failure Response (Password Less Than 8 Characters):
 ```
 {
-    "error": true,
+    "status": "error",
     "message": "Password must have a minimum of 8 characters"
 }
 ```
-- Failure Response (Email Already Registered):
+- Failure Response (Username And Email Already Registered):
 ```
 {
-    "error": true,
-    "message": "Email is already registered."
+    "status": "error",
+    "message": "Username or email is already registered."
 }
 ```
 
 ### Login
 #### Description: User login to obtain a JWT token.
-- Endpoint: /auth/login
+- Endpoint: /api/login
 - Method: POST
 - Request Body:
   - Content-Type: application/json
@@ -120,26 +128,26 @@ password as string
 - Success Response:
 ```
 {
-    "error": false,
-    "message": "success",
+    "status": "success",
+    "message": "Login successful",
     "loginResult": {
-        "userId": 1,
-        "name": "jakikenjeran326",
-        "token": "<JWT_TOKEN>"
+        "userId": 2,
+        "name": "jakikenjeran",
+        "token": <JWT TOKEN>
     }
 }
 ```
 - Failure Response (Invalid Email or Password):
 ```
 {
-    "error": true,
+    "status": "error",
     "message": "Invalid email or password"
 }
 ```
 
 ### Show User Profile
 #### Description: Get the current user profile.
-- Endpoint: /profile
+- Endpoint: api/profile
 - Method: GET
 - Request Body:
   - Authorization: Bearer <JWT_TOKEN>
@@ -147,21 +155,21 @@ password as string
 - Success Response:
 ```
 {
-    "error": false,
+    "status": "success",
     "user": {
-        "name": "jakikenjeran326",
-        "email": "jaki@example.com"
+        "name": "jakikenjeran",
+        "email": "jaki@ex.com"
     }
 }
 ```
 - Failure Response (Invalid/Missing Token):
 ```
 {
-    "error": true,
+    "status": "error",
     "message": "Invalid token"
 }
 {
-    "error": true,
+    "status": "error",
     "message": "Token missing"
 }
 ```
@@ -169,7 +177,7 @@ password as string
 
 ### Update User Profile
 #### Description: Update the user profile.
-- Endpoint: /profile
+- Endpoint: api/profile
 - Method: PUT
 - Request Body:
   - Content-Type: application/json
@@ -186,40 +194,61 @@ password as string
 - Success Response:
 ```
 {
-  "error": false,
-  "message": "Profile updated successfully"
+    "status": "success",
+    "message": "Profile updated successfully"
 }
 ```
-- Failure Response (Name or Password Not Provided):
+- Failure Response (Username or Password Not Provided):
 ```
 {
-    "error": true,
-    "message": "Name or password must be provided for update"
+    "status": "error",
+    "message": "Username must be provided for update"
+}
+{
+    "status": "error",
+    "message": "Password must be provided for update"
 }
 ```
 - Failure Response (Username Less Than 8 Characters):
 ```
 {
-    "error": true,
-    "message": "Name must be at least 12 characters long"
+    "status": "error",
+    "message": "Username must be at least 8 characters long"
 }
 ```
 - Failure Response (Password Less Than 8 Characters):
 ```
 {
-    "error": true,
+    "status": "error",
     "message": "Password must be at least 8 characters long"
+}
+```
+- Failure Response (Username or Password same from the current values)
+```
+{
+    "status": "error",
+    "message": "New username and password must be different from the current values"
+}
+```
+- Failure Response (Invalid/Missing Token):
+```
+{
+    "status": "error",
+    "message": "Invalid token"
+}
+{
+    "status": "error",
+    "message": "Token missing"
 }
 ```
 
 ### Show User History
 #### Description: Get the current user's checkup history.
-- Endpoint: /histories
+- Endpoint: api/histories
 - Method: GET
 - Request Body:
   - Content-Type: application/json
   - Authorization: Bearer <JWT_TOKEN>
-
 - Success Response:
 ```
 {
@@ -233,23 +262,61 @@ password as string
     ]
 }
 ```
-- Failure Response (Invalid/Missing Token):
-```
-{
-    "error": true,
-    "message": "Invalid token"
-}
-{
-    "error": true,
-    "message": "Token missing"
-}
-```
 - Failure Response (User Has No History):
 ```
 {
-    "error": true,
+    "status": "error",
     "message": "No history found"
 }
 ```
-
+- Failure Response (Invalid/Missing Token):
+```
+{
+    "status": "error",
+    "message": "Invalid token"
+}
+{
+    "status": "error",
+    "message": "Token missing"
+}
+```
+### Predict Diabetes
+#### Description: predict user current healt condition using machine learning model.
+- Endpoint: api/predict
+- Method: POST
+- Request Body:
+  - Content-Type: application/json
+- Body (JSON):
+```
+{
+    "name": "jakikenjeran",
+    "age": 20,
+    "hypertension": "no",
+    "heart_disease": "no",
+    "bmi": 28.4,
+    "HbA1c_level": 5.4,
+    "blood_glucose_level": 100,
+    "gender_encoded": "male",
+    "smoking_history_encoded": "never"
+}
+```
+- Success Response:
+```
+{
+    "description": "Pra-diabetes",
+    "input": {
+        "HbA1c_level": 5.4,
+        "age": 20,
+        "blood_glucose_level": 100,
+        "bmi": 28.4,
+        "gender_encoded": "male",
+        "heart_disease": "no",
+        "hypertension": "no",
+        "name": "jakikenjeran",
+        "smoking_history_encoded": "never"
+    }
+}
+```
+- Failure Response
+Return the error message that occurred in the code.
 
