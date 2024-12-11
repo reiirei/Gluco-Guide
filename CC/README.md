@@ -1,5 +1,5 @@
 # Cloud Computing
--
+![Cloud Computing Logo]((https://github.com/reiirei/Gluco-Guide/blob/main/CC/github_assets_cc/cloud%20computing.png?raw=true))
 
 ## URL
 - Backend auth URL : http://34.101.216.232:3000
@@ -49,7 +49,7 @@
 - Don't forget to configure auth in GCP
 
 ## Endpoint
-### Register
+### 1. Register
 #### Description : Register a new user.
 - Description: Register a new user.
 - Endpoint: /api/register
@@ -114,7 +114,7 @@ password as string
 }
 ```
 
-### Login
+### 2. Login
 #### Description: User login to obtain a JWT token.
 - Endpoint: /api/login
 - Method: POST
@@ -152,7 +152,7 @@ password as string
 }
 ```
 
-### Show User Profile
+### 3. Show User Profile
 #### Description: Get the current user profile.
 - Endpoint: api/profile
 - Method: GET
@@ -182,7 +182,7 @@ password as string
 ```
 
 
-### Update User Profile
+### 4. Update User Profile
 #### Description: Update the user profile.
 - Endpoint: api/profile
 - Method: PUT
@@ -249,7 +249,7 @@ password as string
 }
 ```
 
-### Show User History
+### 5. Show User History
 #### Description: Get the current user's checkup history.
 - Endpoint: api/histories
 - Method: GET
@@ -287,8 +287,8 @@ password as string
     "message": "Token missing"
 }
 ```
-### Predict Diabetes
-#### Description: predict user current healt condition using machine learning model.
+### 6. Predict Diabetes
+#### Description: predict user current health condition using machine learning model.
 - Endpoint: api/predict
 - Method: POST
 - Request Body:
