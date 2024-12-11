@@ -1,6 +1,6 @@
-# GlucoGuide API
+# GlucoGuide Predict API
 
-GlucoGuide API adalah aplikasi berbasis Flask yang menggunakan model TensorFlow untuk memprediksi tingkat resiko diabetes berdasarkan input pengguna. API ini menerima data kesehatan pengguna melalui endpoint dan memberikan klasifikasi apakah seseorang berisiko terkena diabetes atau tidak.
+GlucoGuide Predict API adalah aplikasi berbasis Flask yang menggunakan model TensorFlow untuk memprediksi tingkat resiko diabetes berdasarkan input pengguna. API ini menerima data kesehatan pengguna melalui endpoint dan memberikan klasifikasi apakah seseorang berisiko terkena diabetes atau tidak.
 
 ## Fitur
 
