@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentNewsBinding
 import com.health.glucoguide.data.remote.response.WebLink
+import com.health.glucoguide.ui.activity.main.MainActivity
 import com.health.glucoguide.util.ProgressDialog
 
 class NewsFragment : Fragment() {
@@ -36,6 +39,7 @@ class NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val arg = args.news
 
+        setupConnectionCheck()
         setupToolbar()
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
@@ -44,6 +48,32 @@ class NewsFragment : Fragment() {
         }
 
         setupWebView(arg)
+    }
+
+    private fun setupConnectionCheck() {
+        val mainActivity = activity as? MainActivity
+        mainActivity?.networkUtils?.observe(viewLifecycleOwner) { isConnected ->
+            if (!isConnected) {
+                showSnackbar(getString(R.string.network_connection_error))
+                binding.webView.visibility = View.GONE
+                binding.clNoInternet.visibility = View.VISIBLE
+            } else {
+                showSnackbar(getString(R.string.network_connection_restored), R.color.army)
+                binding.webView.visibility = View.VISIBLE
+                binding.clNoInternet.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showSnackbar(errorMessage: String, color: Int = R.color.red) {
+        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
+            setBackgroundTint(ContextCompat.getColor(requireContext(), color))
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setAction(getString(R.string.ok)) {
+                dismiss()
+            }
+        }.show()
     }
 
     private fun setupToolbar() {
@@ -60,7 +90,6 @@ class NewsFragment : Fragment() {
         webView.settings.apply {
             domStorageEnabled = true
             allowFileAccess = false
-            builtInZoomControls = true
         }
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
