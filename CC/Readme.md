@@ -2,8 +2,8 @@
 -
 
 ## URL
-Backend auth URL : http://34.101.216.232:3000
-Backend model url : :5000
+- Backend auth URL : http://34.101.216.232:3000
+- Backend model url : :5000
 
 ## Deploy
 - Clone this repository
@@ -318,5 +318,6 @@ password as string
 }
 ```
 - Failure Response
+```
 Return the error message that occurred in the code.
-
+```
