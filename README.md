@@ -1,6 +1,6 @@
 # Gluco-Guide
-Bangkit 2024 Batch 2 Product Capstone
-Introducing GlucoGuide
+## Bangkit 2024 Batch 2 Product Capstone
+### Introducing GlucoGuide
 
 ![Logo Gluco Guide](https://github.com/reiirei/Gluco-Guide/blob/main/github_assets/gluco_guide_logo.png)
 
