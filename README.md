@@ -1,10 +1,10 @@
-# Gluco-Guide
+# Gluco Guide
 ## Bangkit 2024 Batch 2 Product Capstone
 ### Introducing GlucoGuide
 
 ![Logo Gluco Guide](https://github.com/reiirei/Gluco-Guide/blob/main/github_assets/gluco_guide_logo.png)
 
-Your personalized companion for diabetes risk assessment and management. At GlucoGuide, we aim to empower users with actionable insights into their health by leveraging modern technologies like machine learning, mobile development, and cloud computing. Whether you're looking to monitor your risk, learn more about diabetes, or take proactive steps toward better health, GlucoGuide is here to guide you every step of the way. Join us in making health management smarter, easier, and more accessible!
+Your personalized companion for diabetes risk assessment and management. At Gluco Guide, we aim to empower users with actionable insights into their health by leveraging modern technologies like machine learning, mobile development, and cloud computing. Whether you're looking to monitor your risk, learn more about diabetes, or take proactive steps toward better health, Gluco Guide is here to guide you every step of the way. Join us in making health management smarter, easier, and more accessible!
 
 ## Our Team
 
