@@ -1,18 +1,35 @@
+from dotenv import load_dotenv
+load_dotenv()
 import tensorflow as tf
 import numpy as np
+import os
 from models.model_diabetes import save_prediction
 
-MODEL_PATH = './models/diabetes_model2.keras'
+# URL model di GCP bucket dari .env
+MODEL_URL = os.getenv('MODEL_URL')
+MODEL_LOCAL_PATH = './models/diabetes_model2.keras'
 model = None
 
-# Load the model
+
 def load_model():
     global model
     try:
-        model = tf.keras.models.load_model(MODEL_PATH)
+        # Pastikan direktori './models' ada
+        os.makedirs(os.path.dirname(MODEL_LOCAL_PATH), exist_ok=True)
+
+        # Unduh model dari GCP bucket
+        model_path = tf.keras.utils.get_file(
+            fname=MODEL_LOCAL_PATH.split('/')[-1],
+            origin=MODEL_URL,
+            cache_dir=os.path.dirname(MODEL_LOCAL_PATH)
+        )
+        
+        # Muat model
+        model = tf.keras.models.load_model(model_path)
         print("Model loaded successfully.")
     except Exception as e:
         print(f"Error loading model: {e}")
+
 
 # Map textual inputs to numeric values
 def parse_input(data):

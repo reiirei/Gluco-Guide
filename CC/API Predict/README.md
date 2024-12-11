@@ -1,40 +1,40 @@
-# GlucoGuide Predict API
+# GlucoGuide API
 
-GlucoGuide Predict API is a Flask-based application that utilizes a TensorFlow model to predict diabetes risk levels based on user input. This API receives user health data through an endpoint and provides a classification on whether someone is at risk of diabetes or not.
+GlucoGuide API adalah aplikasi berbasis Flask yang menggunakan model TensorFlow untuk memprediksi tingkat resiko diabetes berdasarkan input pengguna. API ini menerima data kesehatan pengguna melalui endpoint dan memberikan klasifikasi apakah seseorang berisiko terkena diabetes atau tidak.
 
-## Features
+## Fitur
 
-- **Input**: Users can submit data in the form of medical features such as age, BMI, HbA1c level, and more.
-- **Prediction**: The API returns predictions about the user's diabetes status (e.g., "uncontrolled diabetes", "at risk", etc.).
-- **Model**: A TensorFlow model is used to process the input and provide prediction results.
+- **Input**: Pengguna dapat mengirimkan data berupa fitur medis seperti usia, BMI, HbA1c level, dan lain-lain.
+- **Prediksi**: API akan mengembalikan prediksi tentang status diabetes pengguna (misalnya, "uncontrolled diabetes", "at risk", dll).
+- **Model**: Model TensorFlow digunakan untuk memproses input dan memberikan hasil prediksi.
 
-## Instalation
+## Instalasi
 
 1. **Clone Repository**  
-   Clone this repository to your local machine:
+   Clone repo ini ke mesin lokal Anda:
    ```
    git clone <URL_REPO>
    cd <FOLDER_PROJECT>
 2. **Install Dependency**
-   Install the required dependencies using pip:
+   Instal dependensi yang dibutuhkan menggunakan pip:
    ```
    pip install -r requirements.txt
 
-## Running the Application
-To run the application, simply execute the app.py file:
+## Menjalankan Aplikasi
+Untuk menjalankan aplikasi, cukup jalankan file app.py:
 ```
 python app.py
 ```
-Once the server is running, you will see output like this in the terminal:
+Setelah server berjalan, Anda akan melihat output seperti ini di terminal:
 ```
 Running on http://127.0.0.1:3000/ (Press CTRL+C to quit)
 ```
 ## Endpoint API
 **URL**: http://127.0.0.1:3000/api/predict
 
-**Method**: **POST**
+**Metode**: **POST**
 
-**Body Request (JSON)**: Send JSON data containing the user's medical information for prediction. Here is an example of the data that can be sent:
+**Body Request (JSON)**: Kirimkan data JSON berisi informasi medis pengguna untuk prediksi. Berikut adalah contoh data yang bisa dikirimkan:
 ```
 {
     "age": 45,
@@ -47,12 +47,12 @@ Running on http://127.0.0.1:3000/ (Press CTRL+C to quit)
     "smoking_history_encoded": 0
 }
 ```
-**Response**: The API will return the prediction result in JSON format. Example response:
+**Response**: API akan mengembalikan hasil prediksi dalam format JSON. Contoh response:
 ```
 {
     "prediction": "uncontrolled diabetes"
 }
 ```
-## Notes
-- Ensure all dependencies are installed correctly and the Flask server is running before testing the API.
-- If you encounter errors related to TensorFlow or the model, ensure that the `.keras` model file is in the correct folder and compatible with the TensorFlow version being used.
+## Catatan
+- Pastikan Anda sudah menginstal semua dependensi dengan benar dan server Flask berjalan sebelum menguji API.
+- Jika Anda melihat error terkait TensorFlow atau model, pastikan bahwa model .keras sudah ada di folder yang tepat dan kompatibel dengan versi TensorFlow yang digunakan.
