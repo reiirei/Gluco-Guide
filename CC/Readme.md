@@ -99,11 +99,18 @@ password as string
     "message": "Password must have a minimum of 8 characters"
 }
 ```
-- Failure Response (Username Or Email Already Registered):
+- Failure Response (Email Already Registered):
 ```
 {
     "status": "error",
     "message": "Username or email is already registered."
+}
+```
+- Failure Response (Username Already Taken):
+```
+{
+    "status": "error",
+    "message": "Username is already taken."
 }
 ```
 
