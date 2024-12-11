@@ -1,5 +1,5 @@
 # Cloud Computing
-![Cloud Computing Logo]((https://github.com/reiirei/Gluco-Guide/blob/main/CC/github_assets_cc/cloud%20computing.png?raw=true))
+![Cloud Computing Logo](https://github.com/reiirei/Gluco-Guide/blob/main/CC/github_assets_cc/cloud%20computing.png?raw=true)
 
 ## URL
 - Backend auth URL : http://34.101.216.232:3000
