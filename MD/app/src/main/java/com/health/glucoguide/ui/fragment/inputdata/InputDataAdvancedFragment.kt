@@ -16,11 +16,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentInputDataAdvancedBinding
 import com.health.glucoguide.data.remote.request.UserData
+import com.health.glucoguide.ui.activity.main.MainActivity
 
 class InputDataAdvancedFragment : Fragment() {
 
     private var _binding: FragmentInputDataAdvancedBinding? = null
     private val binding get() = _binding!!
+    private var isNetworkConnected: Boolean = false
     private lateinit var bodyMassIndex: EditText
     private lateinit var hemoglobinLevel: EditText
     private lateinit var glucoseLevel: EditText
@@ -37,6 +39,11 @@ class InputDataAdvancedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = activity as? MainActivity
+        activity?.networkUtils?.observe(viewLifecycleOwner) { isConnected ->
+            isNetworkConnected = isConnected
+        }
 
         bodyMassIndex = binding.tiBodyMassIndex
         hemoglobinLevel = binding.tiHemoglobinA1cLevel
@@ -63,22 +70,24 @@ class InputDataAdvancedFragment : Fragment() {
         val userData = args.userData
 
         binding.btnSubmit.setOnClickListener {
-            val bmi = bodyMassIndex.text.toString().trim()
-            val hml = hemoglobinLevel.text.toString().trim()
-            val gl = glucoseLevel.text.toString().trim()
-
-            if (bmi.isEmpty() || hml.isEmpty() || gl.isEmpty()) {
-                showSnackbar(getString(R.string.error_empty_field), anchor = true)
+            if (!isNetworkConnected) {
+                showSnackbar(getString(R.string.network_connection_error))
             } else {
-                showSnackbar(getString(R.string.success_submit), R.color.army)
+                val bmi = bodyMassIndex.text.toString().trim()
+                val hml = hemoglobinLevel.text.toString().trim()
+                val gl = glucoseLevel.text.toString().trim()
 
-                userData.bodyMassIndex = bmi.toDouble()
-                userData.hemoglobinLevel = hml.toDouble()
-                userData.glucoseLevel = gl.toInt()
+                if (bmi.isEmpty() || hml.isEmpty() || gl.isEmpty()) {
+                    showSnackbar(getString(R.string.error_empty_field), anchor = true)
+                } else {
+                    userData.bodyMassIndex = bmi.toDouble()
+                    userData.hemoglobinLevel = hml.toDouble()
+                    userData.glucoseLevel = gl.toInt()
 
-                sendUserData(userData)
+                    sendUserData(userData)
 
-                clearInputData()
+                    clearInputData()
+                }
             }
         }
     }
@@ -88,6 +97,7 @@ class InputDataAdvancedFragment : Fragment() {
             setBackgroundTint(ContextCompat.getColor(requireContext(), color))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            anchorView = if (anchor) binding.btnSubmit else null
             setAction(getString(R.string.ok)) {
                 dismiss()
             }

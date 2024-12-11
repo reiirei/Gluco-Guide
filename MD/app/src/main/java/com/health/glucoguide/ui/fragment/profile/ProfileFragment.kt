@@ -16,9 +16,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.data.remote.response.UserSession
 import com.health.glucoguide.databinding.FragmentProfileBinding
+import com.health.glucoguide.ui.activity.main.MainActivity
 import com.health.glucoguide.util.BottomChoseLanguageDialog
 import com.health.glucoguide.util.BottomLogoutDialog
-import com.health.glucoguide.util.NetworkUtils
 import com.health.glucoguide.util.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,8 +32,8 @@ class ProfileFragment : Fragment() {
     private val progressDialog by lazy { ProgressDialog(requireContext()) }
     private val bottomLogoutDialog by lazy { BottomLogoutDialog(requireContext(), viewModel) }
     private val bottomChoseLanguageDialog by lazy { BottomChoseLanguageDialog(requireContext(), viewModel) }
-    private val networkUtils: NetworkUtils by lazy { NetworkUtils(requireContext()) }
     private lateinit var userSession: UserSession
+    private var isNetworkConnected: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +46,10 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeNetwork()
+        val mainActivity = activity as? MainActivity
+        mainActivity?.networkUtils?.observe(viewLifecycleOwner) { isConnected ->
+            isNetworkConnected = isConnected
+        }
 
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
             val token: String = user.token.toString()
@@ -61,14 +64,6 @@ class ProfileFragment : Fragment() {
 
         setupToolbar()
         setupShapeMessage()
-    }
-
-    private fun observeNetwork() {
-        networkUtils.observe(viewLifecycleOwner) { isNetworkAvailable ->
-            if (!isNetworkAvailable) {
-                showSnackbar(getString(R.string.network_connection_error))
-            }
-        }
     }
 
     private fun setupObservers() {
@@ -128,7 +123,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.cvLanguage.setOnClickListener {
-            if (networkUtils.value == true) {
+            if (isNetworkConnected) {
                 bottomChoseLanguageDialog.showDialog()
             } else {
                 showSnackbar(requireContext().getString(R.string.network_connection_error))
@@ -136,18 +131,21 @@ class ProfileFragment : Fragment() {
         }
 
         binding.cvLogout.setOnClickListener {
-            if (networkUtils.value == true) {
+            if (isNetworkConnected) {
                 bottomLogoutDialog.showLogoutDialog()
             } else {
                 showSnackbar(requireContext().getString(R.string.network_connection_error))
             }
         }
 
-
         binding.ivEdit.setOnClickListener{
-            val navigateToEditProfile = ProfileFragmentDirections
-                .actionProfileFragmentToEditProfileFragment(userSession)
-            findNavController().navigate(navigateToEditProfile)
+            if (isNetworkConnected) {
+                val navigateToEditProfile = ProfileFragmentDirections
+                    .actionProfileFragmentToEditProfileFragment(userSession)
+                findNavController().navigate(navigateToEditProfile)
+            } else {
+                showSnackbar(requireContext().getString(R.string.network_connection_error))
+            }
         }
     }
 
