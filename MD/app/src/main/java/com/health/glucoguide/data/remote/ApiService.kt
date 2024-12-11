@@ -15,28 +15,28 @@ import retrofit2.http.PUT
 
 interface ApiService {
 
-    @POST("auth/register")
+    @POST("api/register")
     suspend fun postUserRegister(
         @Body request: UserRegisterRequest
     ): UserRegisterResponse
 
-    @POST("auth/login")
+    @POST("api/login")
     suspend fun postUserLogin(
     @Body request: UserLoginRequest
     ): UserLoginResponse
 
-    @PUT("profile")
+    @PUT("api/profile")
     suspend fun putUserProfile(
         @Header("Authorization") token: String,
         @Body userData: UserInputProfile
     ): UserProfileResponse
 
-    @GET("profile")
+    @GET("api/profile")
     suspend fun getUserProfile(
         @Header("Authorization") token: String
     ): UserProfileResponse
 
-    @GET("histories")
+    @GET("api/histories")
     suspend fun getUserHistories(
         @Header("Authorization") token: String
     ): UserHistoriesResponse

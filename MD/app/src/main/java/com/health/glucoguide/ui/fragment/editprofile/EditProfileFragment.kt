@@ -14,6 +14,7 @@ import com.health.glucoguide.R
 import com.health.glucoguide.data.ResultState
 import com.health.glucoguide.databinding.FragmentEditProfileBinding
 import com.health.glucoguide.data.remote.request.UserInputProfile
+import com.health.glucoguide.ui.activity.main.MainActivity
 import com.health.glucoguide.util.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +35,15 @@ class EditProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val mainActivity = activity as? MainActivity
+        mainActivity?.networkUtils?.observe(viewLifecycleOwner) { isConnected ->
+            if (!isConnected) {
+                showSnackbar(getString(R.string.network_connection_error))
+            } else {
+                showSnackbar(getString(R.string.network_connection_restored), color=R.color.army)
+            }
+        }
 
         setupToolbar()
         val name = args.usernameAndToken.name
@@ -74,7 +84,7 @@ class EditProfileFragment : Fragment() {
                             progressDialog.hideLoading()
                             val errorMessage = result.error
                             if (!errorMessage.contains("Invalid token")) {
-                                showSnackbar(errorMessage, R.id.bottom_navigation)
+                                showSnackbar(errorMessage)
                             }
                         }
                     }
@@ -83,19 +93,15 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-    private fun showSnackbar(errorMessage: String, anchorViewId: Int? = null) {
+    private fun showSnackbar(errorMessage: String, anchorViewId: Int? = null, color: Int = R.color.red) {
         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).apply {
-            setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.army))
+            setBackgroundTint(ContextCompat.getColor(requireContext(), color))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             setAction("OK") {
                 dismiss()
             }
-            anchorViewId?.let { id ->
-                (requireActivity().findViewById<View>(id))?.let { view ->
-                    anchorView = view
-                }
-            }
+            anchorView = if (anchorViewId != null) requireActivity().findViewById(anchorViewId) else null
         }.show()
     }
 

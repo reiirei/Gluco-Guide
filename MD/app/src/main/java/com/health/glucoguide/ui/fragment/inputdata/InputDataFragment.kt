@@ -17,12 +17,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.health.glucoguide.R
 import com.health.glucoguide.databinding.FragmentInputDataBinding
 import com.health.glucoguide.data.remote.request.UserData
+import com.health.glucoguide.ui.activity.main.MainActivity
 
 class InputDataFragment : Fragment() {
 
     private var _binding: FragmentInputDataBinding? = null
     private val binding get() = _binding!!
     private lateinit var userData: UserData
+    private var isNetworkConnected: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +36,11 @@ class InputDataFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val mainActivity = activity as? MainActivity
+        mainActivity?.networkUtils?.observe(viewLifecycleOwner) { isConnected ->
+            isNetworkConnected = isConnected
+        }
 
         setupShapeGreenBackground()
         setupShapeDoubleCheckCard()
@@ -76,14 +83,18 @@ class InputDataFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            if (validateInputData(userData)) {
-                val toInputDataAdvance =
-                    InputDataFragmentDirections.actionInputDataFragmentToInputDataAdvancedFragment(
-                        userData
-                    )
-                findNavController().navigate(toInputDataAdvance)
+            if (!isNetworkConnected) {
+                showSnackbar(getString(R.string.network_connection_error))
+            } else {
+                if (validateInputData(userData)) {
+                    val toInputDataAdvance =
+                        InputDataFragmentDirections.actionInputDataFragmentToInputDataAdvancedFragment(
+                            userData
+                        )
+                    findNavController().navigate(toInputDataAdvance)
 
-                clearInputData()
+                    clearInputData()
+                }
             }
         }
     }
