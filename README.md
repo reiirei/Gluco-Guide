@@ -26,8 +26,12 @@ Your personalized companion for diabetes risk assessment and management. At Gluc
 ##### Screen Shot App
 
 <div align="center">
-  <img src="./github_assets/home.png" alt="Ss 1" width="200"/>
+  <img src="./github_assets/home.png" alt="Ss 1" width="200">
+  &nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;
   <img src="./github_assets/histories.png" alt="Ss 2" width="200"/>
+  &nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;
   <img src="./github_assets/profile.png" alt="Ss 3" width="200"/>
 </div>
 
