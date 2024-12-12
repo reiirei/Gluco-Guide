@@ -34,7 +34,7 @@ Running on http://127.0.0.1:3000/ (Press CTRL+C to quit)
 ```
 
 ## Endpoint API
-**URL**: http://127.0.0.1:3000/api/predict
+**URL**: http://127.0.0.1:3000
 
 ### 1. Register
 #### Description : Register a new user.
