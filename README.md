@@ -68,6 +68,12 @@ Your personalized companion for diabetes risk assessment and management. At Gluc
 
 ##### Demo Video
 
+<div align="center">
+  <img src="./github_assets/demo_gif.gif" alt="Demo Video" width="300">
+</div>
 
+## Download Here
 
-Feel free to explore each team member's GitHub profile for more information about their contributions and projects.
+[![Download APK](https://img.shields.io/badge/Download-APK-blue?style=flat-square)](https://drive.google.com/uc?export=download&id=1ihf10g495tx3_ba-LV7agn7LbeqAT2Bd)
+
+**Feel free to explore each team member's GitHub profile for more information about their contributions and projects.**
