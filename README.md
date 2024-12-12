@@ -24,7 +24,12 @@ Your personalized companion for diabetes risk assessment and management. At Gluc
 ### Mobile Development (MD):
 
 ##### Screen Shot App
-![an overview](https://github.com/user-attachments/assets/f4eb8a2e-5114-4d3a-9e4f-6b7991053418)
+
+<div align="center">
+  <img src="./github_assets/home.png" alt="Ss 1" width="200"/>
+  <img src="./github_assets/histories.png" alt="Ss 2" width="200"/>
+  <img src="./github_assets/profile.png" alt="Ss 3" width="200"/>
+</div>
 
 ### Cloud Computing (CC):
 
