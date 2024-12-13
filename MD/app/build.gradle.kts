@@ -23,12 +23,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField ("String", "BASE_URL", "\"https://glucoguide-auth-276770190589.asia-southeast2.run.app/\"")
+            buildConfigField ("String", "PREDICT_BASE_URL", "\"https://glucoguide-predict-276770190589.asia-southeast2.run.app/\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField ("String", "BASE_URL", "\"https://glucoguide-auth-276770190589.asia-southeast2.run.app/\"")
+            buildConfigField ("String", "PREDICT_BASE_URL", "\"https://glucoguide-predict-276770190589.asia-southeast2.run.app/\"")
         }
     }
     compileOptions {
