@@ -71,7 +71,7 @@ Your personalized companion for diabetes risk assessment and management. At Gluc
 ##### Demo Video
 
 <div align="center">
-  <img src="./github_assets/demo_gif.gif" alt="Demo Video" width="300">
+  <img src="./github_assets/demo_video_gluco_guide.gif" alt="Demo Video" width="300">
 </div>
 
 ## Download Here
