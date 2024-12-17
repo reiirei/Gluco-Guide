@@ -12,7 +12,6 @@ class AuthInterceptor(private val context: Context) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val response = chain.proceed(request)
-        val appContext = context.applicationContext
 
         if (response.code == 403) {
             val intent = Intent(context, OnBoardingActivity::class.java).apply {
