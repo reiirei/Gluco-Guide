@@ -181,7 +181,7 @@ class UserRepository @Inject constructor(
         } catch (e: ConnectException) {
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         } catch (e: IOException) {
-            emit(ResultState.Error(context.getString(R.string.service_unavailable)))
+            emit(ResultState.Error(context.getString(R.string.http_error_default_message)))
         } catch (e: Exception) {
             emit(ResultState.Error(context.getString(R.string.an_unexpected_error_occurred)))
         }
@@ -204,7 +204,7 @@ class UserRepository @Inject constructor(
         } catch (e: ConnectException) {
             emit(ResultState.Error(context.getString(R.string.network_connection_error)))
         } catch (e: IOException) {
-            emit(ResultState.Error(context.getString(R.string.service_unavailable)))
+            emit(ResultState.Error(context.getString(R.string.http_error_default_message)))
         } catch (e: Exception) {
             emit(ResultState.Error(context.getString(R.string.an_unexpected_error_occurred)))
         }

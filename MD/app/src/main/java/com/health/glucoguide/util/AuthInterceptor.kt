@@ -21,7 +21,7 @@ class AuthInterceptor(private val context: Context) : Interceptor {
         }
 
         if (response.code == 503) {
-            throw IOException(context.getString(R.string.service_unavailable))
+            throw IOException(appContext.getString(R.string.http_error_default_message))
         }
 
         return response
