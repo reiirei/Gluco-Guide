@@ -138,4 +138,5 @@
     <string name="feel_free_to_share_this_app_to_your_friend">Bagikan dengan bebas ke teman kamu</string>
     <string name="logo_change_language">Logo ubah bahasa</string>
     <string name="logo_log_out">logo keluar</string>
+    <string name="service_unavailable">Layanan sedang tidak tersedia</string>
 </resources>

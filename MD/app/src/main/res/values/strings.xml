@@ -143,4 +143,5 @@
     <string name="log_out">Log out</string>
     <string name="logo_change_language">logo change language</string>
     <string name="logo_log_out">logo log out</string>
+    <string name="service_unavailable">Service Unavailable</string>
 </resources>
